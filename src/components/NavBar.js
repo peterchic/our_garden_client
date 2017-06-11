@@ -19,12 +19,13 @@ function NavBar(props){
 
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul className="nav navbar-nav">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/gardens">Find A Garden</Link></li>
-          {/* <li><Link to="/watchlists/search">Search for a Movie</Link></li> */}
+          {/* <li><Link to="/">Home</Link></li> */}
+          <li><Link to="/farmers">Find A Garden</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/signup">Sign Up!</Link></li>
         </ul>
       </div>
-        {/* </div> */}
+      {/* </div> */}
     </nav>
   )
 }

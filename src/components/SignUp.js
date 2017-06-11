@@ -14,16 +14,21 @@ export default class SignUp extends React.Component {
 
   handleSignUp(){
     // console.log(this.state.username);
-    axios({
-      method: 'post',
-      url: 'http://localhost:3000/api/v1/users',
-      data: {
+    axios.post('http://localhost:3000/api/v1/users', {
+      user: {
         name: this.state.name,
         username: this.state.username,
         password: this.state.password,
         bio: this.state.bio,
       }
-    }).then(res => console.log('res', res))
+    }).then(res => {
+      console.log(res);
+      localStorage.setItem("user", res.data.user)
+      localStorage.setItem("token", res.data.token)
+      // localStorage.setItem("username", res.data.username)
+    })
+    .then(() => console.log(localStorage) )
+    .catch((error) => console.log(error.response) )
   }
 
   handleChange(prop, value){

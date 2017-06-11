@@ -27,6 +27,11 @@ export function getUsers(){
   .then(res => res.json())
 }
 
+export function getFarmerProducts(){
+  return fetch('http://localhost:3000/api/v1/farmer_products')
+  .then(res => res.json())
+}
+
 export function editUser(id, name, bio){
   console.log('editUser:', 'We made it!');
     return fetch(`http://localhost:3000/api/v1/users/${id}`, {
@@ -44,6 +49,17 @@ export function editUser(id, name, bio){
     })
     .then( res => res.json())
   }
+
+//   export function handleLogin(params){
+//     return fetch("http://localhost:3000/api/v1/users", {
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     },
+//     method: 'POST',
+//     body: JSON.stringify(params)
+//   }).then( res => res.json() )
+// }
 
 
 export function deleteUser(id){
