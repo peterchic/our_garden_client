@@ -24,7 +24,8 @@ if (props.farmers){
             const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id))
             // console.log('farmer products', props.farmer_products);
             // const farmer_product = props.farmer_products.map( product => {product.farmer_id} )
-              return <GardenShow farmer={farmer} handleAddToCart={props.handleAddToCart}/>
+              return <GardenShow farmer={farmer} handleAddToCart={props.handleAddToCart} product_carts={props.product_carts}
+                products={props.product}/>
           } }/>
         </Switch>
       </div>

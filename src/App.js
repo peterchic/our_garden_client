@@ -58,7 +58,12 @@ export default class App extends React.Component {
       </div>
     )
   } else {
-      return <LogInForm handleLogin={this.handleLogin}/>
+      return (
+        <div>
+          <NavBar title="OurGarden" color="black" />
+          <LogInForm handleLogin={this.handleLogin}/>
+        </div>
+      )
     }
   }
 }

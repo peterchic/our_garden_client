@@ -1,8 +1,9 @@
 import React from 'react'
 // import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { editUser, getFarmers, getProducts, getUsers, getFarmerProducts } from '../api/RailsAPI'
+import { editUser, getFarmers, getProducts, getUsers, getFarmerProducts, addToCart } from '../api/RailsAPI'
 import GardenPage from '../components/GardenPage'
 import Search from '../components/Search'
+import axios from 'axios'
 // import { getWatchlists, createJoin, createList, editWatchlist, deleteWatchlist, getMovies } from '../api/indexRailsAPI'
 // import { MDBapiCall } from '../api/indexMDB'
 // import WatchlistsPage from '../components/WatchlistsPage'
@@ -18,16 +19,50 @@ export default class OurGardenContainer extends React.Component {
       products: [],
       searchTerm: '',
       farmer_products: [],
-      userCart: []
-
+      product_carts: [{
+        quantity: ''
+      }]
     }
   }
 
-  handleAddToCart(e){
-    this.setState({
-      userCart: e.target.value
-    })
-  }
+//   export function createStudent(name){
+//   return fetch("http://localhost:3000/api/v1/students", {
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json',
+//       'Authorization': sessionStorage.jwt
+//     },
+//     method: 'POST',
+//     body: JSON.stringify( {student: {name: name}} )
+//   }).then( res => res.json() )
+// }
+
+// export function updateStudent(student){
+//   return fetch(`http://localhost:3000/api/v1/students/${student.id}`, {
+//     method: 'PATCH',
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify( {student: student})
+//   }).then( res => res.json() )
+// }
+
+
+
+  handleAddToCart(quantity, farmer_product_id, cart_id){
+      // console.log('rails', quantity, farmer_product_id, cart_id)
+        axios.post("http://localhost:3000/api/v1/product_carts", {
+          product_cart: {
+            quantity: quantity,
+            farmer_product_id: farmer_product_id,
+            cart_id: cart_id
+          }
+        })
+      }
+      // .then( () => this.props.history.push('/farmers'))
+      // .catch(e => console.log('error', e))
+
 
   componentDidMount() {
     getFarmers()
@@ -82,7 +117,7 @@ export default class OurGardenContainer extends React.Component {
           searchTerm={this.state.searchTerm}
           users={this.state.users}
           farmer_products={this.state.farmer_products}
-          handleAddToCart={this.handleAddToCart.bind(this)}/>
+          handleAddToCart={this.handleAddToCart.bind(this)} product_carts={this.state.product_carts}/>
       </div>
     )
   }

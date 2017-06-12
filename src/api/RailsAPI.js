@@ -11,6 +11,8 @@
 //     }
 //   }).then(res => console.log('res', res))
 // }
+import axios from 'axios'
+
 
 export function getFarmers(){
   return fetch('http://localhost:3000/api/v1/farmers')
@@ -66,3 +68,14 @@ export function deleteUser(id){
   return fetch(`http://localhost:3000/api/v1/users/${id}`, { method: 'DELETE'})
     .then( res => res.json() )
 }
+
+// export function addToCart(quantity, farmer_product_id, cart_id){
+//   console.log('rails', quantity, farmer_product_id, cart_id)
+//     axios.post("http://localhost:3000/api/v1/product_carts", {
+//       product_cart: {
+//         quantity: quantity,
+//         farmer_product_id: farmer_product_id,
+//         cart_id: cart_id
+//       }
+//     }).then(res => console.log('error', res.data))
+//   }

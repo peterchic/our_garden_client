@@ -23,12 +23,12 @@ export default class SignUp extends React.Component {
       }
     }).then(res => {
       console.log(res);
-      localStorage.setItem("user", res.data.user)
+      localStorage.setItem("wtf", res.data.user)
       localStorage.setItem("token", res.data.token)
       // localStorage.setItem("username", res.data.username)
     })
-    .then(() => console.log(localStorage) )
-    .catch((error) => console.log(error.response) )
+      .then( () => this.props.history.push('/farmers'))
+      .catch((error) => console.log(error.response) )
   }
 
   handleChange(prop, value){

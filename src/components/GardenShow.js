@@ -1,67 +1,3 @@
-// import React from 'react'
-// import { Link } from 'react-router-dom'
-// import ProductShow from './ProductShow'
-//
-// export default function GardenShow (props) {
-//   console.log('props :', props);
-//   debugger
-//
-//   const farm_products = props.farmer_products.map( item => {
-//     return item
-//   })
-//
-//
-          // farmer.products.map(function(item){
-          //   item.name, item.description
-          //   farmer.farmer_products.filter( (f_p) => f_p.farmer_id === farmer.id && f_p.product_id === item.id).quantity
-          // })
-          //
-          // const filtered = props.farmer.filter( prod => {
-          //   // console.log('result prod.product_id: ', prod.product_id);
-          //   const products = props.farmer.products.map( item => {
-          //     // console.log('result products.id: ', item.id);
-          //     return item.id
-          //   })
-          //   // console.log('products', products);
-          //   return prod.product_id === products
-          // })
-//
-//
-//   const product = filtered.map( (product) => {
-//     return <ProductShow product={product} />
-//   })
-//
-//
-//
-//
-//
-//
-//
-//
-//   if (!props.farmer_products) {
-//     return (
-//       <h1>Loading the Show Page</h1>
-//     )
-//   }
-//   // console.log('product: ', props.farmer.products)
-//   // console.log('product2: ', productName)
-//   return (
-//     <div>
-//       <div>
-//         <h1>{props.farmer_products.name}</h1>
-//         <h1>{props.farmer_products.bio}</h1>
-//         <img src={props.farmer.picture}/>
-//
-//         <div className="ui cards">
-//           {product}
-//         </div>
-//       </div>
-//
-//
-//     </div>
-//   )
-// }
-
 import React from 'react'
 import AddToCart from './AddToCart'
 
@@ -85,8 +21,7 @@ export default function GardenShow (props) {
           <li>{product.description}</li>
           <li>{fp[0].quantity}</li>
           <img src={product.picture}/>
-
-          <AddToCart handleAddToCart={props.handleAddToCart} />
+          <AddToCart handleAddToCart={props.handleAddToCart} product_carts={props.product_carts}/>
         </div>
       )
   })
