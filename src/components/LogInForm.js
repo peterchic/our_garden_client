@@ -8,7 +8,7 @@ export default class LoginForm extends React.Component {
       username: '',
       password: ''
     }
-    console.log('in constructor: ', this.props);
+    console.log('in constructor: ', this.props.handleLogin);
 }
 
 handleChange(prop, value){
@@ -23,7 +23,6 @@ handleSubmit(e){
 }
 
   render(){
-
     return(
       <form onSubmit={ e => this.handleSubmit(e)}>
         <label>Username</label>

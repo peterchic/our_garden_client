@@ -9,7 +9,6 @@ export default function GardenPage(props){
     </div>)
 
 if (props.farmers){
-  // console.log(props);
     return(
     <div>
       <div>
@@ -18,19 +17,29 @@ if (props.farmers){
           { farmersElements }
         </ul>
       </div>
-      <div >
+
+      <div>
         <Switch>
           <Route exact path="/farmers/:id" render={ ({match}) => {
             const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id))
-            // console.log('farmer products', props.farmer_products);
-            // const farmer_product = props.farmer_products.map( product => {product.farmer_id} )
-              return <GardenShow farmer={farmer} handleAddToCart={props.handleAddToCart} product_carts={props.product_carts}
-                products={props.product}/>
-          } }/>
+            return (
+              <GardenShow
+                farmer={farmer}
+                handleAddToCart={props.handleAddToCart}
+                product_carts={props.product_carts}
+                products={props.product}
+                handleReview={props.handleReview}
+                reviews={props.reviews}
+              />
+            )
+          }} />
         </Switch>
       </div>
     </div>
     )
-  } else
-    return <div><h1>LOADING.....</h1></div>
+  } else {
+    return (
+      <div><h1>LOADING...</h1></div>
+    )
   }
+}

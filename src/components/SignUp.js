@@ -13,7 +13,6 @@ export default class SignUp extends React.Component {
   }
 
   handleSignUp(){
-    // console.log(this.state.username);
     axios.post('http://localhost:3000/api/v1/users', {
       user: {
         name: this.state.name,
@@ -23,7 +22,7 @@ export default class SignUp extends React.Component {
       }
     }).then(res => {
       console.log(res);
-      localStorage.setItem("wtf", res.data.user)
+      localStorage.setItem("username", res.data.user)
       localStorage.setItem("token", res.data.token)
       // localStorage.setItem("username", res.data.username)
     })
