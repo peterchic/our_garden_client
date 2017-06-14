@@ -8,7 +8,7 @@ export default class LoginForm extends React.Component {
       username: '',
       password: ''
     }
-    console.log('in constructor: ', this.props.handleLogin);
+    // console.log('in constructor: ', this.props.handleLogin);
 }
 
 handleChange(prop, value){

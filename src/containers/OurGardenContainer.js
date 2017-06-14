@@ -52,20 +52,6 @@ export default class OurGardenContainer extends React.Component {
     }).then( res => console.log('response from FP Update', res))
   }
 
-  // handleUpdateCart(id, quantity, farmer_product_id, cart_id){
-  //   console.log('reached handle update cart');
-  // editCart(id, quantity, farmer_product_id, cart_id)
-  // .then( updatedProductCarts => {
-  //   const newProducts = this.state.product_carts.map( prod => {
-  //     if (prod.id === updatedProductCarts.id ) {
-  //       return updatedProductCarts
-  //     } else { return prod }
-  //     })
-  //   this.setState({ product_carts: { quantity: newProducts.quantity }
-  //   })
-  // })
-  // }
-
   componentDidMount() {
     getFarmers()
       .then( res => this.setState({
@@ -78,6 +64,10 @@ export default class OurGardenContainer extends React.Component {
     getReviews()
       .then(res => this.setState ({
       reviews: res
+    }))
+    getFarmerProducts()
+      .then(res => this.setState ({
+      farmer_products: res
     }))
   }
 
@@ -95,20 +85,9 @@ export default class OurGardenContainer extends React.Component {
   )).catch(e => console.log('errorrrrr', e))
   }
 
-  // handleUpdateUser(id, name, bio){
-  //   editUser(id, name, bio)
-  //   .then( updatedUser => {
-  //     const editedUser = this.state.users.map( user => {
-  //       if (user.id === updatedUser.id ) {
-  //         return updatedUser
-  //       } else { return user }
-  //       })
-  //     this.setState({user: editedUser})
-  //     })
-  //   }
 
   render() {
-    // console.log('container props', this.state)
+    console.log('container props', this.state.farmer_products)
     return (
       <div>
         <div>

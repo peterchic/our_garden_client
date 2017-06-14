@@ -27,7 +27,7 @@ export default class SignUp extends React.Component {
       // localStorage.setItem("username", res.data.username)
     })
       .then( () => this.props.history.push('/farmers'))
-      .catch((error) => console.log(error.response) )
+      .catch((error) => console.log('error from handleSignUp', error.response) )
   }
 
   handleChange(prop, value){

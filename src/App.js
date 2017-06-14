@@ -9,20 +9,18 @@ import './App.css';
 
 export default class App extends React.Component {
 
-  logout(){
-    localStorage.clear
-  }
+
 
   render(){
     if(localStorage.getItem('token')){
       return (
       <div>
         <div className = "container-fluid">
-          <NavBar title="OurGarden" color="white" />
+          <NavBar title="OurGarden" color="white"/>
           <Switch>
             <Route path='/farmers' component={OurGardenContainer} />
             <Route path="/about" render={() => <h1>This is an app about life!</h1>}/>
-            <Route exact path='/logout' render={() => this.logout}/>
+            <Route exact path='/logout'/>
           </Switch>
         </div>
       </div>

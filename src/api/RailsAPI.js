@@ -14,6 +14,12 @@ export function getReviews(){
   return fetch('http://localhost:3000/api/v1/reviews')
   .then(res => res.json())
 }
+
+export function getFarmerProducts(){
+  return fetch('http://localhost:3000/api/v1/farmer_products')
+  .then(res => res.json())
+}
+
 export function createReview(review, rating, user_id, farmer_id){
   // console.log('rails', review, rating, user_id, farmer_id);
   return fetch("http://localhost:3000/api/v1/reviews", {

@@ -3,12 +3,19 @@ import LogInSignUp from '../containers/LogInSignUp'
 
 import { Link } from 'react-router-dom'
 
+function logout(){
+  localStorage.clear()
+}
+
+
 export default function NavBar(props){
   console.log('local', localStorage);
   const colors = {
     black: 'navbar-inverse',
     white: 'navbar-default'
   }
+
+  // console.log('logout', props.logout);
 
   if(localStorage.getItem('token')){
     return (
@@ -23,7 +30,7 @@ export default function NavBar(props){
           <ul className="nav navbar-nav">
             <li><Link to="/farmers">Find A Garden</Link></li>
             <li><Link to="/about">About</Link></li>
-            <li><Link to="/signout">Log Out</Link></li>
+            <li><Link to="/signout" onClick={logout}>Log Out</Link></li>
           </ul>
         </div>
       </nav>
