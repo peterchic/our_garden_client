@@ -8,24 +8,20 @@ export default class Reviews extends React.Component {
       review: '',
       rating: '',
       user_id: 1,
-      farmer_id: this.props.fp.id
+      farmer_id: props.farmer.id
     }
   }
 
-  handleChange(e){
+  componentWillReceiveProps(nextProps){
     this.setState({
-      selectValue: e.target.value
+      farmer_id: nextProps.farmer.id
     })
   }
 
   handleInputChange(event) {
-    // console.log('event props', event.target.value);
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    const farmer_id = this.state.farmer_id
+    const value = event.target.value;
+    const name = event.target.name;
     this.setState({
-      // review:
       [name]: value
     });
   }
@@ -34,29 +30,31 @@ export default class Reviews extends React.Component {
     e.preventDefault()
     this.props.handleReview( this.state.review, this.state.rating, this.state.user_id, this.state.farmer_id )
     this.setState({
-      review: ''
+      review: '',
+      rating: ''
     })
+    // this.state.review = ''
   }
 
   render(){
-    // console.log('review', this.props)
+    // console.log('review', this.state.farmer_id)
+    // debugger
     return (
-      <form>
+      <form onSubmit={this.handleSubmit.bind(this) }>
 
         <label>
           Rating:
-          <input name="rating" type="number" min="1" max="5" checked={this.state.rating} onChange={this.handleInputChange.bind(this)} />
-        </label>
+          <input name="rating" innertext='' type="number" min="1" max="5" onChange={this.handleInputChange.bind(this)} />
 
-
-        <label>
           Leave A Review:
-          <input name="review" type="textarea" value={this.state.review} onChange={this.handleInputChange.bind(this)} />
+          <input name="review" type="textarea" onChange={this.handleInputChange.bind(this)} />
         </label>
 
 
-        <input type="button" value="Add" onClick={this.handleSubmit.bind(this) } />
+        <input type="submit" value="Leave A Review"/>
+
       </form>
+
     )
   }
 }

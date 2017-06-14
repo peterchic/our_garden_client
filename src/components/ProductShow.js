@@ -2,7 +2,7 @@ import React from 'react'
 // import { Link } from 'react-router-dom'
 import AddToCart from './AddToCart'
 
-const ProductShow = (props) => {
+export default function ProductShow (props) {
   // console.log('Reached ProductShow', props);
   return (
     <div className='column'>
@@ -13,19 +13,20 @@ const ProductShow = (props) => {
         <div className="content">
           <h2>{props.product.name}</h2>
           <div className='extra content'>
-            <h3>Quantity: {props.fp[0].quantity}</h3>
+            <h3>Quantity: {props.farmer.farmer_products[0].quantity}</h3>
+          </div>
+          <div className='extra content'>
+            <h3>Price per lb: {props.farmer.farmer_products[0].price}</h3>
           </div>
           <div className="description">
             {props.product.description}
           </div>
           <AddToCart
             handleAddToCart={props.handleAddToCart}
-            fp={props.fp}
+            farmer={props.farmer}
           />
         </div>
       </div>
     </div>
     )
   }
-
-export default ProductShow

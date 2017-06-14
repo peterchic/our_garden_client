@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+// import {withRouter} from "react-router-dom";
 
 export default class SignUp extends React.Component {
   constructor(){
@@ -20,13 +21,12 @@ export default class SignUp extends React.Component {
         password: this.state.password,
         bio: this.state.bio,
       }
-    }).then(res => {
-      console.log(res);
+    }).then(res => { console.log(res)
       localStorage.setItem("username", res.data.user)
       localStorage.setItem("token", res.data.token)
       // localStorage.setItem("username", res.data.username)
     })
-      .then( () => this.props.history.push('/farmers'))
+    // , this.props.history.push('/farmers')
       .catch((error) => console.log('error from handleSignUp', error.response) )
   }
 
@@ -65,3 +65,9 @@ export default class SignUp extends React.Component {
 
   }
 }
+
+// SignUp.contextTypes = {
+//   router: React.PropTypes.object.isRequired
+// };
+
+// export default withRouter(SignUp);

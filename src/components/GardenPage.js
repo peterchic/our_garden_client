@@ -8,6 +8,8 @@ export default function GardenPage(props){
       <Link to={`/farmers/${farmer.id}`}><h3>{farmer.name}</h3></Link>
     </div>)
 
+
+
 if (props.farmers){
     return(
     <div>
@@ -17,11 +19,13 @@ if (props.farmers){
           { farmersElements }
         </ul>
       </div>
-
+      
       <div>
         <Switch>
           <Route exact path="/farmers/:id" render={ ({match}) => {
             const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id))
+            console.log('GP', farmer)
+            // debugger
             return (
               <GardenShow
                 farmer={farmer}

@@ -5,19 +5,19 @@ import ReviewShow from './ReviewShow'
 //Garden Page renders me
 
 export default function GardenShow (props) {
-  console.log('garden showpage', props);
+  // console.log('garden showpage', props);
 
   if (!props.farmer) {
     return (
       <h1>Loading the Show Page</h1>
     )
   }
-
+  // console.log('GS', props.farmer);
   const products = props.farmer.products.map(product => {
   var fp = props.farmer.farmer_products.filter( (f_p) => f_p.farmer_id === props.farmer.id && f_p.product_id === product.id)
     return (
       <div className="row">
-        <ProductShow product={product} fp={fp} handleAddToCart={props.handleAddToCart}/>
+        <ProductShow product={product} farmer={props.farmer} handleAddToCart={props.handleAddToCart}/>
       </div>
     )
   })
@@ -28,7 +28,7 @@ export default function GardenShow (props) {
         <h1>{props.farmer.name}</h1>
         <h1>{props.farmer.bio}</h1>
         <img src={props.farmer.picture}/>
-        <Reviews handleReview={props.handleReview} fp={props.farmer}/>
+        <Reviews handleReview={props.handleReview} farmer={props.farmer}/>
         <ReviewShow reviews={props.reviews} farmer={props.farmer}/>
 
         <div className='two column'>

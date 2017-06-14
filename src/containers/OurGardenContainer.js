@@ -49,8 +49,13 @@ export default class OurGardenContainer extends React.Component {
         cart_id: cart_id,
         product_id: product_id
       }
-    }).then( res => console.log('response from FP Update', res))
+    }).then( res => this.setState({
+      farmer_products: [{
+        quantity: res.config.data
+      }]
+    }))
   }
+  //farmers number needs to update in state
 
   componentDidMount() {
     getFarmers()
@@ -87,11 +92,10 @@ export default class OurGardenContainer extends React.Component {
 
 
   render() {
-    console.log('container props', this.state.farmer_products)
+    // console.log('container props', this.state)
     return (
       <div>
         <div>
-          <Link to="/login">Log In!</Link>
         </div>
         <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange.bind(this)} />
         <h2>

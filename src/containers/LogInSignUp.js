@@ -14,7 +14,6 @@ export default class LogInSignUp extends React.Component{
     body: JSON.stringify(params)
   }).then( res => res.json() )
   .then(resp=> {
-    console.log(resp);
     localStorage.setItem("username", resp.user)
     localStorage.setItem("token", resp.token)
     // localStorage.setItem("username", resp.username)
@@ -30,3 +29,5 @@ export default class LogInSignUp extends React.Component{
     )
   }
 }
+
+//with router
