@@ -1,42 +1,32 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+import AddToCart from './AddToCart'
 
-const ProductShow = (props) => {
-  console.log('Reached ProductShow');
+export default function ProductShow (props) {
+  // console.log('Reached ProductShow', props);
   return (
-    <div className="ui link card">
-      <div className="image">
-        <img src={props.product.picture}/>
-      </div>
-      <div className="content">
-        <Link to={`/`} className='header'><h3>{props.product.name}</h3></Link>
-        <div className='extra content'>
-          <span className="right">Quantity: {props.fp[0].quantity}:</span>
+    <div className='column'>
+      <div className="ui card">
+        <div className="image">
+          <img src={props.product.picture}/>
+        </div>
+        <div className="content">
+          <h2>{props.product.name}</h2>
+          <div className='extra content'>
+            <h3>Quantity: {props.farmer.farmer_products[0].quantity}</h3>
+          </div>
+          <div className='extra content'>
+            <h3>Price per lb: {props.farmer.farmer_products[0].price}</h3>
+          </div>
+          <div className="description">
+            {props.product.description}
+          </div>
+          <AddToCart
+            handleAddToCart={props.handleAddToCart}
+            farmer={props.farmer}
+          />
         </div>
       </div>
-      <div className="description">
-        {props.product.description}
-      </div>
-      <button type='submit'>Add!</button>
     </div>
-  )
-}
-
-export default ProductShow
-
-
-
-
-{/* <Route exact path="/products/:id" render={ ({match}) => {
-  const product = props.products.find(product => product.id === parseInt(match.params.id))
-    return <ProductShow product={product}/>
-} }/> */}
-
-{/* <div>
-  <li>{product.name}</li>
-  <li>{product.description}</li>
-  <li>{fp[0].quantity}</li>
-  <img src={product.picture}/>
-
-  <button type='submit'>Add!</button>
-</div> */}
+    )
+  }

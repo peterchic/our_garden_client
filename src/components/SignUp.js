@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+// import {withRouter} from "react-router-dom";
 
 export default class SignUp extends React.Component {
   constructor(){
@@ -13,7 +14,6 @@ export default class SignUp extends React.Component {
   }
 
   handleSignUp(){
-    // console.log(this.state.username);
     axios.post('http://localhost:3000/api/v1/users', {
       user: {
         name: this.state.name,
@@ -21,14 +21,13 @@ export default class SignUp extends React.Component {
         password: this.state.password,
         bio: this.state.bio,
       }
-    }).then(res => {
-      console.log(res);
-      localStorage.setItem("wtf", res.data.user)
+    }).then(res => { console.log(res)
+      localStorage.setItem("username", res.data.user)
       localStorage.setItem("token", res.data.token)
       // localStorage.setItem("username", res.data.username)
     })
-      .then( () => this.props.history.push('/farmers'))
-      .catch((error) => console.log(error.response) )
+    // , this.props.history.push('/farmers')
+      .catch((error) => console.log('error from handleSignUp', error.response) )
   }
 
   handleChange(prop, value){
@@ -66,3 +65,9 @@ export default class SignUp extends React.Component {
 
   }
 }
+
+// SignUp.contextTypes = {
+//   router: React.PropTypes.object.isRequired
+// };
+
+// export default withRouter(SignUp);
