@@ -27,7 +27,10 @@ export default class OurGardenContainer extends React.Component {
   }
 
   handleAddToCart(quantity, farmer_id, cart_id, product_id){
-      console.log('going to...', quantity, farmer_id, cart_id, product_id)
+      console.log('to rails q', quantity)
+      console.log('to rails f_id', farmer_id)
+      console.log('to rails cart', cart_id)
+      console.log('to rails p_id', product_id)
         axios.post("http://localhost:3000/api/v1/product_carts", {
           product_cart: {
             quantity: quantity,
@@ -37,15 +40,39 @@ export default class OurGardenContainer extends React.Component {
           }
         })
         .then(res => { console.log('return from rails', res)
-          this.setState(
-          prevState => ({
-            product_carts: [...prevState.product_carts, res.data.product_cart],
-            farmers:
-            [...this.state.farmers.filter( farmer => farmer.id !== farmer_id ),
-              Object.assign({}, this.state.farmers.find( farmer => farmer.id === farmer_id ),
-              //Line 48 sets the farmer_products key to 1)farmer.id to a farmer_id(fp table) then filters
-              {farmer_products: [...this.state.farmers.find( farmer => farmer.id === farmer_id ).farmer_products.filter( fp => fp.id !== res.data.farmer_product.id), res.data.farmer_product] })]
+        const farmerProduct = res.data.farmer_product
+        const updatedFarmers = this.state.farmers.slice()
+        // [{id:1, bio: '', farmer_products: [{quantity: XX}]}, {}]
 
+        // step 1: find the farmer we want to update their product
+        const farmer = updatedFarmers.find(farmer => farmer.id === farmerProduct.farmer_id)
+        // step 2: find that farmer's farmer_product that matches the farmer_product from api response
+        farmer.farmer_products = farmer.farmer_products.map( f_p => {
+          if(farmerProduct.product_id === f_p.product_id) {
+            return farmerProduct
+          } else {
+            return f_p
+          }
+        })
+
+          this.setState( prevState => (
+            {
+              product_carts: [
+                ...prevState.product_carts,
+                res.data.product_cart
+              ],
+              farmers: updatedFarmers
+              // [
+              //   ...prevState.farmers.filter( farmer => farmer.id !== farmer_id ),
+              //   Object.assign({}, prevState.farmers.find( farmer => farmer.id === farmer_id ),
+              // //Line 48 sets the farmer_products key to 1)farmer.id to a farmer_id(fp table) then filters
+              //   {
+              //     farmer_products: [
+              //       ...prevState.farmers.find( farmer => farmer.id === farmer_id ).farmer_products.filter( fp => fp.id !== res.data.farmer_product.id),
+              //       res.data.farmer_product
+              //     ]
+              //   })
+              // ]
           })
         )
       })
@@ -96,6 +123,10 @@ export default class OurGardenContainer extends React.Component {
     )
   }
 
+  cartImages(){
+    this.state.farmers.filter
+  }
+
   render() {
     // debugger
     console.log('container props', this.state)
@@ -104,7 +135,35 @@ export default class OurGardenContainer extends React.Component {
       <div>
         <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange.bind(this)} />
         <h2>
-          <CartShow products={this.state.product_carts} farmer_products={this.state.farmer_products}/>
+
+
+{/* <CartShow products={this.state.product_carts} farmer_products={this.state.farmer_products}/> */}
+
+
+        <Modal trigger={<Button>Cart</Button>}>
+
+          <Modal.Header>Healthy Living!</Modal.Header>
+
+          <Modal.Content image>
+            <Image wrapped size='medium' src='/images/produce_basket.png' />
+
+            <Modal.Description>
+              <Header>Modal Header</Header>
+              <CartShow products={this.state.product_carts} farmer_products={this.state.farmer_products}/>
+            </Modal.Description>
+
+          </Modal.Content>
+
+          <Modal.Actions>
+            <Button primary>
+              Check Out <Icon name='right chevron' />
+            </Button>
+          </Modal.Actions>
+        </Modal>
+
+
+
+
         </h2>
         <Switch>
           <Route path='/farmers' render={ () =>

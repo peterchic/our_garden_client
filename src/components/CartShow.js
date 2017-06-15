@@ -3,33 +3,26 @@ import React from 'react'
 
 
 export default function CartShow(props){
-  // console.log('cartshow', props);
-
-//   const cartShow = () => (
-//  <Modal trigger={<Button>Long Modal</Button>}>
-//    <Modal.Header>Profile Picture</Modal.Header>
-//    <Modal.Content image>
-//      <Image wrapped size='medium' src='/assets/images/wireframe/image.png' />
-//      <Modal.Description>
-//        <Header>Modal Header</Header>
-//        <p>This is an example of expanded content that will cause the modal's dimmer to scroll</p>
-//        <Image src='/assets/images/wireframe/paragraph.png' />
-//      </Modal.Description>
-//    </Modal.Content>
-//    <Modal.Actions>
-//      <Button primary>
-//        Proceed <Icon name='right chevron' />
-//      </Button>
-//    </Modal.Actions>
-//  </Modal>
-// )
-
-  // var itemName = props.farmer_products.map( item => <li>Item: {item.product.name} Price: {item.price}</li>)
+  console.log('cartshow', props);
 
 
+
+
+
+  var itemName = props.farmer_products.map( item =>
+    <div>
+      Item: {item.product.name} Price: {item.price}
+      img: <img src={item.product.picture}/>
+    </div>)
+  // var cartTotal = props.farmer_products.map( (price) => {
+  //   let item = item.price return item + item.price
+  // )
   return(
     <div>
-
+      <ol>
+        Cart: {itemName} Price: {}
+        {/* Total: {} */}
+      </ol>
     </div>
   )
 }

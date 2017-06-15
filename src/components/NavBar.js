@@ -34,9 +34,6 @@ export default function NavBar(props){
             <li><Link to="/" onClick={logout}>Log Out</Link></li>
           </ul>
           <ul className="pull-right nav navbar-nav">
-            <li>
-              {/* <Link to="/account"> Account </Link> */}
-            </li>
           </ul>
         </div>
       </nav>
@@ -53,7 +50,7 @@ export default function NavBar(props){
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li><Link to="/signup">Log In or Sign Up!</Link></li>
+              <li><Link to="/farmers">Log In or Sign Up!</Link></li>
             </ul>
           </div>
         </nav>
