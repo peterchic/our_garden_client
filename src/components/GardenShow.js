@@ -13,11 +13,12 @@ export default function GardenShow (props) {
     )
   }
   // console.log('GS', props.farmer);
+  // debugger
   const products = props.farmer.products.map(product => {
   var fp = props.farmer.farmer_products.filter( (f_p) => f_p.farmer_id === props.farmer.id && f_p.product_id === product.id)
     return (
       <div className="row">
-        <ProductShow product={product} farmer={props.farmer} handleAddToCart={props.handleAddToCart}/>
+        <ProductShow product={product} farmersProduct={fp} handleAddToCart={props.handleAddToCart}/>
       </div>
     )
   })

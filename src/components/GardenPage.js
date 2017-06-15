@@ -30,7 +30,7 @@ if (props.farmers){
               <GardenShow
                 farmer={farmer}
                 handleAddToCart={props.handleAddToCart}
-                product_carts={props.product_carts}
+                // product_carts={props.product_carts}
                 products={props.product}
                 handleReview={props.handleReview}
                 reviews={props.reviews}
