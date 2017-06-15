@@ -1,5 +1,5 @@
 import React from 'react'
-//Garden Show Render me
+//Garden Show Renders me
 
 export default class Reviews extends React.Component {
   constructor(props){
@@ -49,8 +49,6 @@ export default class Reviews extends React.Component {
           Leave A Review:
           <input name="review" type="textarea" onChange={this.handleInputChange.bind(this)} />
         </label>
-
-
         <input type="submit" value="Leave A Review"/>
 
       </form>

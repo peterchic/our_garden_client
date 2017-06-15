@@ -1,7 +1,8 @@
 import React from 'react'
 import LogInSignUp from '../containers/LogInSignUp'
+import Account from './Account'
 
-import { Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
 function logout(){
   localStorage.clear()
@@ -31,6 +32,11 @@ export default function NavBar(props){
             <li><Link to="/farmers">Find A Garden</Link></li>
             <li><Link to="/about">About</Link></li>
             <li><Link to="/" onClick={logout}>Log Out</Link></li>
+          </ul>
+          <ul className="pull-right nav navbar-nav">
+            <li>
+              {/* <Link to="/account"> Account </Link> */}
+            </li>
           </ul>
         </div>
       </nav>

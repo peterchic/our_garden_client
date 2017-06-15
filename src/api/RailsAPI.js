@@ -20,6 +20,11 @@ export function getFarmerProducts(){
   .then(res => res.json())
 }
 
+export function getProductCarts(){
+  return fetch('http://localhost:3000/api/v1/product_carts') 
+  .then(res => res.json())
+}
+
 export function createReview(review, rating, user_id, farmer_id){
   // console.log('rails', review, rating, user_id, farmer_id);
   return fetch("http://localhost:3000/api/v1/reviews", {
@@ -43,5 +48,11 @@ export function createReview(review, rating, user_id, farmer_id){
 
 export function deleteUser(id){
   return fetch(`http://localhost:3000/api/v1/users/${id}`, { method: 'DELETE'})
+    .then( res => res.json() )
+}
+
+export function deleteReview(id){
+  // console.log('did I delete', id);
+  return fetch(`http://localhost:3000/api/v1/reviews/${id}`, { method: 'DELETE'})
     .then( res => res.json() )
 }

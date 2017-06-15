@@ -19,12 +19,12 @@ if (props.farmers){
           { farmersElements }
         </ul>
       </div>
-      
+
       <div>
         <Switch>
           <Route exact path="/farmers/:id" render={ ({match}) => {
             const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id))
-            console.log('GP', farmer)
+            // console.log('GP', props)
             // debugger
             return (
               <GardenShow
@@ -34,9 +34,11 @@ if (props.farmers){
                 products={props.product}
                 handleReview={props.handleReview}
                 reviews={props.reviews}
+                handleDeleteReview={props.handleDeleteReview}
               />
             )
-          }} />
+          }}
+          />
         </Switch>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import React from 'react'
 
+
 export default class AddToCart extends React.Component {
   constructor(props){
-    console.log('cart', props)
+    console.log('cart', props.farmer.farmer_products[0])
 
     super(props)
     this.state = {
@@ -33,9 +34,9 @@ export default class AddToCart extends React.Component {
     // console.log('farmer_product_id', this.props.fp[0].farmer_product_id)
     return(
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <input type='text' onChange={ (e) => this.handleChange(this.props.farmer.id, e)}/>
-          <input type="button" value="Add to Basket" onClick={this.handleSubmit.bind(this)} />
+          <input type="submit" value="Add to Basket"/>
         </form>
       </div>
     )
