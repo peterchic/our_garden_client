@@ -6,17 +6,19 @@ import Search from '../components/Search'
 import axios from 'axios'
 import Account from '../components/Account'
 import { withRouter } from 'react-router'
+import CartShow from '../components/CartShow'
+import NavBar from '../components/NavBar'
+import LogInSignUp from './LogInSignUp'
+import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react'
 
-
-
-class OurGardenContainer extends React.Component {
+export default class OurGardenContainer extends React.Component {
   constructor(){
     super()
     this.state = {
       reviews: [],
       farmers: [],
       users: [],
-      products: [],
+      // products: [],
       searchTerm: '',
       cart: [],
       farmer_products: [],
@@ -25,7 +27,7 @@ class OurGardenContainer extends React.Component {
   }
 
   handleAddToCart(quantity, farmer_id, cart_id, product_id){
-      // console.log('rails', quantity, farmer_id, cart_id, product_id)
+      console.log('going to...', quantity, farmer_id, cart_id, product_id)
         axios.post("http://localhost:3000/api/v1/product_carts", {
           product_cart: {
             quantity: quantity,
@@ -34,45 +36,20 @@ class OurGardenContainer extends React.Component {
             product_id: product_id
           }
         })
-        .then(res => this.setState(
+        .then(res => { console.log('return from rails', res)
+          this.setState(
           prevState => ({
-            product_carts: [...prevState.product_carts, res.data]
+            product_carts: [...prevState.product_carts, res.data.product_cart],
+            farmers:
+            [...this.state.farmers.filter( farmer => farmer.id !== farmer_id ),
+              Object.assign({}, this.state.farmers.find( farmer => farmer.id === farmer_id ),
+              //Line 48 sets the farmer_products key to 1)farmer.id to a farmer_id(fp table) then filters
+              {farmer_products: [...this.state.farmers.find( farmer => farmer.id === farmer_id ).farmer_products.filter( fp => fp.id !== res.data.farmer_product.id), res.data.farmer_product] })]
+
           })
-        ))
-        this.handleFarmerProductUpdate(quantity, farmer_id, cart_id, product_id)
-      }
-
-
-
-  handleFarmerProductUpdate(quantity, farmer_id, cart_id, product_id){
-    console.log('wtf is happening', quantity, farmer_id, cart_id, product_id);
-    axios.patch(`http://localhost:3000/api/v1/farmer_products/${farmer_id}`, {
-      product_cart: {
-        quantity: quantity,
-        farmer_id: farmer_id,
-        cart_id: cart_id,
-        product_id: product_id
-      }
-    })
-    // .then( res => console.log('please', res.data[res.data.length -1] ) )
-
-
-  //   .then(res => this.setState(
-  //     prevState => ({
-  //       farmer_products: res.data[res.data.length -1]
-  //     })
-  //   ))
-  // }
-  //replace last one with this one
-
-
-
-    .then(res => this.setState({
-        farmer_products: [res.data[res.data.length -1] ]
+        )
       })
-    )
-  }
-  //replace last one with this one
+    }
 
   componentDidMount() {
     getFarmers()
@@ -116,38 +93,52 @@ class OurGardenContainer extends React.Component {
     .then((data) => this.setState({
       reviews: data
     })
-
-      )
-    }
-
+    )
+  }
 
   render() {
-    // console.log('container props', this.state)
+    // debugger
+    console.log('container props', this.state)
+    if(localStorage.getItem('token')){
     return (
       <div>
         <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange.bind(this)} />
         <h2>
-          Cart: {this.state.product_carts.length}
+          <CartShow products={this.state.product_carts} farmer_products={this.state.farmer_products}/>
         </h2>
+        <Switch>
+          <Route path='/farmers' render={ () =>
+            <GardenPage
+              farmers={this.state.farmers}
+              products={this.state.products}
+              searchTerm={this.state.searchTerm}
+              users={this.state.users}
+              farmer_products={this.state.farmer_products}
+              handleAddToCart={this.handleAddToCart.bind(this)}
+              product_carts={this.state.product_carts}
+              handleReview={this.handleReview.bind(this)}
+              reviews={this.state.reviews}
+              handleDeleteReview={this.handleDeleteReview.bind(this)}
+            />}
+          />
 
-        <Route path='/farmers' render={ () =>
-          <GardenPage
-            farmers={this.state.farmers}
-            products={this.state.products}
-            searchTerm={this.state.searchTerm}
-            users={this.state.users}
-            farmer_products={this.state.farmer_products}
-            handleAddToCart={this.handleAddToCart.bind(this)}
-            product_carts={this.state.product_carts}
-            handleReview={this.handleReview.bind(this)}
-            reviews={this.state.reviews}
-            handleDeleteReview={this.handleDeleteReview.bind(this)}
-          />}
-        />
+          <Route exact path='/logout'/>
+        </Switch>
 
       </div>
-    )
-  }
-}
+          )
+          } else {
+            return (
+              <div>
+                <NavBar title="OurGarden" color="white" />
+                <LogInSignUp />
+              </div>
+            )
+          }
+          }
+          }
 
-export default withRouter(OurGardenContainer)
+          // export default ModalScrollingExample
+
+
+// export default withRouter(OurGardenContainer)
