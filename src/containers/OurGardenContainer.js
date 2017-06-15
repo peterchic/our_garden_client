@@ -44,11 +44,12 @@ class OurGardenContainer extends React.Component {
 
 
 
-  handleFarmerProductUpdate(quantity, farmer_product_id, cart_id, product_id){
-    axios.patch(`http://localhost:3000/api/v1/farmer_products/${farmer_product_id}`, {
+  handleFarmerProductUpdate(quantity, farmer_id, cart_id, product_id){
+    console.log('wtf is happening', quantity, farmer_id, cart_id, product_id);
+    axios.patch(`http://localhost:3000/api/v1/farmer_products/${farmer_id}`, {
       product_cart: {
         quantity: quantity,
-        farmer_product_id: farmer_product_id,
+        farmer_id: farmer_id,
         cart_id: cart_id,
         product_id: product_id
       }
@@ -128,7 +129,7 @@ class OurGardenContainer extends React.Component {
         <h2>
           Cart: {this.state.product_carts.length}
         </h2>
-        
+
         <Route path='/farmers' render={ () =>
           <GardenPage
             farmers={this.state.farmers}
