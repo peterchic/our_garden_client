@@ -21,7 +21,7 @@ export function getFarmerProducts(){
 }
 
 export function getProductCarts(){
-  return fetch('http://localhost:3000/api/v1/product_carts') 
+  return fetch('http://localhost:3000/api/v1/product_carts')
   .then(res => res.json())
 }
 
@@ -46,10 +46,23 @@ export function createReview(review, rating, user_id, farmer_id){
     .then( res => res.json())
 }
 
-export function deleteUser(id){
-  return fetch(`http://localhost:3000/api/v1/users/${id}`, { method: 'DELETE'})
-    .then( res => res.json() )
-}
+export function updateReview(id, review, rating) {
+  console.log('update review going to rails', id, review, rating)
+  return fetch(`http://localhost:3000/api/v1/reviews/${id}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        review: {
+          review: review,
+          rating: rating
+        }
+      })
+    })
+    .then( res => res.json())
+  }
 
 export function deleteReview(id){
   // console.log('did I delete', id);

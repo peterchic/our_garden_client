@@ -29,8 +29,11 @@ export default function GardenShow (props) {
         <h1>{props.farmer.name}</h1>
         <h1>{props.farmer.bio}</h1>
         <img src={props.farmer.picture}/>
-        <Reviews handleReview={props.handleReview} farmer={props.farmer}/>
-        <ReviewShow reviews={props.reviews} farmer={props.farmer} handleDeleteReview={props.handleDeleteReview}
+        <Reviews
+          handleReview={props.handleReview} farmer={props.farmer}/>
+        <ReviewShow
+          reviews={props.reviews} farmer={props.farmer} handleDeleteReview={props.handleDeleteReview}
+        // handleUpdateReview={props.handleUpdateReview}
         />
 
         <div className='two column'>

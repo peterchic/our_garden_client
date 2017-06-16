@@ -1,26 +1,58 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ReviewEdit from './ReviewEdit'
+import { Button, Icon, Modal } from 'semantic-ui-react'
+
 
 export default function ReviewShow (props) {
   // console.log('ReviewShow', reviews);
   // debugger
   //
-  // handleClick(){
+  // handleUpdateReview(e){
+  //   console.log('updatereview', e);
   //   props.handleDeleteReview(reviews)
   //
   // }
-
+  console.log('RevShow', props)
+  // debugger
   const filtered = props.reviews.filter( review => review.farmer_id === props.farmer.id )
   const  reviews = filtered.map( review =>{
     return (
       <div>
-        <p>
-          Review: {review.review}
-          Rating: {review.rating}
-          <button value='Delete' onClick={() => props.handleDeleteReview(review.id)}>Delete </button>
-          {/* <Link type='button' to={`/farmers/${props.farmer.id}/edit`}>Edit Review</Link> */}
-        </p>
-      </div>)
+        <div>
+          <h3>
+            Review: {review.review}
+            Rating: {review.rating}
+            <Icon name='close' color='red' onClick={() => props.handleDeleteReview(review.id)}/>
+            <Icon name='pencil' render={() => <ReviewEdit onClick={() => props.handleUpdateReview(review.id)}/>}/>
+            <Link type='button' to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>Edit Review</Link>
+
+
+
+            {/* <Modal
+              trigger={<Button>Edit</Button>}
+              header='Edit Youre Review'
+              content='Are you sure you want to delete your account'
+              actions={[
+                { key: 'no', content: 'No', color: 'red', triggerClose: true },
+                { key: 'yes', content: 'Yes', color: 'green', triggerClose: true },
+              ]}
+            /> */}
+
+
+
+
+
+
+            {/* <Link type='button' to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>Edit Review</Link> */}
+          </h3>
+
+        </div>
+          {/* <Button icon><Icon name='pencil' <Link to={`/farmers/${props.farmer.id}/edit`}</Link>/><Icon name='pencil'/></Button> */}
+          {/* <button onClick={() => <ReviewEdit handleUpdateReview={props.handleUpdateReview(review.id, review.review, review.rating)} reviews={props.reviews} /> }> Edit </button> */}
+
+      </div>
+    )
   })
 
   return(

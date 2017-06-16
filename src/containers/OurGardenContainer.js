@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
-import { editUser, getFarmers, getProducts, getUsers, getFarmerProducts, addToCart, editCart, createReview, getReviews, deleteReview, getProductCarts } from '../api/RailsAPI'
+import { editUser, getFarmers, getProducts, getUsers, getFarmerProducts, addToCart, editCart, createReview, getReviews, deleteReview, getProductCarts, updateReview } from '../api/RailsAPI'
 import GardenPage from '../components/GardenPage'
 import Search from '../components/Search'
 import axios from 'axios'
@@ -40,10 +40,8 @@ export default class OurGardenContainer extends React.Component {
           }
         })
         .then(res => { console.log('return from rails', res)
-        const farmerProduct = res.data.farmer_product
-        const updatedFarmers = this.state.farmers.slice()
-        // [{id:1, bio: '', farmer_products: [{quantity: XX}]}, {}]
-
+        const farmerProduct = res.data.farmer_product //our return from API
+        const updatedFarmers = this.state.farmers.slice() //creates a duplicate of array when parameters are not entered
         // step 1: find the farmer we want to update their product
         const farmer = updatedFarmers.find(farmer => farmer.id === farmerProduct.farmer_id)
         // step 2: find that farmer's farmer_product that matches the farmer_product from api response
@@ -54,7 +52,6 @@ export default class OurGardenContainer extends React.Component {
             return f_p
           }
         })
-
           this.setState( prevState => (
             {
               product_carts: [
@@ -62,17 +59,6 @@ export default class OurGardenContainer extends React.Component {
                 res.data.product_cart
               ],
               farmers: updatedFarmers
-              // [
-              //   ...prevState.farmers.filter( farmer => farmer.id !== farmer_id ),
-              //   Object.assign({}, prevState.farmers.find( farmer => farmer.id === farmer_id ),
-              // //Line 48 sets the farmer_products key to 1)farmer.id to a farmer_id(fp table) then filters
-              //   {
-              //     farmer_products: [
-              //       ...prevState.farmers.find( farmer => farmer.id === farmer_id ).farmer_products.filter( fp => fp.id !== res.data.farmer_product.id),
-              //       res.data.farmer_product
-              //     ]
-              //   })
-              // ]
           })
         )
       })
@@ -119,9 +105,43 @@ export default class OurGardenContainer extends React.Component {
     deleteReview(id)
     .then((data) => this.setState({
       reviews: data
-    })
-    )
+    }))
   }
+
+  handleUpdateReview(id, review, rating){
+    updateReview(id, review, rating)
+    .then( updatedReview => {
+      const newReviews = this.state.reviews.map( rev => {
+        if (rev.id === updatedReview.id ) {
+          return updatedReview
+        } else {
+          return rev
+        }
+      })
+      this.setState({
+        reviews: newReviews
+      })
+      this.props.history.push(`/farmers/${updatedReview.farmer_id}`)
+      })
+
+    }
+
+
+
+
+  // handleUpdateWatchlist(id, name, description){
+  // editWatchlist(id, name, description)
+  // .then( updatedWatchlist => {
+  //   const newWatchlists = this.state.watchlists.map( wl => {
+  //     if (wl.id === updatedWatchlist.id ) {
+  //       return updatedWatchlist
+  //     } else { return wl }
+  //     })
+  //   this.setState({watchlists: newWatchlists})
+  //   }
+  //   )
+  // }
+
 
   cartImages(){
     this.state.farmers.filter
@@ -135,12 +155,12 @@ export default class OurGardenContainer extends React.Component {
       <div>
         <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange.bind(this)} />
         <h2>
-
+          Cart: {this.state.product_carts.length}
 
 {/* <CartShow products={this.state.product_carts} farmer_products={this.state.farmer_products}/> */}
 
 
-        <Modal trigger={<Button>Cart</Button>}>
+        {/* <Modal trigger={<Button>Cart</Button>}>
 
           <Modal.Header>Healthy Living!</Modal.Header>
 
@@ -159,7 +179,7 @@ export default class OurGardenContainer extends React.Component {
               Check Out <Icon name='right chevron' />
             </Button>
           </Modal.Actions>
-        </Modal>
+        </Modal> */}
 
 
 
@@ -178,6 +198,7 @@ export default class OurGardenContainer extends React.Component {
               handleReview={this.handleReview.bind(this)}
               reviews={this.state.reviews}
               handleDeleteReview={this.handleDeleteReview.bind(this)}
+              handleUpdateReview={this.handleUpdateReview.bind(this)}
             />}
           />
 
