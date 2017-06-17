@@ -24,10 +24,8 @@ export default function ReviewShow (props) {
             Review: {review.review}
             Rating: {review.rating}
             <Icon name='close' color='red' onClick={() => props.handleDeleteReview(review.id)}/>
-            <Icon name='pencil' render={() => <ReviewEdit onClick={() => props.handleUpdateReview(review.id)}/>}/>
+            {/* <Icon name='pencil' render={() => <ReviewEdit onClick={() => props.handleUpdateReview(review.id)}/>}/> */}
             <Link type='button' to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>Edit Review</Link>
-
-
 
             {/* <Modal
               trigger={<Button>Edit</Button>}

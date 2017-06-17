@@ -2,6 +2,9 @@ import React from 'react'
 import ProductShow from './ProductShow'
 import Reviews from './Reviews'
 import ReviewShow from './ReviewShow'
+import { Link, Route, Switch } from 'react-router-dom'
+import ReviewEdit from './ReviewEdit'
+
 //Garden Page renders me
 
 export default function GardenShow (props) {
@@ -12,13 +15,18 @@ export default function GardenShow (props) {
       <h1>Loading the Show Page</h1>
     )
   }
-  // console.log('GS', props.farmer);
+  console.log('GS', props.farmer);
   // debugger
   const products = props.farmer.products.map(product => {
   var fp = props.farmer.farmer_products.filter( (f_p) => f_p.farmer_id === props.farmer.id && f_p.product_id === product.id)
     return (
       <div className="row">
-        <ProductShow product={product} farmersProduct={fp} handleAddToCart={props.handleAddToCart}/>
+        <ProductShow
+          product={product}
+          farmersProduct={fp}
+          handleAddToCart={props.handleAddToCart}
+          current_user={props.current_user}
+        />
       </div>
     )
   })
@@ -33,9 +41,16 @@ export default function GardenShow (props) {
           handleReview={props.handleReview} farmer={props.farmer}/>
         <ReviewShow
           reviews={props.reviews} farmer={props.farmer} handleDeleteReview={props.handleDeleteReview}
-        // handleUpdateReview={props.handleUpdateReview}
+          handleUpdateReview={props.handleUpdateReview}
         />
-
+        <Route path="/farmers/:id/reviews/:id/edit" render={ ({match}) => {
+          const review = props.reviews.find(review => review.id === parseInt(match.params.id))
+            return (
+              <ReviewEdit handleUpdateReview={props.handleUpdateReview} reviews={review} farmer={props.farmer}
+              />
+            )
+        }}
+      />
         <div className='two column'>
           <ul>{products}</ul>
         </div>

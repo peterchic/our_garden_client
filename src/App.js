@@ -15,26 +15,16 @@ export default class App extends React.Component {
 
 
   render(){
-    if(localStorage.getItem('token')){
+    // if(localStorage.getItem('token')){
       return (
       <div>
         <div className = "container-fluid">
-          <NavBar title="OurGarden" color="white"/>
-          <Switch>
-            <Route path='/farmers' component={OurGardenContainer} />
-            <Route path="/about" render={() => <h1>This is an app about life!</h1>}/>
-            {/* <Route exact path='/logout'/> */}
-          </Switch>
+          {/* <NavBar title="OurGarden" color="white"/> */}
+          <OurGardenContainer />
+
         </div>
       </div>
-    )
-  } else {
-      return (
-        <div>
-          <NavBar title="OurGarden" color="white" />
-          <LogInSignUp />
-        </div>
       )
-    }
+    // }
   }
 }

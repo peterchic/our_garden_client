@@ -3,7 +3,8 @@ import React from 'react'
 import AddToCart from './AddToCart'
 
 export default function ProductShow (props) {
-
+  const cart_id = props.current_user.current_cart ? props.current_user.current_cart.id : null
+  // console.log('props in ProductShow', props);
   return (
     <div className='column'>
       <div className="ui card">
@@ -23,6 +24,7 @@ export default function ProductShow (props) {
           </div>
           <AddToCart
             handleAddToCart={props.handleAddToCart}
+            cart_id={cart_id}
             farmersProduct={props.farmersProduct}
           />
         </div>

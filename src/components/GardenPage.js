@@ -23,13 +23,14 @@ if (props.farmers){
 
       <div>
         <Switch>
-          <Route exact path="/farmers/:id" render={ ({match}) => {
+          <Route path="/farmers/:id" render={ ({match}) => {
             const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id))
               return (
                 <GardenShow
                   farmer={farmer}
                   handleAddToCart={props.handleAddToCart}
-                  // product_carts={props.product_carts}
+                  current_user={props.current_user}
+                  product_carts={props.product_carts}
                   products={props.product}
                   handleReview={props.handleReview}
                   reviews={props.reviews}
@@ -39,14 +40,6 @@ if (props.farmers){
               )
             }}
           />
-          <Route exact path="/farmers/:id/reviews/:id/edit" render={ ({match}) => {
-            const review = props.reviews.find(review => review.id === parseInt(match.params.id))
-              return (
-                <ReviewEdit handleUpdateReview={props.handleUpdateReview} reviews={review}
-                />
-              )
-          }}
-        />
         </Switch>
       </div>
     </div>

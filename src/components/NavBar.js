@@ -4,11 +4,6 @@ import Account from './Account'
 
 import { Route, Link } from 'react-router-dom'
 
-function logout(){
-  localStorage.clear()
-}
-
-
 export default function NavBar(props){
   // console.log('local', localStorage);
   const colors = {
@@ -31,7 +26,7 @@ export default function NavBar(props){
           <ul className="nav navbar-nav">
             <li><Link to="/farmers">Find A Garden</Link></li>
             <li><Link to="/about">About</Link></li>
-            <li><Link to="/" onClick={logout}>Log Out</Link></li>
+            <li><Link to="/" onClick={props.logout}>Log Out</Link></li>
           </ul>
           <ul className="pull-right nav navbar-nav">
           </ul>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { Switch, Route, Link, withRouter } from 'react-router-dom'
 
 export default class ReviewEdit extends Component{
   constructor(){
     super()
     this.state = {
       review: '',
-      rating: ''
+      rating: '',
     }
   }
 
@@ -26,6 +27,11 @@ export default class ReviewEdit extends Component{
       })
     }
 
+    handleCancel(e){
+      e.preventDefault()
+      // this.props.history.push(`/farmers/${this.props.farmer.id}`)
+    }
+
     handleSubmit(e){
       e.preventDefault()
       this.props.handleUpdateReview(this.props.reviews.id, this.state.review, this.state.rating)
@@ -35,17 +41,18 @@ export default class ReviewEdit extends Component{
     if (!this.props.reviews) {
       return null
     }
-    console.log('reviewEdited', this.props)
+    // console.log('reviewEdited', this.props)
     return(
       <div>
         <h2>Edit your Review</h2>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form>
           <div>
             <label>Review:</label>
             <input type='text' value={this.state.review} placeholder={this.props.reviews.review} onChange={this.handleReviewInputChange.bind(this)} />
             <label>Rating:</label>
             <input type="number" min="1" max="5" value={this.state.rating} placeholder={this.props.reviews.rating} onChange={this.handleRatingInputChange.bind(this)} />
-            <input type='submit' />
+            <input type='submit' onClick={this.handleSubmit.bind(this)}/>
+            {/* <input type='submit' value='Cancel' onClick={this.handleSubmit.bind(this)} /> */}
           </div>
         </form>
       </div>

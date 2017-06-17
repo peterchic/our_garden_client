@@ -17,13 +17,48 @@ export default class OurGardenContainer extends React.Component {
     this.state = {
       reviews: [],
       farmers: [],
-      users: [],
+      current_user: {},
+      // users: [],
       // products: [],
       searchTerm: '',
       cart: [],
       farmer_products: [],
       product_carts: []
     }
+  }
+
+  handleLogin(params){
+    fetch("http://localhost:3000/api/v1/sign_in", {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+    }).then( res => res.json() )
+    .then(resp=> {
+      // console.log(resp);
+      // send back entire user object as the response from Rails
+      // not just the string of username
+      // something that looks like this:
+      // {
+          //  username: "pete",
+          //  bio: "whksdahkjas",
+          //  zip: 123445,
+          //  current_cart: {
+          //    id: 3,
+          //  }
+          //  products: [{}]
+      // }
+
+      // store entire current_user object in React state
+      this.setState({
+        current_user: resp.user
+      })
+
+      localStorage.setItem("token", resp.token)
+      // localStorage.setItem("username", resp.username)
+    })
   }
 
   handleAddToCart(quantity, farmer_id, cart_id, product_id){
@@ -69,10 +104,6 @@ export default class OurGardenContainer extends React.Component {
       .then( res => this.setState({
       farmers: res
     }))
-    getUsers()
-      .then(res => this.setState ({
-      users: res
-    }))
     getReviews()
       .then(res => this.setState ({
       reviews: res
@@ -85,7 +116,27 @@ export default class OurGardenContainer extends React.Component {
       .then(res => this.setState ({
       farmer_products: res
     }))
+
+
+    // if (there's a token in local storage && theres no current user in state) {
+    //   fetch the user
+    //   update the current_user key in your state using this.setState and the response
+    //   (this will look just like it does in the handleLogin function, you may need to double check that the response from your server matched what it does there)
+    // }
+    if(localStorage.getItem('token') && !this.state.current_cart){
+      getUsers()
+        .then(res => console.log('get users', res)
+      //     res => this.setState ({
+      //   users: res
+      // })
+    )
+
+    }
+
+
   }
+
+
 
   handleChange(event) {
     // console.log(event.target.value);
@@ -147,47 +198,31 @@ export default class OurGardenContainer extends React.Component {
     this.state.farmers.filter
   }
 
+  logout(){
+    localStorage.clear()
+    this.setState({
+      current_user: false
+    })
+  }
+
   render() {
     // debugger
     console.log('container props', this.state)
     if(localStorage.getItem('token')){
     return (
       <div>
+
+        <NavBar title="OurGarden" color="white" logout={this.logout.bind(this)} />
         <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange.bind(this)} />
         <h2>
           Cart: {this.state.product_carts.length}
 
-{/* <CartShow products={this.state.product_carts} farmer_products={this.state.farmer_products}/> */}
-
-
-        {/* <Modal trigger={<Button>Cart</Button>}>
-
-          <Modal.Header>Healthy Living!</Modal.Header>
-
-          <Modal.Content image>
-            <Image wrapped size='medium' src='/images/produce_basket.png' />
-
-            <Modal.Description>
-              <Header>Modal Header</Header>
-              <CartShow products={this.state.product_carts} farmer_products={this.state.farmer_products}/>
-            </Modal.Description>
-
-          </Modal.Content>
-
-          <Modal.Actions>
-            <Button primary>
-              Check Out <Icon name='right chevron' />
-            </Button>
-          </Modal.Actions>
-        </Modal> */}
-
-
-
-
+        {/* <CartShow products={this.state.product_carts} farmer_products={this.state.farmer_products}/> */}
         </h2>
         <Switch>
           <Route path='/farmers' render={ () =>
             <GardenPage
+              current_user={this.state.current_user}
               farmers={this.state.farmers}
               products={this.state.products}
               searchTerm={this.state.searchTerm}
@@ -201,24 +236,17 @@ export default class OurGardenContainer extends React.Component {
               handleUpdateReview={this.handleUpdateReview.bind(this)}
             />}
           />
-
           <Route exact path='/logout'/>
         </Switch>
-
       </div>
-          )
-          } else {
-            return (
-              <div>
-                <NavBar title="OurGarden" color="white" />
-                <LogInSignUp />
-              </div>
-            )
-          }
-          }
-          }
-
-          // export default ModalScrollingExample
-
-
-// export default withRouter(OurGardenContainer)
+      )
+      } else {
+      return (
+        <div>
+          <NavBar title="OurGarden" color="white" />
+          <LogInSignUp handleLogin={this.handleLogin.bind(this) } />
+        </div>
+      )
+    }
+  }
+}
