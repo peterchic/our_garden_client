@@ -2,7 +2,7 @@ import React from 'react'
 import ProductShow from './ProductShow'
 import Reviews from './Reviews'
 import ReviewShow from './ReviewShow'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import ReviewEdit from './ReviewEdit'
 
 //Garden Page renders me
@@ -15,7 +15,7 @@ export default function GardenShow (props) {
       <h1>Loading the Show Page</h1>
     )
   }
-  console.log('GS', props.farmer);
+  console.log('GS', props);
   // debugger
   const products = props.farmer.products.map(product => {
   var fp = props.farmer.farmer_products.filter( (f_p) => f_p.farmer_id === props.farmer.id && f_p.product_id === product.id)
@@ -36,7 +36,7 @@ export default function GardenShow (props) {
       <div className=' six column'>
         <h1>{props.farmer.name}</h1>
         <h1>{props.farmer.bio}</h1>
-        <img src={props.farmer.picture}/>
+        <img alt={props.farmer.name} src={props.farmer.picture}/>
         <Reviews
           handleReview={props.handleReview} farmer={props.farmer}/>
         <ReviewShow
@@ -44,7 +44,7 @@ export default function GardenShow (props) {
           handleUpdateReview={props.handleUpdateReview}
         />
         <Route path="/farmers/:id/reviews/:id/edit" render={ ({match}) => {
-          const review = props.reviews.find(review => review.id === parseInt(match.params.id))
+          const review = props.reviews.find(review => review.id === parseInt(match.params.id, 10))
             return (
               <ReviewEdit handleUpdateReview={props.handleUpdateReview} reviews={review} farmer={props.farmer}
               />

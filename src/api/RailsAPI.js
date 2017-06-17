@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 
 export function getFarmers(){
   return fetch('http://localhost:3000/api/v1/farmers')
@@ -28,6 +28,19 @@ export function getProductCarts(){
 export function getCart(){
   return fetch('http://localhost:3000/api/v1/carts')
   .then(res => res.json())
+}
+
+export function decodeToken(params){
+  console.log(params)
+  return fetch(`http://localhost:3000/api/v1/decode_token`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+  })
+  .then( res => res.json() )
 }
 
 export function createReview(review, rating, user_id, farmer_id){

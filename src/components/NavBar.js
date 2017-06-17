@@ -1,8 +1,8 @@
 import React from 'react'
-import LogInSignUp from '../containers/LogInSignUp'
-import Account from './Account'
+// import LogInSignUp from '../containers/LogInSignUp'
+// import Account from './Account'
 
-import { Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function NavBar(props){
   // console.log('local', localStorage);

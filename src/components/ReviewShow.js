@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import ReviewEdit from './ReviewEdit'
-import { Button, Icon, Modal } from 'semantic-ui-react'
+// import ReviewEdit from './ReviewEdit'
+import { Icon } from 'semantic-ui-react'
 
 
 export default function ReviewShow (props) {
@@ -13,7 +13,7 @@ export default function ReviewShow (props) {
   //   props.handleDeleteReview(reviews)
   //
   // }
-  console.log('RevShow', props)
+  // console.log('RevShow', props)
   // debugger
   const filtered = props.reviews.filter( review => review.farmer_id === props.farmer.id )
   const  reviews = filtered.map( review =>{

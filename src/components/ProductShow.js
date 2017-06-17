@@ -4,12 +4,12 @@ import AddToCart from './AddToCart'
 
 export default function ProductShow (props) {
   const cart_id = props.current_user.current_cart ? props.current_user.current_cart.id : null
-  // console.log('props in ProductShow', props);
+  console.log('props in ProductShow', props);
   return (
     <div className='column'>
       <div className="ui card">
         <div className="image">
-          <img src={props.product.picture}/>
+          <img alt={props.product.name} src={props.product.picture}/>
         </div>
         <div className="content">
           <h2>{props.product.name}</h2>

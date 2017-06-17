@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-// import {withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
-export default class SignUp extends React.Component {
+class SignUp extends React.Component {
   constructor(){
     super()
     this.state = {
@@ -19,15 +19,14 @@ export default class SignUp extends React.Component {
         name: this.state.name,
         username: this.state.username,
         password: this.state.password,
-        bio: this.state.bio,
+        bio: this.state.bio
       }
-    }).then(res => { console.log('wtf', res)
-      // localStorage.setItem("username", res.data.user.username)
+    }).then(res => { console.log('Sign Up Response: ', res)
       localStorage.setItem("token", res.data.token)
-      // localStorage.setItem("username", res.data.username)
     })
     // , this.props.history.push('/farmers')
-      .catch((error) => console.log('error from handleSignUp', error.response) )
+    .catch((error) => console.log('error from handleSignUp', error.response) )
+    this.props.history.push('/farmers')
   }
 
   handleChange(prop, value){
@@ -70,4 +69,4 @@ export default class SignUp extends React.Component {
 //   router: React.PropTypes.object.isRequired
 // };
 
-// export default withRouter(SignUp);
+export default withRouter(SignUp)

@@ -7,7 +7,7 @@ export default class LogInSignUp extends React.Component{
 
 
   render(){
-    console.log('LogInSignup props', this.props)
+    // console.log('LogInSignup props', this.props)
     return(
       <div>
         <SignUp />

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
 import GardenShow from './GardenShow'
-import ReviewEdit from './ReviewEdit'
+// import ReviewEdit from './ReviewEdit'
 
 export default function GardenPage(props){
   const farmersElements = props.farmers.map((farmer,i) =>
@@ -24,7 +24,7 @@ if (props.farmers){
       <div>
         <Switch>
           <Route path="/farmers/:id" render={ ({match}) => {
-            const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id))
+            const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id, 10))
               return (
                 <GardenShow
                   farmer={farmer}

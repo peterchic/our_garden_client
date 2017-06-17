@@ -1,13 +1,12 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+// import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import React from 'react';
 
 import OurGardenContainer from './containers/OurGardenContainer'
-import LogInSignUp from './containers/LogInSignUp'
-
-import LogInForm from './components/LogInForm'
-import Account from './components/Account'
-import SignUp from './components/SignUp'
-import NavBar from './components/NavBar'
+// import LogInSignUp from './containers/LogInSignUp'
+// import LogInForm from './components/LogInForm'
+// import Account from './components/Account'
+// import SignUp from './components/SignUp'
+// import NavBar from './components/NavBar'
 import './App.css';
 
 export default class App extends React.Component {
