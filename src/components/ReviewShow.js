@@ -13,7 +13,7 @@ export default function ReviewShow (props) {
   //   props.handleDeleteReview(reviews)
   //
   // }
-  // console.log('RevShow', props)
+  console.log('RevShow', props)
   // debugger
   const filtered = props.reviews.filter( review => review.farmer_id === props.farmer.id )
   const  reviews = filtered.map( review =>{
@@ -26,6 +26,7 @@ export default function ReviewShow (props) {
             <Icon name='close' color='red' onClick={() => props.handleDeleteReview(review.id)}/>
             {/* <Icon name='pencil' render={() => <ReviewEdit onClick={() => props.handleUpdateReview(review.id)}/>}/> */}
             <Link type='button' to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>Edit Review</Link>
+            User:
 
             {/* <Modal
               trigger={<Button>Edit</Button>}

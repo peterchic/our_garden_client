@@ -6,7 +6,7 @@ export default function ProductShow (props) {
   const cart_id = props.current_user.current_cart ? props.current_user.current_cart.id : null
   console.log('props in ProductShow', props);
   return (
-    <div className='column'>
+    <div>
       <div className="ui card">
         <div className="image">
           <img alt={props.product.name} src={props.product.picture}/>

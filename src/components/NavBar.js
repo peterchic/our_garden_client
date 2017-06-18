@@ -1,22 +1,36 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+// import logo from '../images/our_garden_logo-01.svg'
 
 export default class NavBar extends React.Component {
   constructor(){
     super()
     this.state = {
-      activeItem: 'farmers'
+      activeItem: 'farmers',
     }
   }
+
+  // quantity(){
+  //   const quantity = this.props.current_user.products.map( item => {
+  //    return <li>{item.name}</li>
+  //  }).length
+  // }
+
+  // if product carts cart_id === current_user.id then return match plus length
+
+
+
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
+    // debugger
+    console.log('navbar', this.props);
     const { activeItem } = this.state
-    if(localStorage.getItem('token')){
+    if(localStorage.getItem('token') && this.props.current_user){
       return (
-        <Menu color='olive' inverted={1} size='massive'>
+        <Menu color='olive' inverted={true} size='massive'>
           <Link to="/farmers">
           <Menu.Item name='farmers' active={activeItem === 'farmers'} onClick={this.handleItemClick}/>
           </Link>
@@ -26,7 +40,7 @@ export default class NavBar extends React.Component {
           </Link>
 
           <Menu.Menu position='right'>
-            Products In Current Cart {this.props.product_carts.length}
+            <div>{this.props.current_user.products.length}</div>
             <Link to='/cart'>
             <Menu.Item name='cart' active={activeItem === 'cart'} onClick={this.handleItemClick}/>
             </Link>
@@ -42,54 +56,12 @@ export default class NavBar extends React.Component {
       )
     } else {
       return (
-        <Menu>
+        <Menu color='olive' inverted={true} size='massive'>
           <Link to="/">
-          <Menu.Item name='log in or sign up' active={activeItem === 'log in or sign up'} onClick={this.handleItemClick}/>
+          <Menu.Item name="Our Garden" active={activeItem === 'Our Garden'} onClick={this.handleItemClick}/>
           </Link>
         </Menu>
       )
     }
   }
 }
-
-
-//     return (
-//       <nav className={`navbar ${colors[props.color]} bg-inverse`}>
-//         <div className='navbar-header'>
-//           <a className='navbar-brand'>
-//             { props.title }
-//           </a>
-//         </div>
-//
-//         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-//           <ul className="nav navbar-nav">
-//             <li><Link to="/farmers">Find A Garden</Link></li>
-//             <li><Link to="/about">About</Link></li>
-//             <li><Link to="/" onClick={props.logout}>Log Out</Link></li>
-//           </ul>
-//           <ul className="pull-right nav navbar-nav">
-//           </ul>
-//         </div>
-//       </nav>
-//     )
-//   } else {
-//     return (
-//       <div>
-//         <nav className={`navbar ${colors[props.color]} bg-inverse`}>
-//           <div className='navbar-header'>
-//             <a className='navbar-brand'>
-//               { props.title }
-//             </a>
-//           </div>
-//
-//           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-//             <ul className="nav navbar-nav">
-//               <li><Link to="/farmers">Log In or Sign Up!</Link></li>
-//             </ul>
-//           </div>
-//         </nav>
-//
-//       </div>
-//     )
-//   }
-// }

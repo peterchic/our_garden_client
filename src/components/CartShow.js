@@ -1,67 +1,56 @@
 import React from 'react'
-// import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react'
+import { Card, Item } from 'semantic-ui-react'
+// import { getUsers } from '../api/RailsAPI'
 
 
-export default function CartShow(props){
-  console.log('cartshow', props);
-  // debugger
+export default function CartShow (props){
+  console.log('cartshow', props)
 
+  if(props.current_user.products){
+    console.log('products are here', props.current_user.products)
+    if( props.current_user.products.length > 0){
+      const cart_quantity = props.product_carts.filter( product => {
+        product.id === props.current_user.id
+       })
 
+       const names = props.current_user.products.map( item => {
+         return(
+           <li>
+             <Item.Group>
+                 <Item>
+                   <Item.Image size='tiny' src={item.picture} />
 
+                   <Item.Content>
+                     <Item.Header as='a'>{item.name}</Item.Header>
+                     {/* <Item.Meta>Description</Item.Meta> */}
+                     <Item.Description>
+                       {item.description}
+                     </Item.Description>
+                     <Item.Extra>{cart_quantity}</Item.Extra>
+                   </Item.Content>
+                 </Item>
+               </Item.Group>
+           </li>
+         )
+        })
 
-  var cart = props.current_cart.filter( cart => {
-    cart.cart_id === props.current_user.id
-  })
-  // Array of 7 objects
-      // cart_id: 30
-      // farmer_product_id:8
-      // id:14
-      // quantity:1
+        return(
+          <div>
+            <ol>
+              {names}
+            </ol>
+            <div>
+              <h2>
+                Total:
+              </h2>
 
-// var totalItems = qq.reduce((a,b) => {
-//     return a+b }, 0)
-
-
-  const theUser = props.current_user.id
-
-  var cartQuantity = cart.map( item => item.quantity).reduce(function(a,b){
-    return a + b }, 0)
-    // 12 = Total quantity of purchased items from array above
-
-
-
-
-
-  // var price = props.farmer_products.filter( fp => {
-  //   fp.id === props.current_cart.farmer_product_id })
-  //
-  //   cart.filter( item =>  item.farmer_product_id === fp.id)
-  // })
-
-  // let price = cart.filter(item => item.farmer_product_id === props.farmer_product.price)
-
-
-
-// let integers = prices.map(Number)
-
-// let total = integers.reduce( function(a,b) {
-// return a + b }, 0 )
-
-
-  var itemName = props.farmer_products.map( item =>
-    <div>
-      Item: {item.product.name} Price: {item.price}
-      <img src={item.product.picture}/>
-    </div>)
-
-
-  return(
-    <div>
-      <h1>Your List:</h1>
-      <ol>
-        {cart}
-      </ol>
-      <h2>Total: {cartQuantity} items</h2>
-    </div>
-  )
+            </div>
+          </div>
+        )
+    } else {
+       console.log('first else' );
+    }
+  } else {
+    console.log('second else');
+  }
 }

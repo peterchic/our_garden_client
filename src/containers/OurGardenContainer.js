@@ -17,31 +17,41 @@ class OurGardenContainer extends React.Component {
     this.state = {
       reviews: [],
       farmers: [],
-      current_user: {
-        active_cart: false
-      },
-      // users: [],
-      // products: [],
-      // searchTerm: '',
-      // cart: [],
+      current_user: 0,
       farmer_products: [],
       product_carts: []
 
     }
   }
 
+  componentDidMount() {
+    if(localStorage.getItem('token') && !this.state.current_user.id){
+      decodeToken({token: localStorage.token})
+        .then(res => {
+          this.setState ({
+          current_user: res
+        })
+      })
+    }
+    getFarmers()
+      .then( res => this.setState({
+      farmers: res
+    }))
+    getReviews()
+      .then(res => this.setState ({
+      reviews: res
+    }))
+    getProductCarts()
+      .then(res => this.setState ({
+      product_carts: res
+    }))
+    getFarmerProducts()
+      .then(res => this.setState ({
+      farmer_products: res
+    }))
+  }
+
   //######################### LOG IN/OUT ###############################
-
-
-  // handleLogin(params){
-  //   login(params)
-  //   .then( resp => { console.log('Log In Response: ', resp)
-  //   localStorage.setItem("token", resp.token)
-  //   this.setState({
-  //     current_user: resp.user
-  //   }),this.props.history.push('/farmers')
-  //   })
-  // }
 
   handleLogin(params){
     fetch("http://localhost:3000/api/v1/login", {
@@ -58,7 +68,7 @@ class OurGardenContainer extends React.Component {
     this.setState({
       current_user: resp.user
     }),this.props.history.push('/farmers')
-    })
+  }).catch( e => console.log('error from login', e.response) )
   }
 
   handleSignUp(name, username, password, bio){
@@ -78,17 +88,13 @@ class OurGardenContainer extends React.Component {
   }
 
   logout(){
-    // this.setState({
-    //   current_user: { active_cart: false }
-    // })
     localStorage.clear()
-    // console.log('logout', this.state.current_user);
   }
 
   //################################ CART ################################
 
   handleAddToCart(quantity, farmer_id, cart_id, product_id){
-    console.log('addCart to Rails', quantity, farmer_id, cart_id, product_id)
+    // console.log('addCart to Rails', quantity, farmer_id, cart_id, product_id)
     axios.post("http://localhost:3000/api/v1/product_carts", {
       product_cart: {
         quantity: quantity,
@@ -97,11 +103,9 @@ class OurGardenContainer extends React.Component {
         product_id: product_id
       }
     }).then(res => { console.log('return from rails', res)
-    const farmerProduct = res.data.farmer_product //our return from API
-    const updatedFarmers = this.state.farmers.slice() //creates a duplicate of array when parameters are not entered
-    // step 1: find the farmer we want to update their product
+    const farmerProduct = res.data.farmer_product
+    const updatedFarmers = this.state.farmers.slice()
     const farmer = updatedFarmers.find(farmer => farmer.id === farmerProduct.farmer_id)
-    // step 2: find that farmer's farmer_product that matches the farmer_product from api response
     farmer.farmer_products = farmer.farmer_products.map( f_p => {
       if(farmerProduct.product_id === f_p.product_id) {
         return farmerProduct
@@ -115,40 +119,11 @@ class OurGardenContainer extends React.Component {
             ...prevState.product_carts,
             res.data.product_cart
           ],
-          farmers: updatedFarmers
+          farmers: updatedFarmers,
         }
       ))
     })
   }
-
-  componentDidMount() {
-    getFarmers()
-      .then( res => this.setState({
-      farmers: res
-    }))
-    getReviews()
-      .then(res => this.setState ({
-      reviews: res
-    }))
-    getProductCarts()
-      .then(res => this.setState ({
-      product_carts: res
-    }))
-    getFarmerProducts()
-      .then(res => this.setState ({
-      farmer_products: res
-    }))
-
-    if(localStorage.getItem('token') && !this.state.current_user.id){
-      decodeToken({token: localStorage.token})
-        .then(res => {
-          this.setState ({
-        current_user: res
-      })
-
-      }
-    )
-  }}
 
 //############################### REVIEWS ##################################
 
@@ -185,25 +160,26 @@ class OurGardenContainer extends React.Component {
     })
   }
 
-  //######################### RENDER ###############################
+  //############################## RENDER ###############################
 
   render() {
     console.log('container props', this.state)
-    if(localStorage.getItem('token')){
+    if(localStorage.getItem('token') && this.state.current_user !== 0){
     return (
       <div>
-        <Switch>
-        <NavBar product_carts={this.state.product_carts} logout={this.logout.bind(this)} />
+
+        <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
         <h2>Hey, {this.state.current_user.username}!</h2>
+          <Switch>
           <Route path='/cart' render={() =>
             <CartShow
               current_cart={this.state.product_carts}
               farmer_products={this.state.farmer_products}
               current_user={this.state.current_user}
+              product_carts={this.state.product_carts}
+              farmers={this.state.farmers}
             />
           }/>
-          <Grid>
-            <Grid.Column width={13}>
           <Route path='/farmers' render={ () =>
             <GardenPage
               current_user={this.state.current_user}
@@ -220,11 +196,9 @@ class OurGardenContainer extends React.Component {
               handleUpdateReview={this.handleUpdateReview.bind(this)}
             />}
           />
-        </Grid.Column>
-      </Grid>
           <Route exact path='/logout'/>
-</Switch>
-    </div>
+        </Switch>
+      </div>
       )
       } else {
       return (

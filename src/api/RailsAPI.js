@@ -31,7 +31,7 @@ export function getCart(){
 }
 
 export function decodeToken(params){
-  console.log(params)
+  // console.log(params)
   return fetch(`http://localhost:3000/api/v1/decode_token`, {
     headers: {
       'Accept': 'application/json',

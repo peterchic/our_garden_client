@@ -7,14 +7,15 @@ export default class Reviews extends React.Component {
     this.state={
       review: '',
       rating: '',
-      user_id: 1,
+      user_id: props.current_user.id,
       farmer_id: props.farmer.id
     }
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      farmer_id: nextProps.farmer.id
+      farmer_id: nextProps.farmer.id,
+      user_id: nextProps.current_user.id
     })
   }
 
@@ -37,7 +38,7 @@ export default class Reviews extends React.Component {
   }
 
   render(){
-    // console.log('review', this.state.farmer_id)
+    console.log('review', this.props)
     // debugger
     return (
       <form onSubmit={this.handleSubmit.bind(this) }>
