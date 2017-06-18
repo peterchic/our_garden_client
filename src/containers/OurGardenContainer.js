@@ -1,15 +1,15 @@
 import React from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
-import { getFarmers, getUsers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken } from '../api/RailsAPI'
+import { getFarmers, getUsers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken, login } from '../api/RailsAPI'
 import GardenPage from '../components/GardenPage'
 import Search from '../components/Search'
 import axios from 'axios'
 // import Account from '../components/Account'
 // import { withRouter } from 'react-router'
-// import CartShow from '../components/CartShow'
+import CartShow from '../components/CartShow'
 import NavBar from '../components/NavBar'
 import LogInSignUp from './LogInSignUp'
-// import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 class OurGardenContainer extends React.Component {
   constructor(){
@@ -17,20 +17,34 @@ class OurGardenContainer extends React.Component {
     this.state = {
       reviews: [],
       farmers: [],
-      current_user: {},
+      current_user: {
+        active_cart: false
+      },
       // users: [],
       // products: [],
       // searchTerm: '',
-      cart: [],
+      // cart: [],
       farmer_products: [],
       product_carts: []
+
     }
   }
 
-  //######## LOG IN/OUT #############
+  //######################### LOG IN/OUT ###############################
+
+
+  // handleLogin(params){
+  //   login(params)
+  //   .then( resp => { console.log('Log In Response: ', resp)
+  //   localStorage.setItem("token", resp.token)
+  //   this.setState({
+  //     current_user: resp.user
+  //   }),this.props.history.push('/farmers')
+  //   })
+  // }
 
   handleLogin(params){
-    return fetch("http://localhost:3000/api/v1/sign_in", {
+    fetch("http://localhost:3000/api/v1/login", {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -40,45 +54,38 @@ class OurGardenContainer extends React.Component {
     })
     .then( res => res.json() )
     .then( resp => { console.log('Log In Response: ', resp)
+    localStorage.setItem("token", resp.token)
+    this.setState({
+      current_user: resp.user
+    }),this.props.history.push('/farmers')
+    })
+  }
 
-      // localStorage.setItem("token", resp.token)
-
-      // send back entire user object as the response from Rails
-      // not just the string of username
-      // something that looks like this:
-      // {
-          //  username: "pete",
-          //  bio: "whksdahkjas",
-          //  zip: 123445,
-          //  current_cart: {
-          //    id: 3,
-          //  }
-          //  products: [{}]
-      // }
-
-      // store entire current_user object in React state
-      this.setState({
-        current_user: resp.user
-      })
-      //
-      localStorage.setItem("token", resp.token)
-      // localStorage.setItem("username", resp.username)
-      this.props.history.push('/farmers')
-    }
-    )
+  handleSignUp(name, username, password, bio){
+    axios.post('http://localhost:3000/api/v1/users', {
+      user: {
+        name: name,
+        username: username,
+        password: password,
+        bio: bio
+      }
+    }).then(res => { console.log('Sign Up Response: ', res)
+    localStorage.setItem("token", res.data.token)
+    this.setState({
+      current_user: res.data.user
+    }),this.props.history.push('/farmers')
+  }).catch( e => console.log('error from handleSignUp', e.response) )
   }
 
   logout(){
-    this.setState({
-      current_user: {
-        active_cart: false
-      }
-    })
+    // this.setState({
+    //   current_user: { active_cart: false }
+    // })
     localStorage.clear()
-    console.log('logout', this.state.current_user);
+    // console.log('logout', this.state.current_user);
   }
 
-  //######## CART ##############
+  //################################ CART ################################
 
   handleAddToCart(quantity, farmer_id, cart_id, product_id){
     console.log('addCart to Rails', quantity, farmer_id, cart_id, product_id)
@@ -89,8 +96,7 @@ class OurGardenContainer extends React.Component {
         cart_id: cart_id,
         product_id: product_id
       }
-    })
-    .then(res => { console.log('return from rails', res)
+    }).then(res => { console.log('return from rails', res)
     const farmerProduct = res.data.farmer_product //our return from API
     const updatedFarmers = this.state.farmers.slice() //creates a duplicate of array when parameters are not entered
     // step 1: find the farmer we want to update their product
@@ -133,12 +139,6 @@ class OurGardenContainer extends React.Component {
       farmer_products: res
     }))
 
-
-    // if (there's a token in local storage && theres no current user in state) {
-    //   fetch the user
-    //   update the current_user key in your state using this.setState and the response
-    //   (this will look just like it does in the handleLogin function, you may need to double check that the response from your server matched what it does there)
-    // }
     if(localStorage.getItem('token') && !this.state.current_user.id){
       decodeToken({token: localStorage.token})
         .then(res => {
@@ -150,7 +150,7 @@ class OurGardenContainer extends React.Component {
     )
   }}
 
-//############ REVIEWS #####################
+//############################### REVIEWS ##################################
 
   handleReview(review, rating, user_id, farmer_id ){
     createReview(review, rating, user_id, farmer_id)
@@ -185,20 +185,25 @@ class OurGardenContainer extends React.Component {
     })
   }
 
+  //######################### RENDER ###############################
+
   render() {
-    // debugger
     console.log('container props', this.state)
     if(localStorage.getItem('token')){
     return (
       <div>
-        <NavBar title="OurGarden" color="white" logout={this.logout.bind(this)} />
-        {/* <Search searchTerm={this.state.searchTerm} handleChange={this.handleChange.bind(this)} /> */}
-        <h2>
-          Cart: {this.state.product_carts.length}
-
-        {/* <CartShow products={this.state.product_carts} farmer_products={this.state.farmer_products}/> */}
-        </h2>
         <Switch>
+        <NavBar product_carts={this.state.product_carts} logout={this.logout.bind(this)} />
+        <h2>Hey, {this.state.current_user.username}!</h2>
+          <Route path='/cart' render={() =>
+            <CartShow
+              current_cart={this.state.product_carts}
+              farmer_products={this.state.farmer_products}
+              current_user={this.state.current_user}
+            />
+          }/>
+          <Grid>
+            <Grid.Column width={13}>
           <Route path='/farmers' render={ () =>
             <GardenPage
               current_user={this.state.current_user}
@@ -215,15 +220,20 @@ class OurGardenContainer extends React.Component {
               handleUpdateReview={this.handleUpdateReview.bind(this)}
             />}
           />
+        </Grid.Column>
+      </Grid>
           <Route exact path='/logout'/>
-        </Switch>
-      </div>
+</Switch>
+    </div>
       )
       } else {
       return (
         <div>
-          <NavBar title="OurGarden" color="white" />
-          <LogInSignUp handleLogin={this.handleLogin.bind(this) } />
+          <NavBar/>
+          <LogInSignUp
+            handleSignUp={this.handleSignUp.bind(this)}
+            handleLogin={this.handleLogin.bind(this)}
+          />
         </div>
       )
     }

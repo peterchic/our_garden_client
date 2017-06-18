@@ -13,22 +13,6 @@ class SignUp extends React.Component {
     }
   }
 
-  handleSignUp(){
-    axios.post('http://localhost:3000/api/v1/users', {
-      user: {
-        name: this.state.name,
-        username: this.state.username,
-        password: this.state.password,
-        bio: this.state.bio
-      }
-    }).then(res => { console.log('Sign Up Response: ', res)
-      localStorage.setItem("token", res.data.token)
-    })
-    // , this.props.history.push('/farmers')
-    .catch((error) => console.log('error from handleSignUp', error.response) )
-    this.props.history.push('/farmers')
-  }
-
   handleChange(prop, value){
     this.setState({
       [prop]: value
@@ -37,7 +21,12 @@ class SignUp extends React.Component {
 
   handleSubmit(e){
     e.preventDefault()
-    this.handleSignUp()
+    this.props.handleSignUp(
+      this.state.name,
+      this.state.username,
+      this.state.password,
+      this.state.bio
+    )
   }
 
   render(){
