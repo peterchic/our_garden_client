@@ -1,7 +1,7 @@
 import React from 'react'
 // import { Link } from 'react-router-dom'
 import AddToCart from './AddToCart'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Card } from 'semantic-ui-react'
 
 
 export default function ProductShow (props) {
@@ -9,6 +9,8 @@ export default function ProductShow (props) {
   console.log('props in ProductShow', props);
   return (
     <div>
+
+
 
       <div className="ui card float">
         <div className="image">
@@ -32,6 +34,8 @@ export default function ProductShow (props) {
           />
         </div>
       </div>
+
+
     </div>
   )
 }

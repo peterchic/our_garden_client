@@ -4,12 +4,13 @@ import { getFarmers, getUsers, getFarmerProducts, createReview, getReviews, dele
 import GardenPage from '../components/GardenPage'
 import Search from '../components/Search'
 import axios from 'axios'
-// import Account from '../components/Account'
+import Account from '../components/Account'
 // import { withRouter } from 'react-router'
 import CartShow from '../components/CartShow'
 import NavBar from '../components/NavBar'
 import LogInSignUp from './LogInSignUp'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Image } from 'semantic-ui-react'
+import bg from '../images/bg_images/bg_1.png'
 
 
 class OurGardenContainer extends React.Component {
@@ -184,10 +185,18 @@ class OurGardenContainer extends React.Component {
       <div>
 
         <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
-        {/* <h3>Hey, {this.state.current_user.name} {this.state.current_user.products.length} items ready to purchase!</h3> */}
+        <Image src={bg} fluid />
 
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={1}>
+            </Grid.Column>
+            <div>
+              <h3>Hey, {this.state.current_user.username}! {this.state.current_user.products.length} items ready to purchase!</h3>
+            </div>
+      </Grid.Row>
           <Switch>
-          <Route path='/cart' render={() =>
+          <Route exact path='/cart' render={() =>
             <CartShow
               current_cart={this.state.product_carts}
               farmer_products={this.state.farmer_products}
@@ -197,7 +206,14 @@ class OurGardenContainer extends React.Component {
               handleDeleteProduct={this.handleDeleteProduct.bind(this)}
             />
           }/>
-          <Route path='/farmers' render={ () =>
+          <Route exact path='/account' render={() =>
+            <Account
+              current_user={this.state.current_user}
+            />
+          }/>
+          <Grid.Row width={3}>
+          <Grid.Column width={13}>
+          <Route path='/farmers' render={() =>
             <GardenPage
               current_user={this.state.current_user}
               farmers={this.state.farmers}
@@ -211,10 +227,15 @@ class OurGardenContainer extends React.Component {
               reviews={this.state.reviews}
               handleDeleteReview={this.handleDeleteReview.bind(this)}
               handleUpdateReview={this.handleUpdateReview.bind(this)}
-            />}
-          />
+            />
+          }/>
+        </Grid.Column>
+        <Grid.Column>
+        </Grid.Column>
+        </Grid.Row>
           <Route exact path='/logout'/>
         </Switch>
+      </Grid>
       </div>
       )
       } else {

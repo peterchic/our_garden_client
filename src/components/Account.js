@@ -1,40 +1,29 @@
 import React from 'react'
-import { getUsers, getProductCarts } from '../api/RailsAPI'
+import farmer_img from '../images/farmer_9.jpg'
+import { Image, Grid, Card, Header } from 'semantic-ui-react'
 
 
-function Account() {
-  // constructor(){
-  //   super()
-  //   this.state ={
-  //     user: [],
-  //     product_carts: []
-  //   }
-  //
-  // }
-  // console.log('account!!!!!', props);
-
-  // componentDidMount() {
-  //   getUsers()
-  //     .then(res => this.setState ({
-  //     users: res.filter( user => user.username !== localStorage.username)
-  //   }))
-  //
-  //   getProductCarts()
-  //     .then(res => this.setState ({
-  //     product_carts: res
-  //   }))
-  // }
-
-
-  // render(){
-  //   console.log('reached account page', this.state);
+export default function Account(props) {
+// console.log('account', props);
     return(
       <div>
-        {/* <p>{this.state.user}</p> */}
-        <h1>THIS IS THE ACCOUNT PAGE</h1>
+        <Grid>
+            <Grid.Column width={16}>
+              {/* <Header as='h2' attached='top'>{props.current_user.username}</Header> */}
+              <Image src={farmer_img} size='large' shape='circular' />
+            </Grid.Column>
+            <Grid.Column width={16}>
+              <h3>{props.current_user.bio}</h3>
+            </Grid.Column>
+            {/* <Grid.Column width={3}>
+              <Image src='/assets/images/wireframe/media-paragraph.png' />
+            </Grid.Column> */}
+          </Grid>
       </div>
     )
-  // }
 }
 
-export default Account
+
+
+
+{/* <Card.Header>Daniel</Card.Header> */}

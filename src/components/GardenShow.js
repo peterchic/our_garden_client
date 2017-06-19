@@ -17,23 +17,17 @@ export default function GardenShow (props) {
       <h1>Loading the Show Page</h1>
     )
   }
-  console.log('GS', props);
+  // console.log('GS', props);
   // debugger
   const products = props.farmer.products.map(product => {
   var fp = props.farmer.farmer_products.filter( (f_p) => f_p.farmer_id === props.farmer.id && f_p.product_id === product.id)
     return (
       <div>
-
-
-
-
-
-          <ProductShow className='dotted' product={product}
+          <ProductShow product={product}
             farmersProduct={fp}
             handleAddToCart={props.handleAddToCart}
             current_user={props.current_user}
           />
-
       </div>
     )
   })
@@ -80,8 +74,11 @@ export default function GardenShow (props) {
         <div>
           <Grid>
             <Grid.Row className='product-page'>
+              <Grid.Column width={1}>
+              </Grid.Column>
+
           {products}
-        </Grid.Row>
+          </Grid.Row>
         </Grid>
         </div>
 

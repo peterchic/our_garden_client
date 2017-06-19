@@ -16,22 +16,25 @@ export default function GardenPage(props){
 if (props.farmers){
     return(
     <div>
-      <div>
-        <h3>Your Local Gardeners:</h3>
-        <ul>
-          { farmersElements }
-        </ul>
-      </div>
+        <Grid>
+          <Grid.Row width={2}>
+            <Grid.Column>
+            </Grid.Column>
+            <Grid.Column width={6}>
+            <div>
+              <ul>
+                <h3>Your Local Gardeners:</h3>
+                  { farmersElements }
+              </ul>
+            </div>
+            </Grid.Column>
+          </Grid.Row>
 
       <div>
         <Switch>
           <Route path="/farmers/:id" render={ ({match}) => {
             const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id, 10))
-              return (
-
-
-
-                <GardenShow
+              return (<GardenShow
                   farmer={farmer}
                   handleAddToCart={props.handleAddToCart}
                   current_user={props.current_user}
@@ -47,6 +50,7 @@ if (props.farmers){
           />
         </Switch>
       </div>
+    </Grid>
     </div>
     )
   } else {

@@ -1,5 +1,7 @@
 import React from 'react'
 //Garden Show Renders me
+import { Grid, Card } from 'semantic-ui-react'
+
 
 export default class Reviews extends React.Component {
   constructor(props){
@@ -38,9 +40,14 @@ export default class Reviews extends React.Component {
   }
 
   render(){
-    console.log('review', this.props)
+    // console.log('review', this.props)
     // debugger
     return (
+      <Grid>
+        <Grid.Column width={1}>
+
+        </Grid.Column>
+
       <form onSubmit={this.handleSubmit.bind(this) }>
 
         <label>
@@ -53,6 +60,7 @@ export default class Reviews extends React.Component {
         <input type="submit" value="Leave A Review"/>
 
       </form>
+    </Grid>
 
     )
   }
