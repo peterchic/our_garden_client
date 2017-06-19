@@ -1,32 +1,35 @@
 import React from 'react'
-import { Card, Item } from 'semantic-ui-react'
+import { Card, Item, Icon } from 'semantic-ui-react'
 // import { getUsers } from '../api/RailsAPI'
 
 
 export default function CartShow (props){
   console.log('cartshow', props)
+  // debugger
 
   if(props.current_user.products){
-    console.log('products are here', props.current_user.products)
     if( props.current_user.products.length > 0){
-      const cart_quantity = props.product_carts.filter( product => {
-        product.id === props.current_user.id
+      var products = props.product_carts.filter( function (product) {
+        return product.cart_id === props.current_user.id
        })
 
-       const names = props.current_user.products.map( item => {
+       console.log('products are here', products)
+
+       var items = products.map(function (prod) {
          return(
            <li>
              <Item.Group>
                  <Item>
-                   <Item.Image size='tiny' src={item.picture} />
+                   <Item.Image size='tiny' src={prod.picture} />
 
                    <Item.Content>
-                     <Item.Header as='a'>{item.name}</Item.Header>
+                     <Item.Header as='a'>{prod.name}</Item.Header>
                      {/* <Item.Meta>Description</Item.Meta> */}
                      <Item.Description>
-                       {item.description}
+                       {prod.description}
+                       <Icon name='close' color='red' onClick={() => props.handleDeleteProduct(items.id)}/>
                      </Item.Description>
-                     <Item.Extra>{cart_quantity}</Item.Extra>
+                     <Item.Extra> Quantity: {prod.quantity}</Item.Extra>
                    </Item.Content>
                  </Item>
                </Item.Group>
@@ -37,7 +40,7 @@ export default function CartShow (props){
         return(
           <div>
             <ol>
-              {names}
+              {items}
             </ol>
             <div>
               <h2>
@@ -49,8 +52,16 @@ export default function CartShow (props){
         )
     } else {
        console.log('first else' );
+       return
+       (<div>
+        {null}
+       </div>)
     }
   } else {
     console.log('second else');
+    return
+    (<div>
+      {null}
+    </div>)
   }
 }

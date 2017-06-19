@@ -42,7 +42,7 @@ export default class AddToCart extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit.bind(this)} >
           <input
-            type='text'
+            type='text' value={this.state.quantity}
             onChange={ (e) => this.handleChange(this.props.farmersProduct[0].farmer_id, this.props.farmersProduct[0].product_id, e)}
           />
           <input

@@ -2,6 +2,8 @@ import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
 import GardenShow from './GardenShow'
 // import ReviewEdit from './ReviewEdit'
+import { Grid } from 'semantic-ui-react'
+
 
 export default function GardenPage(props){
   const farmersElements = props.farmers.map((farmer,i) =>
@@ -26,6 +28,9 @@ if (props.farmers){
           <Route path="/farmers/:id" render={ ({match}) => {
             const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id, 10))
               return (
+
+
+
                 <GardenShow
                   farmer={farmer}
                   handleAddToCart={props.handleAddToCart}

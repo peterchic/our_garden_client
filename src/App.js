@@ -8,6 +8,9 @@ import OurGardenContainer from './containers/OurGardenContainer'
 // import SignUp from './components/SignUp'
 // import NavBar from './components/NavBar'
 import './App.css';
+import isAuthenticated from './components/hocs/isAuthenticated'
+
+const AuthedOurGardenContainer = isAuthenticated(OurGardenContainer)
 
 export default class App extends React.Component {
 

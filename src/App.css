@@ -18,7 +18,21 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.row.garden-page{
+  border-color: solid green 2px;
+}
+
+.row.product-page{
+  float: left;
+  border-color: solid green 2px;
+}
+
+.ui.card{
+  float: left;
+  display: inline;
+}
+
+.dotted{
+  float: right;
+  border-color: solid black 2px;
 }

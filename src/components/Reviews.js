@@ -45,10 +45,10 @@ export default class Reviews extends React.Component {
 
         <label>
           Rating:
-          <input name="rating" type="number" min="1" max="5" onChange={this.handleInputChange.bind(this)} />
+          <input value={this.state.rating} name="rating" type="number" min="1" max="5" onChange={this.handleInputChange.bind(this)} />
 
           Leave A Review:
-          <input name="review" type="textarea" onChange={this.handleInputChange.bind(this)} />
+          <input value={this.state.review} name="review" type="textarea" onChange={this.handleInputChange.bind(this)} />
         </label>
         <input type="submit" value="Leave A Review"/>
 

@@ -4,6 +4,8 @@ import Reviews from './Reviews'
 import ReviewShow from './ReviewShow'
 import { Route } from 'react-router-dom'
 import ReviewEdit from './ReviewEdit'
+import { Grid } from 'semantic-ui-react'
+
 
 //Garden Page renders me
 
@@ -21,12 +23,17 @@ export default function GardenShow (props) {
   var fp = props.farmer.farmer_products.filter( (f_p) => f_p.farmer_id === props.farmer.id && f_p.product_id === product.id)
     return (
       <div>
-        <ProductShow
-          product={product}
-          farmersProduct={fp}
-          handleAddToCart={props.handleAddToCart}
-          current_user={props.current_user}
-        />
+
+
+
+
+
+          <ProductShow className='dotted' product={product}
+            farmersProduct={fp}
+            handleAddToCart={props.handleAddToCart}
+            current_user={props.current_user}
+          />
+
       </div>
     )
   })
@@ -34,9 +41,19 @@ export default function GardenShow (props) {
   return (
     <div>
       <div>
-        <h1>{props.farmer.name}</h1>
-        <h1>{props.farmer.bio}</h1>
-        <img alt={props.farmer.name} src={props.farmer.picture}/>
+        <Grid celled='internally'>
+
+        <Grid.Row>
+          <Grid.Column width={3}>
+            <img alt={props.farmer.name} src={props.farmer.picture}/>
+          </Grid.Column>
+
+        <Grid.Column width={13}>
+          <h1>{props.farmer.name}</h1>
+          <h1>{props.farmer.bio}</h1>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
         <Reviews
           handleReview={props.handleReview}
           farmer={props.farmer}
@@ -61,7 +78,11 @@ export default function GardenShow (props) {
         }}
       />
         <div>
-          <ul>{products}</ul>
+          <Grid>
+            <Grid.Row className='product-page'>
+          {products}
+        </Grid.Row>
+        </Grid>
         </div>
 
       </div>

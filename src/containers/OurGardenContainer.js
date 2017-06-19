@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
-import { getFarmers, getUsers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken, login } from '../api/RailsAPI'
+import { getFarmers, getUsers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken, login, deleteProduct } from '../api/RailsAPI'
 import GardenPage from '../components/GardenPage'
 import Search from '../components/Search'
 import axios from 'axios'
@@ -10,6 +10,7 @@ import CartShow from '../components/CartShow'
 import NavBar from '../components/NavBar'
 import LogInSignUp from './LogInSignUp'
 import { Grid } from 'semantic-ui-react'
+
 
 class OurGardenContainer extends React.Component {
   constructor(){
@@ -23,6 +24,8 @@ class OurGardenContainer extends React.Component {
 
     }
   }
+
+
 
   componentDidMount() {
     if(localStorage.getItem('token') && !this.state.current_user.id){
@@ -88,7 +91,7 @@ class OurGardenContainer extends React.Component {
   }
 
   logout(){
-    localStorage.clear()
+    localStorage.clear('token')
   }
 
   //################################ CART ################################
@@ -123,6 +126,13 @@ class OurGardenContainer extends React.Component {
         }
       ))
     })
+  }
+
+  handleDeleteProduct(id){
+    deleteProduct(id)
+    .then((data) => this.setState({
+      product_carts: data
+    }))
   }
 
 //############################### REVIEWS ##################################
@@ -160,16 +170,22 @@ class OurGardenContainer extends React.Component {
     })
   }
 
+  // const cartCount = this.state.current_user.products.length === 0 ? {this.state.current_user.username} : {this.state.current_user.username}! ${this.state.current_user.products.length} items ready to purchase!
+  // console.log('container props', this.state)
+
+
   //############################## RENDER ###############################
 
+
   render() {
-    console.log('container props', this.state)
+
     if(localStorage.getItem('token') && this.state.current_user !== 0){
     return (
       <div>
 
         <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
-        <h2>Hey, {this.state.current_user.username}!</h2>
+        {/* <h3>Hey, {this.state.current_user.name} {this.state.current_user.products.length} items ready to purchase!</h3> */}
+
           <Switch>
           <Route path='/cart' render={() =>
             <CartShow
@@ -178,6 +194,7 @@ class OurGardenContainer extends React.Component {
               current_user={this.state.current_user}
               product_carts={this.state.product_carts}
               farmers={this.state.farmers}
+              handleDeleteProduct={this.handleDeleteProduct.bind(this)}
             />
           }/>
           <Route path='/farmers' render={ () =>

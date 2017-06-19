@@ -1,7 +1,7 @@
 import React from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-// import logo from '../images/our_garden_logo-01.svg'
+import logo from '../images/our_garden_logo-01.svg'
 
 export default class NavBar extends React.Component {
   constructor(){
@@ -11,36 +11,28 @@ export default class NavBar extends React.Component {
     }
   }
 
-  // quantity(){
-  //   const quantity = this.props.current_user.products.map( item => {
-  //    return <li>{item.name}</li>
-  //  }).length
-  // }
-
-  // if product carts cart_id === current_user.id then return match plus length
-
-
-
-
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     // debugger
     console.log('navbar', this.props);
     const { activeItem } = this.state
-    if(localStorage.getItem('token') && this.props.current_user){
+    if(localStorage.getItem('token')){
       return (
         <Menu color='olive' inverted={true} size='massive'>
           <Link to="/farmers">
-          <Menu.Item name='farmers' active={activeItem === 'farmers'} onClick={this.handleItemClick}/>
+          <Menu.Item>
+            <Image src={logo} size='small' active={activeItem === 'farmers'} onClick={this.handleItemClick}/>
+
+        </Menu.Item>
           </Link>
 
-          <Link to='/about'>
-          <Menu.Item name='about' active={activeItem === 'about'} onClick={this.handleItemClick}/>
+          <Link to='/farmers'>
+          <Menu.Item name='farmers' active={activeItem === 'about'} onClick={this.handleItemClick}/>
           </Link>
 
           <Menu.Menu position='right'>
-            <div>{this.props.current_user.products.length}</div>
+            {/* <div>{this.props.current_user.products.length}</div> */}
             <Link to='/cart'>
             <Menu.Item name='cart' active={activeItem === 'cart'} onClick={this.handleItemClick}/>
             </Link>
@@ -54,7 +46,8 @@ export default class NavBar extends React.Component {
           </Menu.Menu>
         </Menu>
       )
-    } else {
+    }
+    else {
       return (
         <Menu color='olive' inverted={true} size='massive'>
           <Link to="/">
