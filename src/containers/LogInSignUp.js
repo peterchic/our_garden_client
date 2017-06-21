@@ -5,7 +5,7 @@ import LogInForm from '../components/LogInForm'
 export default function LogInSignUp (props){
 
   // render(){
-    console.log('LogInSignup props', props)
+    // console.log('LogInSignup props', props)
     return(
       <div>
         {/* <SignUp handleSignUp={props.handleSignUp}/> */}

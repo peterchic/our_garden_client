@@ -72,16 +72,15 @@ export default function GardenShow (props) {
         }}
       />
         <div>
+          <ul>
           <Grid>
             <Grid.Row className='product-page'>
-              <Grid.Column width={1}>
-              </Grid.Column>
+              {products}
+            </Grid.Row>
+          </Grid>
 
-          {products}
-          </Grid.Row>
-        </Grid>
+        </ul>
         </div>
-
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
+
 import GardenShow from './GardenShow'
-// import ReviewEdit from './ReviewEdit'
 import { Grid } from 'semantic-ui-react'
 
 
@@ -10,31 +10,28 @@ export default function GardenPage(props){
     <div key={farmer.id}>
       <Link to={`/farmers/${farmer.id}`}><h3>{farmer.name}</h3></Link>
     </div>)
-
-
-
-if (props.farmers){
-    return(
-    <div>
-        <Grid>
-          <Grid.Row width={2}>
-            <Grid.Column>
-            </Grid.Column>
-            <Grid.Column width={6}>
-            <div>
-              <ul>
-                <h3>Your Local Gardeners:</h3>
-                  { farmersElements }
-              </ul>
-            </div>
+    if (props.farmers){
+      return(
+        <div>
+          <Grid>
+            <Grid.Row width={2}>
+              <Grid.Column>
+              </Grid.Column>
+              <Grid.Column width={6}>
+              <div>
+                <ul>
+                  <h3>Your Local Gardeners:</h3>
+                    { farmersElements }
+                </ul>
+              </div>
             </Grid.Column>
           </Grid.Row>
-
       <div>
         <Switch>
-          <Route path="/farmers/:id" render={ ({match}) => {
+          <Route exact path="/farmers/:id" render={ ({match}) => {
             const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id, 10))
-              return (<GardenShow
+              return (
+                <GardenShow
                   farmer={farmer}
                   handleAddToCart={props.handleAddToCart}
                   current_user={props.current_user}

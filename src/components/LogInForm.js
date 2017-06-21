@@ -27,7 +27,7 @@ export default class LoginForm extends React.Component {
 
 
   render(){
-    console.log('LoginForm props', this.props)
+    // console.log('LoginForm props', this.props)
     return(
     <Switch>
     <Route

@@ -5,8 +5,8 @@ import { Redirect } from 'react-router-dom'
 export default function isAuthenticated(WrappedComponent){
   return function (props) {
     console.log('auth', props);
-      if (!localStorage.getItem('token') && props.current_user.length > 0) {
-        return < Redirect to='/farmers' />
+      if (!localStorage.getItem('token')) {
+        return < Redirect to='/login' />
       }
       return < WrappedComponent {...props} />
     }

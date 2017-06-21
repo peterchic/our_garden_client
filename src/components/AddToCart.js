@@ -1,9 +1,10 @@
 import React from 'react'
+import { Button, Form, Dropdown } from 'semantic-ui-react'
 
 
 export default class AddToCart extends React.Component {
   constructor(props){
-    console.log('cart', props)
+    // console.log('cart', props)
 
     super(props)
     this.state = {
@@ -36,20 +37,22 @@ export default class AddToCart extends React.Component {
   }
 
   render(){
-    // console.log('product_id', this.props.fp[0].product_id)
-    // console.log('props in AddToCart', this.props)
     return(
       <div>
-        <form onSubmit={this.handleSubmit.bind(this)} >
-          <input
+        <Form onSubmit={this.handleSubmit.bind(this)}>
+          <Form.Group>
+            <Form.Input
             type='text' value={this.state.quantity}
             onChange={ (e) => this.handleChange(this.props.farmersProduct[0].farmer_id, this.props.farmersProduct[0].product_id, e)}
-          />
-          <input
+            />
+          <Button
+            color='orange'
+            size='small'
             type="submit"
-            value="Add to Basket"
-          />
-        </form>
+            value="Add to Basket">Add!
+          </Button>
+        </Form.Group>
+        </Form>
       </div>
     )
   }

@@ -1,16 +1,16 @@
+import axios from 'axios'
 import React from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 import { getFarmers, getUsers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken, login, deleteProduct } from '../api/RailsAPI'
-import GardenPage from '../components/GardenPage'
-import Search from '../components/Search'
-import axios from 'axios'
-import Account from '../components/Account'
-// import { withRouter } from 'react-router'
-import CartShow from '../components/CartShow'
-import NavBar from '../components/NavBar'
+
 import LogInSignUp from './LogInSignUp'
-import { Grid, Image } from 'semantic-ui-react'
+import NavBar from '../components/NavBar'
+import Search from '../components/Search'
+import Account from '../components/Account'
+import CartShow from '../components/CartShow'
 import bg from '../images/bg_images/bg_1.png'
+import { Grid, Image } from 'semantic-ui-react'
+import GardenPage from '../components/GardenPage'
 
 
 class OurGardenContainer extends React.Component {
@@ -22,11 +22,8 @@ class OurGardenContainer extends React.Component {
       current_user: 0,
       farmer_products: [],
       product_carts: []
-
     }
   }
-
-
 
   componentDidMount() {
     if(localStorage.getItem('token') && !this.state.current_user.id){
@@ -46,14 +43,33 @@ class OurGardenContainer extends React.Component {
       reviews: res
     }))
     getProductCarts()
-      .then(res => this.setState ({
+      .then(res => {console.log('procart', res)
+        this.setState ({
       product_carts: res
-    }))
+    })})
     getFarmerProducts()
       .then(res => this.setState ({
       farmer_products: res
     }))
   }
+
+  componentWillReceiveProps(nextProps){
+    console.log('nextProps', nextProps)
+    console.log('this.state.current_user', this.state.current_user)
+    if(nextProps.product_carts !== this.state.product_carts){
+      this.setState({
+        current_user: this.state.current_user
+      })
+    } else {
+      return null
+    }
+  }
+
+  //componenetWillReceiveProps(){
+  // check to see if the current_user state has changed
+  // if so, make another fetch request for current_user
+  //in order to change state.
+
 
   //######################### LOG IN/OUT ###############################
 
@@ -108,8 +124,7 @@ class OurGardenContainer extends React.Component {
       }
     }).then(res => { console.log('return from rails', res)
     const farmerProduct = res.data.farmer_product
-    const updatedFarmers = this.state.farmers.slice()
-    const farmer = updatedFarmers.find(farmer => farmer.id === farmerProduct.farmer_id)
+    const farmer = this.state.farmers.find(farmer => farmer.id === farmerProduct.farmer_id)
     farmer.farmer_products = farmer.farmer_products.map( f_p => {
       if(farmerProduct.product_id === f_p.product_id) {
         return farmerProduct
@@ -123,7 +138,6 @@ class OurGardenContainer extends React.Component {
             ...prevState.product_carts,
             res.data.product_cart
           ],
-          farmers: updatedFarmers,
         }
       ))
     })
@@ -171,14 +185,10 @@ class OurGardenContainer extends React.Component {
     })
   }
 
-  // const cartCount = this.state.current_user.products.length === 0 ? {this.state.current_user.username} : {this.state.current_user.username}! ${this.state.current_user.products.length} items ready to purchase!
-  // console.log('container props', this.state)
-
-
   //############################## RENDER ###############################
 
-
   render() {
+    console.log('current_user', this.state.current_user);
 
     if(localStorage.getItem('token') && this.state.current_user !== 0){
     return (
@@ -188,17 +198,12 @@ class OurGardenContainer extends React.Component {
         <Image src={bg} fluid />
 
         <Grid>
-          <Grid.Row>
-            <Grid.Column width={1}>
-            </Grid.Column>
             <div>
-              <h3>Hey, {this.state.current_user.username}! {this.state.current_user.products.length} items ready to purchase!</h3>
+              {/* <h3>Hey, {this.state.current_user.username}!</h3> */}
             </div>
-      </Grid.Row>
           <Switch>
           <Route exact path='/cart' render={() =>
             <CartShow
-              current_cart={this.state.product_carts}
               farmer_products={this.state.farmer_products}
               current_user={this.state.current_user}
               product_carts={this.state.product_carts}
@@ -213,7 +218,7 @@ class OurGardenContainer extends React.Component {
           }/>
           <Grid.Row width={3}>
           <Grid.Column width={13}>
-          <Route path='/farmers' render={() =>
+          <Route  path='/farmers' render={() =>
             <GardenPage
               current_user={this.state.current_user}
               farmers={this.state.farmers}
@@ -230,15 +235,15 @@ class OurGardenContainer extends React.Component {
             />
           }/>
         </Grid.Column>
-        <Grid.Column>
-        </Grid.Column>
+
         </Grid.Row>
           <Route exact path='/logout'/>
         </Switch>
       </Grid>
       </div>
       )
-      } else {
+      }
+      else {
       return (
         <div>
           <NavBar/>

@@ -32,6 +32,15 @@
   display: inline;
 }
 
+.cartCon{
+  border-color: solid green 2px;
+}
+
+.pad-left{
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
 /*.dotted{
   float: right;
   border-color: solid black 2px;
