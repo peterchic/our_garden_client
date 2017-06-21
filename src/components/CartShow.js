@@ -3,6 +3,36 @@ import { Card, Item, Icon } from 'semantic-ui-react'
 
 export default function CartShow (props){
   console.log('cartshow', props)
+
+  // let id = props.current_user.current_cart[product].pc_id
+  // let price = props.current_user.current_cart[product].price
+  // let quantity = props.current_user.current_cart[product].quantity
+  // let picture = props.current_user.current_cart[product].info.picture
+  // let description = props.current_user.current_cart[product].info.description
+
+  function calcTotal(cart){
+  var keys = Object.keys(cart)
+  var total = 0
+  for(var i=0; i< keys.length; i++){
+    total += cart[keys[i]].price * cart[keys[i]].quantity
+  }
+  return total
+}
+
+// function itemTotal(cart){
+// var keys = Object.keys(cart)
+// var total = 0
+// for(var i=0; i< keys.length; i++){
+//   total += cart[keys[i]].price * cart[keys[i]].quantity
+// }
+// return total
+// }
+
+// console.log(calcTotal(props.current_user.current_cart))
+
+//   let total = price.reduce(function(a,b){
+//     return num + num),0}
+// debugger
   if(!!props.current_user){
        var user = []
        for( let product in props.current_user.current_cart) {
@@ -17,9 +47,12 @@ export default function CartShow (props){
                  {/* <Item.Meta>Description</Item.Meta> */}
                    <Item.Description>
                      {props.current_user.current_cart[product].info.description}
-                     <Icon name='close' color='red' onClick={() => props.handleDeleteProduct(props.current_user.current_cart[product].info.id)}/>
+                     <Icon name='close' color='red' onClick={() => props.handleDeleteProduct(props.current_user.current_cart[product].pc_id)}/>
                    </Item.Description>
-                 <Item.Extra> Quantity: {props.current_user.current_cart[product].quantity}</Item.Extra>
+                     <Item.Extra>Quantity:]{props.current_user.current_cart[product].quantity}</Item.Extra>
+                     <Item.Extra>Price: {props.current_user.current_cart[product].price}</Item.Extra>
+                     <Item.Extra>Sum: ({props.current_user.current_cart[product].price}*{props.current_user.current_cart[product].quantity})</Item.Extra>
+
                </Item.Content>
              </Item>
            </Item.Group>
@@ -33,7 +66,7 @@ export default function CartShow (props){
           </ol>
           <div>
             <h2>
-              Total:
+              Total: ${calcTotal(props.current_user.current_cart)}
             </h2>
           </div>
         </div>
