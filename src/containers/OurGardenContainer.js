@@ -122,31 +122,41 @@ class OurGardenContainer extends React.Component {
         cart_id: cart_id,
         product_id: product_id
       }
-    }).then(res => { console.log('return from rails', res)
-    const farmerProduct = res.data.farmer_product
-    const farmer = this.state.farmers.find(farmer => farmer.id === farmerProduct.farmer_id)
-    farmer.farmer_products = farmer.farmer_products.map( f_p => {
-      if(farmerProduct.product_id === f_p.product_id) {
-        return farmerProduct
-      } else {
-        return f_p
-      }
-    })
+    }).then(res => {
       this.setState( prevState => (
         {
-          product_carts: [
-            ...prevState.product_carts,
-            res.data.product_cart
-          ],
+          ...prevState,
+          current_user: {
+            ...prevState.current_user,
+            current_cart: res.data.current_cart
+          }
         }
       ))
     })
   }
 
   handleDeleteProduct(id){
+
+    //here: find the object to Remove of removed object
+    //copy state, remove item from copied state
+    //set current_user (153) to copied state.
     deleteProduct(id)
-    .then((data) => this.setState({
-      product_carts: data
+    .then((data) => this.setState( prevState => {
+      const current_cart = prevState.current_user.current_cart
+      const next_cart = {}
+      for (let product in current_cart) {
+        if (current_cart[product].pc_id !== id) {
+          next_cart[product] = current_cart[product]
+        }
+      }
+      return {
+        ...prevState,
+        current_user: {
+          ...prevState.current_user,
+          current_cart: next_cart
+        }
+      }
+      // current_user: data??
     }))
   }
 
@@ -188,7 +198,7 @@ class OurGardenContainer extends React.Component {
   //############################## RENDER ###############################
 
   render() {
-    console.log('current_user', this.state.current_user);
+    console.log('container', this.state);
 
     if(localStorage.getItem('token') && this.state.current_user !== 0){
     return (
