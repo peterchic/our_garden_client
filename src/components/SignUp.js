@@ -13,7 +13,8 @@ class SignUp extends React.Component {
       name: '',
       username: '',
       password: '',
-      bio: ''
+      bio: '',
+      picture: ''
     }
   }
 
@@ -29,7 +30,8 @@ class SignUp extends React.Component {
       this.state.name,
       this.state.username,
       this.state.password,
-      this.state.bio
+      this.state.bio,
+      this.state.picture
     )
   }
 
@@ -47,13 +49,16 @@ class SignUp extends React.Component {
                 <Input fluid icon='user' iconPosition='left' placeholder='Name' value={this.state.name} onChange={ e => this.handleChange('name', e.target.value)} />
               </Form.Field>
               <Form.Field>
-                <Input fluid icon='lock' iconPosition='left' placeholder='Username' type="text" value={this.state.username} onChange={ e => this.handleChange('username', e.target.value)} />
+                <Input fluid icon='user' iconPosition='left' placeholder='Username' type="text" value={this.state.username} onChange={ e => this.handleChange('username', e.target.value)} />
               </Form.Field>
               <Form.Field>
                 <Input fluid icon='lock' iconPosition='left' placeholder='Password' type="password" value={this.state.password} onChange={ e => this.handleChange('password', e.target.value)} />
               </Form.Field>
               <Form.Field>
-                <Input fluid icon='lock' iconPosition='left' placeholder='Bio' type="textarea" value={this.state.bio} onChange={ e => this.handleChange('bio', e.target.value)} />
+                <Input fluid icon='comment outline' iconPosition='left' placeholder='Bio' type="textarea" value={this.state.bio} onChange={ e => this.handleChange('bio', e.target.value)} />
+              </Form.Field>
+              <Form.Field>
+                <Input fluid icon='image' iconPosition='left' placeholder='Upload an image -url link- only please' type="textarea" value={this.state.picture} onChange={ e => this.handleChange('picture', e.target.value)} />
               </Form.Field>
               <Button fluid color="olive" size="large">Sign Up</Button>
             </Segment>
@@ -66,5 +71,6 @@ class SignUp extends React.Component {
     )
   }
 }
+
 
 export default withRouter(SignUp)

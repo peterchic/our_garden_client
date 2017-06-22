@@ -30,7 +30,6 @@ export default class AddToCart extends React.Component {
         this.props.cart_id,
         this.state.product_id
       )
-
       this.setState({
       quantity: ''
     })
@@ -39,19 +38,23 @@ export default class AddToCart extends React.Component {
   render(){
     return(
       <div>
-        <Form onSubmit={this.handleSubmit.bind(this)}>
+        <Form onSubmit={this.handleSubmit.bind(this)} className='float-right'>
           <Form.Group>
             <Form.Input
-            type='text' value={this.state.quantity}
-            onChange={ (e) => this.handleChange(this.props.farmersProduct[0].farmer_id, this.props.farmersProduct[0].product_id, e)}
+              placeholder='5'
+              type='number'
+              min='0'
+              max={this.props.farmersProduct[0].quantity}
+              value={this.state.quantity}
+              onChange={ (e) => this.handleChange(this.props.farmersProduct[0].farmer_id, this.props.farmersProduct[0].product_id, e)}
             />
-          <Button
-            color='orange'
-            size='small'
-            type="submit"
-            value="Add to Basket">Add!
-          </Button>
-        </Form.Group>
+            <Button
+              color='orange'
+              size='medium'
+              type="submit"
+              value="Add to Basket">Add!
+            </Button>
+          </Form.Group>
         </Form>
       </div>
     )

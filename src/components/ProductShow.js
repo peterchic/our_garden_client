@@ -8,7 +8,7 @@ export default function ProductShow (props) {
   const cart_id = props.current_user.cart_id ? props.current_user.cart_id : null
   console.log('props in ProductShow', props.farmersProduct[0].quantity);
   return (
-    <div className='pad-left'>
+    <div className='pad-15'>
       <div className='ui cards'>
     <Card color='olive'>
       <Image src={props.product.picture} alt={props.product.name} />
@@ -26,8 +26,9 @@ export default function ProductShow (props) {
             {props.product.description}
           </Card.Description>
         </Card.Content>
-        <div className='pad-left'>
+        <div className='pad-15 float-right'>
           <AddToCart
+            
             handleAddToCart={props.handleAddToCart}
             cart_id={cart_id}
             farmersProduct={props.farmersProduct}

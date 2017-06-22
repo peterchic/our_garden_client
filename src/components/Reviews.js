@@ -76,8 +76,3 @@ export default class Reviews extends React.Component {
     )
   }
 }
-
-{/* <Form.Input value={this.state.rating} name="rating" type="number" min="1" max="5" onChange={this.handleInputChange.bind(this)} /> */}
-
-{/* <Form.Input value={this.state.review} name="review" type="textarea" onChange={this.handleInputChange.bind(this)} /> */}
-{/* </label> */}

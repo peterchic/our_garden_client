@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
-import { getFarmers, getUsers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken, login, deleteProduct } from '../api/RailsAPI'
+import { getFarmers, getUsers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken, login, deleteProduct, deleteUser } from '../api/RailsAPI'
 
 import LogInSignUp from './LogInSignUp'
 import NavBar from '../components/NavBar'
@@ -71,7 +71,7 @@ class OurGardenContainer extends React.Component {
   //in order to change state.
 
 
-  //######################### LOG IN/OUT ###############################
+  //######################### LOG IN/OUT DELETE USER ###############################
 
   handleLogin(params){
     fetch("http://localhost:3000/api/v1/login", {
@@ -91,13 +91,14 @@ class OurGardenContainer extends React.Component {
   }).catch( e => console.log('error from login', e.response) )
   }
 
-  handleSignUp(name, username, password, bio){
+  handleSignUp(name, username, password, bio, picture){
     axios.post('http://localhost:3000/api/v1/users', {
       user: {
         name: name,
         username: username,
         password: password,
-        bio: bio
+        bio: bio,
+        picture: picture
       }
     }).then(res => { console.log('Sign Up Response: ', res)
     localStorage.setItem("token", res.data.token)
@@ -109,6 +110,13 @@ class OurGardenContainer extends React.Component {
 
   logout(){
     localStorage.clear('token')
+  }
+
+  handleDeleteUser(id){
+    deleteUser(id)
+    .then((data) => this.setState({
+      current_user: data
+    }))
   }
 
   //################################ CART ################################
@@ -213,9 +221,8 @@ class OurGardenContainer extends React.Component {
         <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
         <Image src={bg} fluid />
 
-        <Grid>
             <div>
-              {/* <h3>Hey, {this.state.current_user.username}!</h3> */}
+              <h3>Hey, {this.state.current_user.username}!</h3>
             </div>
           <Switch>
           <Route exact path='/cart' render={() =>
@@ -230,10 +237,10 @@ class OurGardenContainer extends React.Component {
           <Route exact path='/account' render={() =>
             <Account
               current_user={this.state.current_user}
+              handleDeleteUser={this.handleDeleteUser.bind(this)}
+
             />
           }/>
-          <Grid.Row width={3}>
-          <Grid.Column width={13}>
           <Route  path='/farmers' render={() =>
             <GardenPage
               current_user={this.state.current_user}
@@ -250,12 +257,9 @@ class OurGardenContainer extends React.Component {
               handleUpdateReview={this.handleUpdateReview.bind(this)}
             />
           }/>
-        </Grid.Column>
 
-        </Grid.Row>
           <Route exact path='/logout'/>
         </Switch>
-      </Grid>
       </div>
       )
       }

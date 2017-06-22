@@ -21,27 +21,11 @@ export default function ReviewShow (props) {
       <div>
         <div>
           <h3>
-            Review: {review.review}
+            Review: {review.review}<br/>
             Rating: {review.rating}
             <Icon name='close' color='red' onClick={() => props.handleDeleteReview(review.id)}/>
             {/* <Icon name='pencil' render={() => <ReviewEdit onClick={() => props.handleUpdateReview(review.id)}/>}/> */}
-            <Link type='button' to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>Edit Review</Link>
-            User:
-
-            {/* <Modal
-              trigger={<Button>Edit</Button>}
-              header='Edit Youre Review'
-              content='Are you sure you want to delete your account'
-              actions={[
-                { key: 'no', content: 'No', color: 'red', triggerClose: true },
-                { key: 'yes', content: 'Yes', color: 'green', triggerClose: true },
-              ]}
-            /> */}
-
-
-
-
-
+            <Link type='button' to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>Edit</Link>
 
             {/* <Link type='button' to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>Edit Review</Link> */}
           </h3>

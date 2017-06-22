@@ -15,9 +15,10 @@ export default class NavBar extends React.Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
-    // console.log('navbar', this.props);
+    // debugger
+    console.log('navbar', this.props);
     const { activeItem } = this.state
-    if(localStorage.getItem('token')){
+    if(localStorage.getItem('token') && this.props.current_user){
       return (
         <Menu color='olive' inverted={true} >
           <Link to="/farmers">
@@ -29,7 +30,7 @@ export default class NavBar extends React.Component {
             <Menu.Item as='h2' name='farmers' active={activeItem === 'farmers'} onClick={this.handleItemClick}/>
           </Link>
           <Menu.Menu position='right'>
-            {/* <div>{this.props.current_user.products.length}</div> */}
+            <div>{Object.keys(this.props.current_user.current_cart).length}</div>
           <Link to='/cart'>
             <Menu.Item as='h2' name='cart' active={activeItem === 'cart'} onClick={this.handleItemClick}/>
           </Link>
@@ -40,6 +41,9 @@ export default class NavBar extends React.Component {
           <Link to='/farmers' onClick={this.props.logout}>
             <Menu.Item as='h2' name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick}/>
           </Link>
+
+
+            <Menu.Item width={12}/>
           </Menu.Menu>
         </Menu>
       )
