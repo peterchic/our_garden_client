@@ -4,7 +4,7 @@ import { Button, Form, Dropdown } from 'semantic-ui-react'
 
 export default class AddToCart extends React.Component {
   constructor(props){
-    // console.log('cart', props)
+    console.log('cart', props)
 
     super(props)
     this.state = {

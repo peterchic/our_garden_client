@@ -54,8 +54,8 @@ class OurGardenContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('nextProps', nextProps)
-    console.log('this.state.current_user', this.state.current_user)
+    // console.log('nextProps', nextProps)
+    // console.log('this.state.current_user', this.state.current_user)
     if(nextProps.product_carts !== this.state.product_carts){
       this.setState({
         current_user: this.state.current_user
@@ -122,24 +122,31 @@ class OurGardenContainer extends React.Component {
         cart_id: cart_id,
         product_id: product_id
       }
-    }).then(res => {
+    }).then(res => { console.log('return from rails', res)
+    const farmerProduct = res.data.farmer_product
+    const updatedFarmers = this.state.farmers.slice()
+    const farmer = updatedFarmers.find(farmer => farmer.id === farmerProduct.farmer_id)
+    farmer.farmer_products = farmer.farmer_products.map( f_p => {
+      if(farmerProduct.product_id === f_p.product_id) {
+        return farmerProduct
+      } else {
+        return f_p
+      }
+    })
       this.setState( prevState => (
         {
           ...prevState,
           current_user: {
             ...prevState.current_user,
             current_cart: res.data.current_cart
-          }
+          },
+          farmers: updatedFarmers
         }
       ))
     })
   }
 
   handleDeleteProduct(id){
-
-    //here: find the object to Remove of removed object
-    //copy state, remove item from copied state
-    //set current_user (153) to copied state.
     deleteProduct(id)
     .then((data) => this.setState( prevState => {
       const current_cart = prevState.current_user.current_cart
@@ -156,7 +163,6 @@ class OurGardenContainer extends React.Component {
           current_cart: next_cart
         }
       }
-      // current_user: data??
     }))
   }
 
@@ -198,7 +204,7 @@ class OurGardenContainer extends React.Component {
   //############################## RENDER ###############################
 
   render() {
-    console.log('container', this.state);
+    // console.log('container', this.state);
 
     if(localStorage.getItem('token') && this.state.current_user !== 0){
     return (

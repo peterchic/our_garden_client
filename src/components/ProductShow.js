@@ -6,7 +6,7 @@ import { Grid, Card, Image } from 'semantic-ui-react'
 
 export default function ProductShow (props) {
   const cart_id = props.current_user.cart_id ? props.current_user.cart_id : null
-  // console.log('props in ProductShow', props);
+  console.log('props in ProductShow', props.farmersProduct[0].quantity);
   return (
     <div className='pad-left'>
       <div className='ui cards'>
