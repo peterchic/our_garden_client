@@ -83,13 +83,11 @@ export function updateReview(id, review, rating) {
   }
 
 export function deleteReview(id){
-  // console.log('did I delete', id);
   return fetch(`http://localhost:3000/api/v1/reviews/${id}`, { method: 'DELETE'})
     .then( res => res.json() )
 }
 
 export function deleteProduct(id){
-  console.log('did I delete?', id);
   return fetch(`http://localhost:3000/api/v1/product_carts/${id}`, { method: 'DELETE'})
     .then( res => res.json() )
 }

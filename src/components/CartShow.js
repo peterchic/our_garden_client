@@ -54,6 +54,7 @@ export default function CartShow (props){
         </ol>
         <div>
           <h2>
+            {Object.keys(props.current_user.current_cart)[0] ?
             <div>
               Total: ${calcTotal(props.current_user.current_cart)}
               <Modal
@@ -66,6 +67,7 @@ export default function CartShow (props){
                 ]}
               />
             </div>
+            :  <h1> Basket is empty. Grab some Produce and head back here to check out!</h1>}
           </h2>
         </div>
       </div>

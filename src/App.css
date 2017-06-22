@@ -1,3 +1,5 @@
+/*import bg from './images/bg_images/bg_1.png'*/
+
 .App {
   text-align: center;
 }
@@ -36,6 +38,13 @@
   border-color: solid green 2px;
 }
 
+.pad-15-lbt{
+  padding-left: 15px;
+  padding-bottom: 15px;
+  /*padding-right: 15px;*/
+  padding-top: 15px;
+}
+
 .pad-15{
   padding-left: 15px;
   padding-bottom: 15px;
@@ -46,6 +55,23 @@
 .float-right{
   float: right;
 }
+
+.float-left{
+  float: left;
+}
+
+.ul{
+list-style-type: none;
+}
+
+.div-horizontal {
+    width: 30%; /* safe distance for non-supporting browsers */
+}
+
+/*.landing-image {
+    background-image: url('./images/bg_images/bg_1.jpg');
+    background-size: cover !important;
+}*/
 
 /*.dotted{
   float: right;

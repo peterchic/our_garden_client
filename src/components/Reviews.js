@@ -47,7 +47,8 @@ export default class Reviews extends React.Component {
     // console.log('review', this.props)
     return (
       <div>
-        <ul>
+        <h2>Leave A Review!</h2>
+
           <Form onSubmit={this.handleSubmit.bind(this)}>
             <Form.Group>
               <Form.Input
@@ -71,7 +72,7 @@ export default class Reviews extends React.Component {
               <Form.Button color='orange' type="submit" value="Leave A Review">Leave a Review!</Form.Button>
             </Form.Group>
           </Form>
-        </ul>
+
       </div>
     )
   }

@@ -4,13 +4,13 @@ import Reviews from './Reviews'
 import ReviewShow from './ReviewShow'
 import { Route } from 'react-router-dom'
 import ReviewEdit from './ReviewEdit'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Divider } from 'semantic-ui-react'
 
 
 //Garden Page renders me
 
 export default function GardenShow (props) {
-  // console.log('garden showpage', props);
+  console.log('garden showpage', props);
 
   if (!props.farmer) {
     return (
@@ -33,8 +33,7 @@ export default function GardenShow (props) {
   })
 
   return (
-    <div>
-      <div>
+    <span>
         <Grid celled='internally'>
 
         <Grid.Row>
@@ -48,40 +47,49 @@ export default function GardenShow (props) {
         </Grid.Column>
       </Grid.Row>
     </Grid>
-        <Reviews
-          handleReview={props.handleReview}
-          farmer={props.farmer}
-          current_user={props.current_user}
-        />
-        <ReviewShow
-          reviews={props.reviews}
-          farmer={props.farmer}
-          handleDeleteReview={props.handleDeleteReview}
-          handleUpdateReview={props.handleUpdateReview}
-        />
-        <Route
-          path="/farmers/:id/reviews/:id/edit" render={ ({match}) => {
-          const review = props.reviews.find(review => review.id === parseInt(match.params.id, 10))
-            return (
-              <ReviewEdit
-                handleUpdateReview={props.handleUpdateReview}
-                reviews={review}
-                farmer={props.farmer}
-              />
-            )
-        }}
-      />
         <div>
           <ul>
           <Grid>
             <Grid.Row className='product-page'>
               {products}
             </Grid.Row>
+            <Grid.Column width={13}>
+
+              <Divider horizontal><h2>Reviews</h2></Divider>
+            </Grid.Column>
           </Grid>
 
+
+
+          <Reviews handleReview={props.handleReview}
+            farmer={props.farmer}
+            current_user={props.current_user}
+          />
+          <ReviewShow
+            reviews={props.reviews}
+            farmer={props.farmer}
+            handleDeleteReview={props.handleDeleteReview}
+            handleUpdateReview={props.handleUpdateReview}
+            current_user={props.current_user}
+          />
         </ul>
         </div>
-      </div>
-    </div>
+        <div>
+          <ul>
+            <Route
+              path="/farmers/:id/reviews/:id/edit" render={ ({match}) => {
+                const review = props.reviews.find(review => review.id === parseInt(match.params.id, 10))
+                return (
+                  <ReviewEdit
+                    handleUpdateReview={props.handleUpdateReview}
+                    reviews={review}
+                    farmer={props.farmer}
+                  />
+                )
+              }}
+            />
+          </ul>
+        </div>
+    </span>
   )
 }

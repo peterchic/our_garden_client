@@ -113,6 +113,7 @@ class OurGardenContainer extends React.Component {
   }
 
   handleDeleteUser(id){
+    localStorage.clear('token')
     deleteUser(id)
     .then((data) => this.setState({
       current_user: data
@@ -219,11 +220,34 @@ class OurGardenContainer extends React.Component {
       <div>
 
         <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
-        <Image src={bg} fluid />
+        <Image className="landing-image" src={bg} fluid />
+        <div>
+          <ul>
+            <h3>Hey, {this.state.current_user.username}!</h3>
+          </ul>
+        </div>
 
-            <div>
-              <h3>Hey, {this.state.current_user.username}!</h3>
-            </div>
+        <Route path='/farmers' render={() =>
+          <GardenPage
+            current_user={this.state.current_user}
+            farmers={this.state.farmers}
+            products={this.state.products}
+            searchTerm={this.state.searchTerm}
+            users={this.state.users}
+            farmer_products={this.state.farmer_products}
+            handleAddToCart={this.handleAddToCart.bind(this)}
+            product_carts={this.state.product_carts}
+            handleReview={this.handleReview.bind(this)}
+            reviews={this.state.reviews}
+            handleDeleteReview={this.handleDeleteReview.bind(this)}
+            handleUpdateReview={this.handleUpdateReview.bind(this)}
+          />
+        }/>
+
+        <Grid>
+          <Grid.Column width={1}>
+          </Grid.Column>
+          <Grid.Column width={15}>
           <Switch>
           <Route exact path='/cart' render={() =>
             <CartShow
@@ -238,28 +262,12 @@ class OurGardenContainer extends React.Component {
             <Account
               current_user={this.state.current_user}
               handleDeleteUser={this.handleDeleteUser.bind(this)}
-
             />
           }/>
-          <Route  path='/farmers' render={() =>
-            <GardenPage
-              current_user={this.state.current_user}
-              farmers={this.state.farmers}
-              products={this.state.products}
-              searchTerm={this.state.searchTerm}
-              users={this.state.users}
-              farmer_products={this.state.farmer_products}
-              handleAddToCart={this.handleAddToCart.bind(this)}
-              product_carts={this.state.product_carts}
-              handleReview={this.handleReview.bind(this)}
-              reviews={this.state.reviews}
-              handleDeleteReview={this.handleDeleteReview.bind(this)}
-              handleUpdateReview={this.handleUpdateReview.bind(this)}
-            />
-          }/>
-
           <Route exact path='/logout'/>
         </Switch>
+      </Grid.Column>
+      </Grid>
       </div>
       )
       }

@@ -6,29 +6,29 @@ import { Grid } from 'semantic-ui-react'
 
 
 export default function GardenPage(props){
-  const farmersElements = props.farmers.map((farmer,i) =>
+  const farmerList = props.farmers.map((farmer,i) =>
     <div key={farmer.id}>
-      <Link to={`/farmers/${farmer.id}`}><h3>{farmer.name}</h3></Link>
+      <Link to={`/farmers/${farmer.id}`}><li className='ul'><h3>{farmer.name}</h3></li></Link>
     </div>)
     if (props.farmers){
       return(
-        <div>
-          <Grid>
-            <Grid.Row width={2}>
-              <Grid.Column>
-              </Grid.Column>
-              <Grid.Column width={6}>
+        <span className='float-left'>
+          <Grid celled='internally'>
+            <Grid.Column width={3}>
+
               <div>
                 <ul>
                   <h3>Your Local Gardeners:</h3>
-                    { farmersElements }
+                </ul>
+                <ul>
+                    { farmerList }
                 </ul>
               </div>
             </Grid.Column>
-          </Grid.Row>
+          <Grid.Column className width={13}>
       <div>
         <Switch>
-          <Route exact path="/farmers/:id" render={ ({match}) => {
+          <Route path="/farmers/:id" render={ ({match}) => {
             const farmer = props.farmers.find(farmer => farmer.id === parseInt(match.params.id, 10))
               return (
                 <GardenShow
@@ -47,8 +47,9 @@ export default function GardenPage(props){
           />
         </Switch>
       </div>
-    </Grid>
-    </div>
+    </Grid.Column>
+  </Grid>
+    </span>
     )
   } else {
     return (
