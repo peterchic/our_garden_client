@@ -247,8 +247,6 @@ class OurGardenContainer extends React.Component {
         <Grid>
           <Grid.Column width={1}>
           </Grid.Column>
-          <Grid.Column width={15}>
-          <Switch>
           <Route exact path='/cart' render={() =>
             <CartShow
               farmer_products={this.state.farmer_products}
@@ -258,12 +256,17 @@ class OurGardenContainer extends React.Component {
               handleDeleteProduct={this.handleDeleteProduct.bind(this)}
             />
           }/>
+          <Grid.Column width={15}>
+          <Switch>
+          <Grid.Column width={2}>
+
           <Route exact path='/account' render={() =>
             <Account
               current_user={this.state.current_user}
               handleDeleteUser={this.handleDeleteUser.bind(this)}
             />
           }/>
+        </Grid.Column>
           <Route exact path='/logout'/>
         </Switch>
       </Grid.Column>

@@ -38,10 +38,13 @@ export default function GardenShow (props) {
 
         <Grid.Row>
           <Grid.Column width={3}>
+            {/* <ul> */}
             <img alt={props.farmer.name} src={props.farmer.picture}/>
+          {/* </ul> */}
           </Grid.Column>
 
         <Grid.Column width={13}>
+
           <h1>{props.farmer.name}</h1>
           <h1>{props.farmer.bio}</h1>
         </Grid.Column>

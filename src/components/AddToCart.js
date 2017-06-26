@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Dropdown } from 'semantic-ui-react'
+import { Button, Form, Dropdown, Grid } from 'semantic-ui-react'
 
 
 export default class AddToCart extends React.Component {
@@ -38,6 +38,12 @@ export default class AddToCart extends React.Component {
   render(){
     return(
       <div>
+        {/* <Grid>
+          <Grid.Row>
+            <Grid.Column width={13}>
+
+ */}
+
         <Form onSubmit={this.handleSubmit.bind(this)} className='float-right'>
           <Form.Group>
             <Form.Input
@@ -56,6 +62,9 @@ export default class AddToCart extends React.Component {
             </Button>
           </Form.Group>
         </Form>
+      {/* </Grid.Column>
+      </Grid.Row>
+      </Grid> */}
       </div>
     )
   }

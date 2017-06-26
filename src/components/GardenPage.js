@@ -12,7 +12,7 @@ export default function GardenPage(props){
     </div>)
     if (props.farmers){
       return(
-        <span className='float-left'>
+        <span >
           <Grid celled='internally'>
             <Grid.Column width={3}>
 
@@ -25,7 +25,11 @@ export default function GardenPage(props){
                 </ul>
               </div>
             </Grid.Column>
+
           <Grid.Column className width={13}>
+            <ul>
+            <h1>Hey Guys! Click on the links to the left to check out what local farmers are currently selling!</h1>
+          </ul>
       <div>
         <Switch>
           <Route path="/farmers/:id" render={ ({match}) => {

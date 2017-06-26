@@ -43,7 +43,7 @@ export default class NavBar extends React.Component {
           </Link>
 
 
-            <Menu.Item width={12}/>
+            
           </Menu.Menu>
         </Menu>
       )
