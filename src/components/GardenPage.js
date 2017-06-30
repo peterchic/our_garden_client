@@ -27,9 +27,7 @@ export default function GardenPage(props){
             </Grid.Column>
 
           <Grid.Column className width={13}>
-            <ul>
-            <h1>Hey Guys! Click on the links to the left to check out what local farmers are currently selling!</h1>
-          </ul>
+            
       <div>
         <Switch>
           <Route path="/farmers/:id" render={ ({match}) => {

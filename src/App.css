@@ -68,6 +68,14 @@ list-style-type: none;
     width: 30%; /* safe distance for non-supporting browsers */
 }
 
+.rcorners {
+    border-radius: 100%;
+    /*padding-left: 20px;*/
+    /*padding-right: 20px;*/
+    /*width: 200px;*/
+    /*height: 150px;*/
+}
+
 /*.landing-image {
     background-image: url('./images/bg_images/bg_1.jpg');
     background-size: cover !important;
