@@ -220,7 +220,7 @@ class OurGardenContainer extends React.Component {
       <div>
 
         <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
-        <Image className="landing-image" src={bg} fluid />
+        {/* <Image className="landing-image" src={bg} fluid /> */}
         <div>
           <ul>
             <h3>Hey, {this.state.current_user.username}!</h3>

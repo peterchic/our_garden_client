@@ -1,6 +1,6 @@
 import React from 'react'
 //Garden Show Renders me
-import { Grid, Card, Button, Form, Input } from 'semantic-ui-react'
+import { Grid, Card, Button, Form, Input, Divider } from 'semantic-ui-react'
 
 
 export default class Reviews extends React.Component {
@@ -47,8 +47,6 @@ export default class Reviews extends React.Component {
     // console.log('review', this.props)
     return (
       <div>
-        <h2>Leave A Review!</h2>
-
           <Form onSubmit={this.handleSubmit.bind(this)}>
             <Form.Group>
               <Form.Input
@@ -72,6 +70,11 @@ export default class Reviews extends React.Component {
               <Form.Button color='orange' type="submit" value="Leave A Review">Leave a Review!</Form.Button>
             </Form.Group>
           </Form>
+          <Grid>
+              <Grid.Column width={13}>
+                <Divider></Divider>
+              </Grid.Column>
+          </Grid>
 
       </div>
     )

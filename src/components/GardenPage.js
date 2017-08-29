@@ -27,7 +27,7 @@ export default function GardenPage(props){
             </Grid.Column>
 
           <Grid.Column className width={13}>
-            
+
       <div>
         <Switch>
           <Route path="/farmers/:id" render={ ({match}) => {

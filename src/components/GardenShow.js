@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductShow from './ProductShow'
 import Reviews from './Reviews'
-import ReviewShow from './ReviewShow'
+import ReviewList from './ReviewList'
 import { Route } from 'react-router-dom'
 import ReviewEdit from './ReviewEdit'
 import { Grid, Divider, Button } from 'semantic-ui-react'
@@ -36,35 +36,34 @@ export default function GardenShow (props) {
   let firstName = name[0]
 
 
+
+
   return (
     <span>
-      {/* <ul> */}
 
         <Grid celled='internally'>
 
         <Grid.Row>
-          <Grid.Column width={3}>
-            {/* <ul> */}
+          <Grid.Column width={3} id="farmer-image">
             <img alt={props.farmer.name} className='rcorners' src={props.farmer.picture}/>
-          {/* </ul> */}
           </Grid.Column>
 
-        <Grid.Column width={13}>
+        <Grid.Column width={10}>
 
           <h1>{props.farmer.name}</h1>
           <h1>{props.farmer.bio}</h1>
+
+
           <Button
             color='orange'
             size='medium'
-            type="submit"
-            value="Add to Basket">Contact {firstName}
+            type="submit">
+            Contact {firstName}
           </Button>
         </Grid.Column>
       </Grid.Row>
     </Grid>
-  {/* </ul> */}
         <div>
-          {/* <ul> */}
           <Grid>
             <Grid.Row className='product-page'>
               {products}
@@ -81,14 +80,13 @@ export default function GardenShow (props) {
             farmer={props.farmer}
             current_user={props.current_user}
           />
-          <ReviewShow
+          <ReviewList
             reviews={props.reviews}
             farmer={props.farmer}
             handleDeleteReview={props.handleDeleteReview}
             handleUpdateReview={props.handleUpdateReview}
             current_user={props.current_user}
           />
-        {/* </ul> */}
         </div>
         <div>
           <ul>

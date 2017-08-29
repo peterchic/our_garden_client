@@ -14,38 +14,39 @@ export default class NavBar extends React.Component {
   }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
+
+
   render() {
     // debugger
-    console.log('navbar', this.props);
     const { activeItem } = this.state
     if(localStorage.getItem('token') && this.props.current_user){
       return (
-        <Menu color='olive' inverted={true} >
-          <Link to="/farmers">
-            <Menu.Item>
-              <Image src={logo} size='small' onClick={this.handleItemClick}/>
-            </Menu.Item>
-          </Link>
-          <Link to='/farmers'>
-            <Menu.Item as='h2' name='farmers' active={activeItem === 'farmers'} onClick={this.handleItemClick}/>
-          </Link>
-          <Menu.Menu position='right'>
-            <div>{Object.keys(this.props.current_user.current_cart).length}</div>
-          <Link to='/cart'>
-            <Menu.Item as='h2' name='cart' active={activeItem === 'cart'} onClick={this.handleItemClick}/>
-          </Link>
-          <Link to='/account'>
-            <Menu.Item as='h2' name='account' active={activeItem === 'account'} onClick={this.handleItemClick}/>
-          </Link>
+        <div >
+          <Menu className="ui top fixed menu" color='olive' inverted={true} >
+            <Link to="/farmers">
+              <Menu.Item>
+                <Image src={logo} size='small' onClick={this.handleItemClick}/>
+              </Menu.Item>
+            </Link>
+            <Link to='/farmers'>
+              <Menu.Item as='h2' name='farmers' active={activeItem === 'farmers'} onClick={this.handleItemClick}/>
+            </Link>
+            <Menu.Menu position='right'>
+              {Object.keys(this.props.current_user.current_cart).length == 0 ? null : <span className="cart-count">{Object.keys(this.props.current_user.current_cart).length}</span>}
+            <Link to='/cart'>
+              <Menu.Item as='h2' name='cart' active={activeItem === 'cart'} onClick={this.handleItemClick}/>
+            </Link>
+            <Link to='/account'>
+              <Menu.Item as='h2' name='account' active={activeItem === 'account'} onClick={this.handleItemClick}/>
+            </Link>
 
-          <Link to='/farmers' onClick={this.props.logout}>
-            <Menu.Item as='h2' name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick}/>
-          </Link>
+            <Link to='/farmers' onClick={this.props.logout}>
+              <Menu.Item as='h2' name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick}/>
+            </Link>
+            </Menu.Menu>
+          </Menu>
+        </div>
 
-
-            
-          </Menu.Menu>
-        </Menu>
       )
     }
     else {

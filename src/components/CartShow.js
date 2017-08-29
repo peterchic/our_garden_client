@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Item, Icon, Button, Modal } from 'semantic-ui-react'
+import { Card, Item, Icon, Button, Modal, Grid } from 'semantic-ui-react'
 
 export default function CartShow (props){
   console.log('cartshow', props)
@@ -13,16 +13,6 @@ export default function CartShow (props){
     return total
   }
 
-  function empty(cart){
-    var keys = Object.keys(cart)
-    var total = 0
-      for(var i=0; i< keys.length; i++){
-        total += cart[keys[i]].price * cart[keys[i]].quantity
-      }
-    return total
-  }
-
-// debugger
   if(!!props.current_user && !!props.current_user.current_cart){
      var user = []
      for( let product in props.current_user.current_cart) {
@@ -33,7 +23,6 @@ export default function CartShow (props){
              <Item.Image size='tiny' src={props.current_user.current_cart[product].info.picture} />
              <Item.Content>
                <Item.Header as='a'>{product}</Item.Header>
-               {/* <Item.Meta>Description</Item.Meta> */}
                  <Item.Description>
                    {props.current_user.current_cart[product].info.description}
                    <Icon name='close' color='red' onClick={() => props.handleDeleteProduct(props.current_user.current_cart[product].pc_id)}/>
@@ -47,8 +36,14 @@ export default function CartShow (props){
        </li>
      )
    }
-    return(
+    return (
+
       <div>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={3}>
+            </Grid.Column>
+            <Grid.Column width={13}>
         <ol>
           {user}
         </ol>
@@ -70,6 +65,9 @@ export default function CartShow (props){
             :  <h1> Basket is empty. Grab some Produce and head back here to check out!</h1>}
           </h2>
         </div>
+      </Grid.Column>
+    </Grid.Row>
+  </Grid>
       </div>
     )
   }
@@ -80,6 +78,6 @@ export default function CartShow (props){
        <h2>
          Hey! Grab some fresh produce and head back here to checkout!
        </h2>
-     </div>)
-   }
+     </div>
+   )}
 }
