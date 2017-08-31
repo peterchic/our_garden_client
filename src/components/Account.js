@@ -13,10 +13,10 @@ console.log('account', props);
           <Grid.Row>
             <Grid.Column width={3}>
             </Grid.Column>
-            <Grid.Column width={13}>
+            <Grid.Column width={10}>
               <Image src={props.current_user.picture} size='medium' shape='circular' />
               <h3>{props.current_user.bio}</h3>
-              {/* <Icon name='close' color='red' onClick={() => props.handleDeleteUser(props.current_user.id)}/> */}
+              <Icon name='close' type='submit' color='red' onClick={() => props.handleDeleteUser(props.current_user.id)}/>Delete Account!
             </Grid.Column>
           </Grid.Row>
         </Grid>

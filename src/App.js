@@ -1,6 +1,6 @@
 // import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import React from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 
 import isAuthenticated from './components/hocs/isAuthenticated'
 import OurGardenContainer from './containers/OurGardenContainer'

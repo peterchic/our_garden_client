@@ -96,10 +96,67 @@ html {
   margin: 80px 0 0 0;
 }
 
-/*.landing-image {
-    background-image: url('./images/bg_images/bg_1.jpg');
-    background-size: cover !important;
-}*/
+#logged-out{
+  margin: -80px 0 0 0;
+}
+
+#log-in-signup {
+  margin-top: 20px;
+  position: relative;
+}
+
+#subline-bg {
+  background-color: rgba(247, 247, 248, 0.9);
+  text-align: center;
+  margin: 40px auto;
+  max-width: 850px;
+  color: white;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+#intro {
+  text-align: center;
+  max-width: 850px;
+  color: #999b9c;
+  font-size: 50px;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-weight: 700;
+  line-height: 1.1em;
+  border-radius: 15px;
+}
+
+.landing-image {
+    background: no-repeat center center fixed;
+    background-size: cover;
+    opacity: .4;
+    display: block;
+    margin-top: -6px;
+    position: fixed;
+    max-width: 100%;
+    z-index: -1;
+}
+
+.landing-div {
+  /*position: fixed;*/
+  /*z-index: -2;*/
+}
+
+#subline{
+  text-align: center;
+  max-width: 850px;
+  color: #999b9c;
+  font-size: 30px;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-weight: 700;
+  line-height: 1.28571429em;
+}
+
+#header {
+  color: black;
+  margin-right: 20px;
+  font-size: 30px;
+}
 
 /*.dotted{
   float: right;

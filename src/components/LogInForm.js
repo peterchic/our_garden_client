@@ -37,9 +37,9 @@ export default class LoginForm extends React.Component {
 
     <Grid centered verticalAlign="middle">
       <Grid.Column textAlign="center" width={7}>
-        <Header as='h2' color='olive'>
+        <Header id='header'>
           <Image src={logo}/>
-          Log-in to your account
+          Log-in!
         </Header>
         <Form size="large" onSubmit={ e => this.handleSubmit(e)}>
           <Segment stacked>

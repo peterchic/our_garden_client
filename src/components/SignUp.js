@@ -39,7 +39,7 @@ class SignUp extends React.Component {
     return (
       <Grid centered verticalAlign="middle">
         <Grid.Column textAlign="center" width={7}>
-          <Header as='h2' color='olive'>
+          <Header id="header">
             <Image src={logo} />
             Create Your Account!
           </Header>

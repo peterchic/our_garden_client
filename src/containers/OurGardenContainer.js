@@ -8,7 +8,6 @@ import NavBar from '../components/NavBar'
 import Search from '../components/Search'
 import Account from '../components/Account'
 import CartShow from '../components/CartShow'
-import bg from '../images/bg_images/bg_1.png'
 import { Grid, Image } from 'semantic-ui-react'
 import GardenPage from '../components/GardenPage'
 
@@ -113,11 +112,11 @@ class OurGardenContainer extends React.Component {
   }
 
   handleDeleteUser(id){
-    localStorage.clear('token')
     deleteUser(id)
     .then((data) => this.setState({
       current_user: data
     }))
+    localStorage.clear('token')
   }
 
   //################################ CART ################################
@@ -220,13 +219,13 @@ class OurGardenContainer extends React.Component {
       <div>
 
         <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
-        {/* <Image className="landing-image" src={bg} fluid /> */}
         <div>
           <ul>
             <h3>Hey, {this.state.current_user.username}!</h3>
           </ul>
         </div>
 
+        
         <Route path='/farmers' render={() =>
           <GardenPage
             current_user={this.state.current_user}

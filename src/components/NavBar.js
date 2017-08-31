@@ -17,7 +17,6 @@ export default class NavBar extends React.Component {
 
 
   render() {
-    // debugger
     const { activeItem } = this.state
     if(localStorage.getItem('token') && this.props.current_user){
       return (
@@ -32,26 +31,24 @@ export default class NavBar extends React.Component {
               <Menu.Item as='h2' name='farmers' active={activeItem === 'farmers'} onClick={this.handleItemClick}/>
             </Link>
             <Menu.Menu position='right'>
-              {Object.keys(this.props.current_user.current_cart).length == 0 ? null : <span className="cart-count">{Object.keys(this.props.current_user.current_cart).length}</span>}
+              {Object.keys(this.props.current_user.current_cart) ? null : <span className="cart-count">{Object.keys(this.props.current_user.current_cart).length}</span>}
             <Link to='/cart'>
               <Menu.Item as='h2' name='cart' active={activeItem === 'cart'} onClick={this.handleItemClick}/>
             </Link>
             <Link to='/account'>
               <Menu.Item as='h2' name='account' active={activeItem === 'account'} onClick={this.handleItemClick}/>
             </Link>
-
-            <Link to='/farmers' onClick={this.props.logout}>
+            <Link to='/login' onClick={this.props.logout}>
               <Menu.Item as='h2' name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick}/>
             </Link>
             </Menu.Menu>
           </Menu>
         </div>
-
       )
     }
     else {
       return (
-        <Menu color='olive' inverted={true}>
+        <Menu color='olive' inverted={true} id='logged-out'>
           <Link to="/">
           <Menu.Item>
             <Image src={logo} size='small' active={activeItem === 'Our Garden'} onClick={this.handleItemClick}/>
