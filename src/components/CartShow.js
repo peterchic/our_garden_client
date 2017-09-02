@@ -43,7 +43,7 @@ export default function CartShow (props){
           <Grid.Row>
             <Grid.Column width={3}>
             </Grid.Column>
-            <Grid.Column width={13}>
+            <Grid.Column width={10} id="cart-border">
         <ol>
           {user}
         </ol>
@@ -55,7 +55,7 @@ export default function CartShow (props){
               <Modal
                 trigger={<Button floated='right' color='orange'>Checkout!</Button>}
                 header='Ready to Checkout...'
-                content={`Clicking "Yes" will bring you to a separate checkout page and you\'re card will be charged ${calcTotal(props.current_user.current_cart)}`}
+                content={`Clicking "Yes" will bring you to a separate checkout page and you\'re card will be charged $${calcTotal(props.current_user.current_cart)}`}
                 actions={[
                   { key: 'no', content: 'Go Back!', color: 'red', triggerClose: true },
                   { key: 'yes', content: 'Yes!', color: 'green', triggerClose: true },

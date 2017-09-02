@@ -1,7 +1,4 @@
-// import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom'
-
 import isAuthenticated from './components/hocs/isAuthenticated'
 import OurGardenContainer from './containers/OurGardenContainer'
 // import LogInSignUp from './containers/LogInSignUp'
@@ -21,9 +18,7 @@ class App extends React.Component {
         return (
         <div>
           <div className = "container-fluid">
-            {/* <NavBar title="OurGarden" color="white"/> */}
             <OurGardenContainer />
-
           </div>
         </div>
         )

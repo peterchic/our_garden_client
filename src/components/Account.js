@@ -1,6 +1,6 @@
 import React from 'react'
 // import farmer_img from '../images/farmer_9.jpg'
-import { Image, Grid, Card, Header, Icon } from 'semantic-ui-react'
+import { Grid, Button, Image } from 'semantic-ui-react'
 
 
 export default function Account(props) {
@@ -16,7 +16,8 @@ console.log('account', props);
             <Grid.Column width={10}>
               <Image src={props.current_user.picture} size='medium' shape='circular' />
               <h3>{props.current_user.bio}</h3>
-              <Icon name='close' type='submit' color='red' onClick={() => props.handleDeleteUser(props.current_user.id)}/>Delete Account!
+              <Button size="mini" color="red" onClick={() => props.handleDeleteUser(props.current_user.id)}>Delete Account</Button>
+              {/* <Icon name='close' type='submit' color='red' onClick={() => props.handleDeleteUser(props.current_user.id)}/>Delete Account! */}
             </Grid.Column>
           </Grid.Row>
         </Grid>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
 
 import GardenShow from './GardenShow'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
 
 
 export default function GardenPage(props){
@@ -25,8 +25,7 @@ export default function GardenPage(props){
               </ul>
             </div>
           </Grid.Column>
-          <Grid.Column className width={10}>
-            <h1>Hello, this is some randomly generated text to make sure this app works. Well does it how long will this go?</h1>
+          <Grid.Column className width={13}>
             <div>
               <Switch>
                 <Route path="/farmers/:id" render={ ({match}) => {

@@ -4,13 +4,10 @@ import Reviews from './Reviews'
 import ReviewList from './ReviewList'
 import { Route } from 'react-router-dom'
 import ReviewEdit from './ReviewEdit'
-import { Grid, Divider, Button } from 'semantic-ui-react'
+import { Grid, Divider, Button, Modal } from 'semantic-ui-react'
 //Garden Page renders me
 
 export default function GardenShow (props) {
-  let name = props.farmer.name.split(' ')
-  let firstName = name[0]
-
   if (!props.farmer) {
     return <h1>Loading the Show Page</h1>
   }
@@ -27,6 +24,9 @@ export default function GardenShow (props) {
     )
   })
 
+  let name = props.farmer.name.split(' ')
+  let firstName = name[0]
+
   return (
     <span>
       <Grid celled='internally'>
@@ -37,12 +37,17 @@ export default function GardenShow (props) {
           <Grid.Column width={13}>
             <h1>{props.farmer.name}</h1>
             <h1>{props.farmer.bio}</h1>
-            <Button
-              color='orange'
-              size='medium'
-              type="submit">
-              Contact {firstName}
-            </Button>
+
+            <Modal
+              trigger={<Button color="orange">Contact {firstName}</Button>}
+              header={`${firstName} would love to hear from you! Select from the options below:`}
+              size="small"
+              actions={[
+                { key: 'no', content: 'Text!', color: 'blue', triggerClose: true },
+                { key: 'yes', content: 'E-Mail!', color: 'green', triggerClose: true },
+              ]}
+            />
+
           </Grid.Column>
         </Grid.Row>
       </Grid>

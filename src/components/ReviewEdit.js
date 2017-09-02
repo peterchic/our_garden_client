@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
+import { Button, Modal } from 'semantic-ui-react'
 // import { Switch, Route, Link, withRouter } from 'react-router-dom'
 
 export default class ReviewEdit extends Component{
@@ -7,7 +7,7 @@ export default class ReviewEdit extends Component{
     super()
     this.state = {
       review: '',
-      rating: '',
+      rating: ''
     }
   }
 
@@ -26,11 +26,6 @@ export default class ReviewEdit extends Component{
           rating: rating
         }
       })
-    }
-
-    handleCancel(e){
-      e.preventDefault()
-      // this.props.history.push(`/farmers/${this.props.farmer.id}`)
     }
 
     handleSubmit(e){
@@ -52,11 +47,10 @@ export default class ReviewEdit extends Component{
             <input type='text' value={this.state.review} placeholder={this.props.reviews.review} onChange={this.handleReviewInputChange.bind(this)} />
             <label>Rating:</label>
             <input type="number" min="1" max="5" value={this.state.rating} placeholder={this.props.reviews.rating} onChange={this.handleRatingInputChange.bind(this)} />
-            <Button color='olive' type='submit' onClick={this.handleSubmit.bind(this)}>Save</Button>
-            {/* <input type='submit' value='Cancel' onClick={this.handleSubmit.bind(this)} /> */}
+            <Button color='green' size="tiny" type='submit' onClick={this.handleSubmit.bind(this)}>Save</Button>
           </div>
         </form>
-      </div>
+  </div>
     )
   }
 

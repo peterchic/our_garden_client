@@ -117,6 +117,7 @@ class OurGardenContainer extends React.Component {
       current_user: data
     }))
     localStorage.clear('token')
+    // .catch( err => console.log(err) )
   }
 
   //################################ CART ################################
@@ -212,32 +213,28 @@ class OurGardenContainer extends React.Component {
   //############################## RENDER ###############################
 
   render() {
-    // console.log('container', this.state);
-
     if(localStorage.getItem('token') && this.state.current_user !== 0){
-    return (
-      <div>
-
-        <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
+      return (
+        <div>
+          <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
         <div>
           <ul>
             <h3>Hey, {this.state.current_user.username}!</h3>
           </ul>
         </div>
 
-        
         <Route path='/farmers' render={() =>
           <GardenPage
-            current_user={this.state.current_user}
+            users={this.state.users}
             farmers={this.state.farmers}
+            reviews={this.state.reviews}
             products={this.state.products}
             searchTerm={this.state.searchTerm}
-            users={this.state.users}
-            farmer_products={this.state.farmer_products}
-            handleAddToCart={this.handleAddToCart.bind(this)}
+            current_user={this.state.current_user}
             product_carts={this.state.product_carts}
             handleReview={this.handleReview.bind(this)}
-            reviews={this.state.reviews}
+            farmer_products={this.state.farmer_products}
+            handleAddToCart={this.handleAddToCart.bind(this)}
             handleDeleteReview={this.handleDeleteReview.bind(this)}
             handleUpdateReview={this.handleUpdateReview.bind(this)}
           />
@@ -248,38 +245,36 @@ class OurGardenContainer extends React.Component {
           </Grid.Column>
           <Route exact path='/cart' render={() =>
             <CartShow
-              farmer_products={this.state.farmer_products}
+              farmers={this.state.farmers}
               current_user={this.state.current_user}
               product_carts={this.state.product_carts}
-              farmers={this.state.farmers}
+              farmer_products={this.state.farmer_products}
               handleDeleteProduct={this.handleDeleteProduct.bind(this)}
             />
           }/>
           <Grid.Column width={15}>
-          <Switch>
-          <Grid.Column width={2}>
-
-          <Route exact path='/account' render={() =>
-            <Account
-              current_user={this.state.current_user}
-              handleDeleteUser={this.handleDeleteUser.bind(this)}
-            />
-          }/>
-        </Grid.Column>
-          <Route exact path='/logout'/>
-        </Switch>
-      </Grid.Column>
-      </Grid>
+            <Switch>
+              <Grid.Column width={2}>
+                <Route exact path='/account' render={() =>
+                  <Account
+                    current_user={this.state.current_user}
+                    handleDeleteUser={this.handleDeleteUser.bind(this)}
+                  />
+                }/>
+              </Grid.Column>
+              <Route exact path='/logout'/>
+            </Switch>
+          </Grid.Column>
+        </Grid>
       </div>
       )
-      }
-      else {
+    } else {
       return (
         <div>
           <NavBar/>
           <LogInSignUp
-            handleSignUp={this.handleSignUp.bind(this)}
             handleLogin={this.handleLogin.bind(this)}
+            handleSignUp={this.handleSignUp.bind(this)}
           />
         </div>
       )

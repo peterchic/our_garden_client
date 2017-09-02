@@ -93,26 +93,14 @@ export function deleteProduct(id){
 }
 
 export function deleteUser(id){
-  console.log('did I delete user?', id);
+  console.log('deleteing this user', id)
   return fetch(`http://localhost:3000/api/v1/users/${id}`, {
-    method: 'DELETE'
+    // mode: 'cors',
+    method: 'DELETE',
+    // headers: {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json',
+    //   'Authorization': localStorage.getItem('token')
+    // },
   }).then( res => res.json() )
 }
-
-// export function deleteWatchlistMovie(movieId, watchlistId) {
-//   console.log('delete movies from list: ', movieId, watchlistId);
-//     return fetch(`http://localhost:3000/api/v1/watchlist_movies/${movieId}`, {
-//      headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//       },
-//       method: 'delete',
-//       body: JSON.stringify({
-//         watchlist_movie: {
-//           movie_id: movieId,
-//           watchlist_id: watchlistId
-//         }
-//       })
-//     })
-//     .then( res => res.json())
-//     // .then(()=> props.props.history.push(`/watchlists`))

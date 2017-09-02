@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 // import ReviewEdit from './ReviewEdit'
-import { Icon, Divider, Grid, Message } from 'semantic-ui-react'
+import { Icon, Divider, Grid, Message, Button } from 'semantic-ui-react'
 
 
 export default function ReviewList (props) {
@@ -23,8 +23,8 @@ export default function ReviewList (props) {
                 <h4>Review: {review.review}</h4>
               </div>
               <div className="text">
-                <Icon name='close' color='red' onClick={() => props.handleDeleteReview(review.id)}/>
-                <Link type='button' to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>Edit</Link>
+                <Button size="mini" color="red" onClick={() => props.handleDeleteReview(review.id)}>Delete</Button>
+                <Link color="white" to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}><Button size="mini" color="gray">Edit</Button></Link>
               </div>
             </div>
           </div>
