@@ -3,14 +3,14 @@ import { Grid, Segment, Input, Button, Header, Form } from 'semantic-ui-react'
 // import { Switch, Route, Link, withRouter } from 'react-router-dom'
 
 export default class UserEdit extends Component{
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
-      name: '',
-      username: '',
-      password: '',
-      bio: '',
-      picture: ''
+      name: this.props.current_user.name,
+      username: this.props.current_user.username,
+      password: this.props.current_user.password,
+      bio: this.props.current_user.bio,
+      picture: this.props.current_user.picture
     }
   }
 
@@ -33,6 +33,7 @@ export default class UserEdit extends Component{
   }
 
   render(){
+    console.log(this.props.current_user);
     if (!this.props.current_user){
       return null
     }

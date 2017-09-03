@@ -31,7 +31,7 @@ export default class NavBar extends React.Component {
               <Menu.Item as='h2' name='farmers' active={activeItem === 'farmers'} onClick={this.handleItemClick}/>
             </Link>
             <Menu.Menu position='right'>
-              {/* {Object.keys(this.props.current_user.current_cart).length === 0 ? null : <span className="cart-count">{Object.keys(this.props.current_user.current_cart).length}</span>} */}
+              {Object.keys(this.props.current_user.current_cart).length === 0 ? null : <span className="cart-count">{Object.keys(this.props.current_user.current_cart).length}</span>}
             <Link to='/cart'>
               <Menu.Item as='h2' name='cart' active={activeItem === 'cart'} onClick={this.handleItemClick}/>
             </Link>

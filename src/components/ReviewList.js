@@ -1,37 +1,48 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 // import ReviewEdit from './ReviewEdit'
-import { Divider, Grid, Button } from 'semantic-ui-react'
+import { Divider, Grid, Button, Image, Icon } from 'semantic-ui-react'
 
 
 export default function ReviewList (props) {
+
+  console.log('review list', props);
+
+  // const user_thumbnail = props.reviews.filter( user => {
+  //   return user.user_thumbnail === props.current_user.picture
+  // })
+
 
   const filtered = props.reviews.filter( review => review.farmer_id === props.farmer.id )
   const  reviews = filtered.map( review => {
     return (
       <Grid>
-        <Grid.Row>
           <Grid.Column width={13}>
-          <div className="ui comments">
-            <div className="comment">
-              <div class="metadata">
+          <div>
+            <Image className="thumbnail" src={review.user_thumbnail}/>
+            <div id="reviews">
+              <div>
                 <h4>Rating: {review.rating}</h4>
-                <div class="date">
-                </div>
               </div>
-              <div className="text">
+              <div>
                 <h4>Review: {review.review}</h4>
               </div>
-              <div className="text">
-                <Button size="mini" color="red" onClick={() => props.handleDeleteReview(review.id)}>Delete</Button>
-                <Link color="white" to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}><Button size="mini" color="gray">Edit</Button></Link>
-              </div>
+            </div>
+            <div id="review-icons">
+              <Icon
+                link name='trash outline'
+                size="large"
+                onClick={() => props.handleDeleteReview(review.id)}
+              />
+              <Link to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>
+                <Icon
+                  name='pencil'
+                  size="large"
+                  color="grey"/>
+              </Link>
             </div>
           </div>
-
-            <Divider></Divider>
-          </Grid.Column>
-        </Grid.Row>
+        </Grid.Column>
       </Grid>
     )
   })

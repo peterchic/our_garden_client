@@ -25,7 +25,7 @@ export default function CartShow (props){
                <Item.Header as='a'>{product}</Item.Header>
                  <Item.Description>
                    {props.current_user.current_cart[product].info.description}
-                   <Button size="tiny" floated="right" color="gray" onClick={() => props.handleDeleteProduct(props.current_user.current_cart[product].pc_id)}>Remove</Button>
+                   <Button size="tiny" floated="right" color="grey" onClick={() => props.handleDeleteProduct(props.current_user.current_cart[product].pc_id)}>Remove</Button>
                  </Item.Description>
                  <Item.Extra>Quantity:{props.current_user.current_cart[product].quantity}</Item.Extra>
                  <Item.Extra>Price: {props.current_user.current_cart[product].price}</Item.Extra>

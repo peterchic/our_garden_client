@@ -73,38 +73,56 @@ class OurGardenContainer extends React.Component {
 
   handleLogin(params){
     fetch("http://localhost:3000/api/v1/login", {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify(params)
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(params)
     })
     .then( res => res.json() )
-    .then( resp => { console.log('Log In Response: ', resp)
-    localStorage.setItem("token", resp.token)
-    this.setState({
-      current_user: resp.user
-    }),this.props.history.push('/farmers')
-  }).catch( e => console.log('error from login', e.response) )
+    .then( res => {
+      if (res.error) {
+        return alert(`Sorry, ${res.error}! Try again.`)
+      }
+      localStorage.setItem("token", res.token)
+      this.setState({
+        current_user: res.user
+      })
+      this.props.history.push('/farmers')
+    }).catch( e => console.log('error from login', e.response) )
   }
 
   handleSignUp(name, username, password, bio, picture){
-    axios.post('http://localhost:3000/api/v1/users', {
-      user: {
-        name: name,
-        username: username,
-        password: password,
-        bio: bio,
-        picture: picture
-      }
-    }).then(res => { console.log('Sign Up Response: ', res)
-    localStorage.setItem("token", res.data.token)
-    this.setState({
-      current_user: res.data.user
-    }),this.props.history.push('/farmers')
+      return fetch('http://localhost:3000/api/v1/users', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user: {
+            name: name,
+            username: username,
+            password: password,
+            bio: bio,
+            picture: picture
+          }
+        })
+      })
+      .then( res => res.json() )
+      .then(res => {
+        if (res) {
+      localStorage.setItem("token", res.data.token)
+      this.setState({
+        current_user: res.data.user
+      })
+    } else {
+      return alert("Fill it in bitch")
+    }
+    this.props.history.push('/farmers')
   }).catch( e => console.log('error from handleSignUp', e.response) )
-  }
+    }
 
   logout(){
     localStorage.clear('token')
@@ -192,7 +210,7 @@ class OurGardenContainer extends React.Component {
       prevState => ({
         reviews: [...prevState.reviews, review]
       })
-    )).catch(e => console.log('errorrrrr', e))
+    )).catch(e => console.log('error with reviews', e))
   }
 
   handleDeleteReview(id){
