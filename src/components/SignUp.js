@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import {withRouter, Link } from "react-router-dom";
 import { Grid, Segment, Input, Button, Header, Image, Form, Message } from 'semantic-ui-react'
 import logo from '../images/plant.svg'

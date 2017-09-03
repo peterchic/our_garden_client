@@ -1,15 +1,15 @@
 import axios from 'axios'
 import React from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
-import { getFarmers, getUsers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken, login, deleteProduct, deleteUser } from '../api/RailsAPI'
+import { getFarmers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken, deleteProduct, deleteUser, editUser } from '../api/RailsAPI'
 
 import LogInSignUp from './LogInSignUp'
 import NavBar from '../components/NavBar'
-import Search from '../components/Search'
 import Account from '../components/Account'
 import CartShow from '../components/CartShow'
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import GardenPage from '../components/GardenPage'
+import UserEdit from '../components/UserEdit'
 
 
 class OurGardenContainer extends React.Component {
@@ -42,10 +42,9 @@ class OurGardenContainer extends React.Component {
       reviews: res
     }))
     getProductCarts()
-      .then(res => {console.log('procart', res)
-        this.setState ({
+      .then(res => this.setState ({
       product_carts: res
-    })})
+    }))
     getFarmerProducts()
       .then(res => this.setState ({
       farmer_products: res
@@ -119,6 +118,16 @@ class OurGardenContainer extends React.Component {
     localStorage.clear('token')
     // .catch( err => console.log(err) )
   }
+
+  handleEditUser(id, name, username, password, bio, picture){
+    editUser(id, name, username, password, bio, picture)
+    .then((data) => this.setState({
+        current_user: data
+      })
+    )
+    this.props.history.push('/account')
+  }
+
 
   //################################ CART ################################
 
@@ -213,6 +222,7 @@ class OurGardenContainer extends React.Component {
   //############################## RENDER ###############################
 
   render() {
+    console.log('container', this.state.current_user);
     if(localStorage.getItem('token') && this.state.current_user !== 0){
       return (
         <div>
@@ -255,10 +265,17 @@ class OurGardenContainer extends React.Component {
           <Grid.Column width={15}>
             <Switch>
               <Grid.Column width={2}>
-                <Route exact path='/account' render={() =>
+                <Route path='/account' render={() =>
                   <Account
                     current_user={this.state.current_user}
+                    editUser={this.handleEditUser.bind(this)}
                     handleDeleteUser={this.handleDeleteUser.bind(this)}
+                  />
+                }/>
+                <Route path='/account/edit' render={() =>
+                  <UserEdit
+                    current_user={this.state.current_user}
+                    editUser={this.handleEditUser.bind(this)}
                   />
                 }/>
               </Grid.Column>

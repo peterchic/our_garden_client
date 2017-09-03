@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Dropdown, Grid } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 
 
 export default class AddToCart extends React.Component {

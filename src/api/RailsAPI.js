@@ -49,7 +49,7 @@ export function createReview(review, rating, user_id, farmer_id){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-      // 'Authorization': sessionStorage.jwt
+      // 'Authorization': sessionStorage.token
     },
     method: 'POST',
     body: JSON.stringify({
@@ -95,12 +95,27 @@ export function deleteProduct(id){
 export function deleteUser(id){
   console.log('deleteing this user', id)
   return fetch(`http://localhost:3000/api/v1/users/${id}`, {
-    // mode: 'cors',
     method: 'DELETE',
-    // headers: {
-    //   'Accept': 'application/json',
-    //   'Content-Type': 'application/json',
-    //   'Authorization': localStorage.getItem('token')
-    // },
   }).then( res => res.json() )
+}
+
+export function editUser(id, name, username, password, bio, picture){
+  console.log('edit this user', id, name, username, password, bio, picture)
+  return fetch(`http://localhost:3000/api/v1/users/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      user: {
+        name: name,
+        username: username,
+        password: password,
+        bio: bio,
+        picture: picture
+      }
+    })
+  })
+  .then(res => res.json() )
 }

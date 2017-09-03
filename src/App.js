@@ -1,5 +1,5 @@
 import React from 'react';
-import isAuthenticated from './components/hocs/isAuthenticated'
+// import isAuthenticated from './components/hocs/isAuthenticated'
 import OurGardenContainer from './containers/OurGardenContainer'
 // import LogInSignUp from './containers/LogInSignUp'
 // import LogInForm from './components/LogInForm'
@@ -8,7 +8,7 @@ import OurGardenContainer from './containers/OurGardenContainer'
 // import NavBar from './components/NavBar'
 import './App.css';
 
-const AuthedOurGardenContainer = isAuthenticated(OurGardenContainer)
+// const AuthedOurGardenContainer = isAuthenticated(OurGardenContainer)
 
 class App extends React.Component {
 
@@ -25,7 +25,6 @@ class App extends React.Component {
       }
     // }
   }
-{/* <AuthedOurGardenContainer /> */}
 
 
 export default App

@@ -1,6 +1,6 @@
 import React from 'react'
 import AddToCart from './AddToCart'
-import { Grid, Card, Image, Divider } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 
 
 export default function ProductShow (props) {

@@ -1,8 +1,6 @@
 import React from 'react'
-import SignUp from '../components/SignUp'
 import LogInForm from '../components/LogInForm'
 import bg from '../images/bg_images/bg_2.jpg'
-import { Image } from 'semantic-ui-react'
 
 export default function LogInSignUp (props){
 
@@ -11,7 +9,7 @@ export default function LogInSignUp (props){
     return(
       <div className='landing-div'>
         {/* <Image className="landing-image" src={bg} /> */}
-        <img className='landing-image' src={bg}/>
+        <img alt="fresh produce and bread background" className='landing-image' src={bg}/>
         <div id='log-in-signup'>
 
           <LogInForm handleLogin={props.handleLogin} handleSignUp={props.handleSignUp} />

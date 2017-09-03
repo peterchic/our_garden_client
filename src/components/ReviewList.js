@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 // import ReviewEdit from './ReviewEdit'
-import { Icon, Divider, Grid, Message, Button } from 'semantic-ui-react'
+import { Divider, Grid, Button } from 'semantic-ui-react'
 
 
 export default function ReviewList (props) {

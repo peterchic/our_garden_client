@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Item, Icon, Button, Modal, Grid } from 'semantic-ui-react'
+import { Item, Icon, Button, Modal, Grid } from 'semantic-ui-react'
 
 export default function CartShow (props){
   console.log('cartshow', props)
@@ -25,7 +25,7 @@ export default function CartShow (props){
                <Item.Header as='a'>{product}</Item.Header>
                  <Item.Description>
                    {props.current_user.current_cart[product].info.description}
-                   <Icon name='close' color='red' onClick={() => props.handleDeleteProduct(props.current_user.current_cart[product].pc_id)}/>
+                   <Button size="tiny" floated="right" color="gray" onClick={() => props.handleDeleteProduct(props.current_user.current_cart[product].pc_id)}>Remove</Button>
                  </Item.Description>
                  <Item.Extra>Quantity:{props.current_user.current_cart[product].quantity}</Item.Extra>
                  <Item.Extra>Price: {props.current_user.current_cart[product].price}</Item.Extra>
@@ -55,7 +55,7 @@ export default function CartShow (props){
               <Modal
                 trigger={<Button floated='right' color='orange'>Checkout!</Button>}
                 header='Ready to Checkout...'
-                content={`Clicking "Yes" will bring you to a separate checkout page and you\'re card will be charged $${calcTotal(props.current_user.current_cart)}`}
+                content={`Clicking "Yes" will bring you to a separate checkout page and your card will be charged $${calcTotal(props.current_user.current_cart)}`}
                 actions={[
                   { key: 'no', content: 'Go Back!', color: 'red', triggerClose: true },
                   { key: 'yes', content: 'Yes!', color: 'green', triggerClose: true },

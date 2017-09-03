@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 // import { Switch, Route, Link, withRouter } from 'react-router-dom'
 
 export default class ReviewEdit extends Component{
