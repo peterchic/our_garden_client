@@ -1,5 +1,5 @@
 import React from 'react'
-import { Item, Icon, Button, Modal, Grid } from 'semantic-ui-react'
+import { Item, Button, Modal, Grid } from 'semantic-ui-react'
 
 export default function CartShow (props){
   console.log('cartshow', props)
@@ -25,8 +25,8 @@ export default function CartShow (props){
                <Item.Header as='a'>{product}</Item.Header>
                  <Item.Description>
                    {props.current_user.current_cart[product].info.description}
-                   <Button size="tiny" floated="right" color="grey" onClick={() => props.handleDeleteProduct(props.current_user.current_cart[product].pc_id)}>Remove</Button>
                  </Item.Description>
+                 <Button id="cart-button" size="tiny" color="grey" onClick={() => props.handleDeleteProduct(props.current_user.current_cart[product].pc_id)}>Remove</Button>
                  <Item.Extra>Quantity:{props.current_user.current_cart[product].quantity}</Item.Extra>
                  <Item.Extra>Price: {props.current_user.current_cart[product].price}</Item.Extra>
 
@@ -41,9 +41,11 @@ export default function CartShow (props){
       <div>
         <Grid>
           <Grid.Row>
-            <Grid.Column width={3}>
-            </Grid.Column>
-            <Grid.Column width={10} id="cart-border">
+
+
+        <Grid.Column width={10} id="cart-border">
+          <h1 className="center">Your Cart</h1>
+
         <ol>
           {user}
         </ol>
@@ -62,12 +64,13 @@ export default function CartShow (props){
                 ]}
               />
             </div>
-            :  <h1> Basket is empty. Grab some Produce and head back here to check out!</h1>}
+            :  <h2 className='center'> Cart is empty. Grab some Produce and head back here to check out!</h2>}
           </h2>
         </div>
-      </Grid.Column>
-    </Grid.Row>
-  </Grid>
+
+  </Grid.Column>
+</Grid.Row>
+</Grid>
       </div>
     )
   }

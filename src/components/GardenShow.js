@@ -2,7 +2,7 @@ import React from 'react'
 import ProductShow from './ProductShow'
 import Reviews from './Reviews'
 import ReviewList from './ReviewList'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import ReviewEdit from './ReviewEdit'
 import { Grid, Divider, Button, Modal } from 'semantic-ui-react'
 //Garden Page renders me
@@ -26,6 +26,12 @@ export default function GardenShow (props) {
 
   let name = props.farmer.name.split(' ')
   let firstName = name[0]
+  let lastName = name[1]
+
+  let firstNameDown = name[0].toLowerCase()
+  let lastNameDown = name[1].toLowerCase()
+
+  let email = `https://mail.google.com/mail/?view=cm&fs=1&to=${firstNameDown}.${lastNameDown}@example.com&su=Our_Garden_Question&body=Hello!`
 
   return (
     <span>
@@ -34,7 +40,7 @@ export default function GardenShow (props) {
           <Grid.Column width={3} id="farmer-image">
             <img alt={props.farmer.name} className='rcorners' src={props.farmer.picture}/>
           </Grid.Column>
-          <Grid.Column width={13}>
+          <Grid.Column width={10}>
             <h1>{props.farmer.name}</h1>
             <h1>{props.farmer.bio}</h1>
 
@@ -43,9 +49,10 @@ export default function GardenShow (props) {
               header={`${firstName} would love to hear from you! Select from the options below:`}
               size="small"
               actions={[
-                { key: 'no', content: 'Text!', color: 'blue', triggerClose: true },
-                { key: 'yes', content: 'E-Mail!', color: 'green', triggerClose: true },
+                { key: 'no', content: 'Text', color: 'blue', triggerClose: true },
+                <Link to={email}><Button color='green'>E-mail</Button></Link>
               ]}
+
             />
 
           </Grid.Column>
@@ -74,7 +81,6 @@ export default function GardenShow (props) {
         />
       </div>
       <div>
-        <ul>
           <Route path="/farmers/:id/reviews/:id/edit" render={ ({match}) => {
             const review = props.reviews.find(review => review.id === parseInt(match.params.id, 10))
             return (
@@ -86,7 +92,6 @@ export default function GardenShow (props) {
             )
           }}
           />
-        </ul>
       </div>
     </span>
   )

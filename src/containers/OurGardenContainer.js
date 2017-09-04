@@ -94,35 +94,21 @@ class OurGardenContainer extends React.Component {
   }
 
   handleSignUp(name, username, password, bio, picture){
-      return fetch('http://localhost:3000/api/v1/users', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user: {
-            name: name,
-            username: username,
-            password: password,
-            bio: bio,
-            picture: picture
-          }
-        })
-      })
-      .then( res => res.json() )
-      .then(res => {
-        if (res) {
-      localStorage.setItem("token", res.data.token)
-      this.setState({
-        current_user: res.data.user
-      })
-    } else {
-      return alert("Fill it in bitch")
-    }
-    this.props.history.push('/farmers')
-  }).catch( e => console.log('error from handleSignUp', e.response) )
-    }
+    axios.post('http://localhost:3000/api/v1/users', {
+      user: {
+        name: name,
+        username: username,
+        password: password,
+        bio: bio,
+        picture: picture
+      }
+    }).then(res => { console.log('Sign Up Response: ', res)
+    localStorage.setItem("token", res.data.token)
+    this.setState({
+      current_user: res.data.user
+    }),this.props.history.push('/farmers')
+  }).catch( e => alert("Missing information. Please fill in all fields below.") )
+  }
 
   logout(){
     localStorage.clear('token')
@@ -245,63 +231,56 @@ class OurGardenContainer extends React.Component {
       return (
         <div>
           <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
-        <div>
-          <ul>
-            <h3>Hey, {this.state.current_user.username}!</h3>
-          </ul>
-        </div>
 
-        <Route path='/farmers' render={() =>
-          <GardenPage
-            users={this.state.users}
-            farmers={this.state.farmers}
-            reviews={this.state.reviews}
-            products={this.state.products}
-            searchTerm={this.state.searchTerm}
-            current_user={this.state.current_user}
-            product_carts={this.state.product_carts}
-            handleReview={this.handleReview.bind(this)}
-            farmer_products={this.state.farmer_products}
-            handleAddToCart={this.handleAddToCart.bind(this)}
-            handleDeleteReview={this.handleDeleteReview.bind(this)}
-            handleUpdateReview={this.handleUpdateReview.bind(this)}
-          />
-        }/>
-
-        <Grid>
-          <Grid.Column width={1}>
-          </Grid.Column>
-          <Route exact path='/cart' render={() =>
-            <CartShow
+          <Route path='/farmers' render={() =>
+            <GardenPage
+              users={this.state.users}
               farmers={this.state.farmers}
+              reviews={this.state.reviews}
+              products={this.state.products}
+              searchTerm={this.state.searchTerm}
               current_user={this.state.current_user}
               product_carts={this.state.product_carts}
+              handleReview={this.handleReview.bind(this)}
               farmer_products={this.state.farmer_products}
-              handleDeleteProduct={this.handleDeleteProduct.bind(this)}
+              handleAddToCart={this.handleAddToCart.bind(this)}
+              handleDeleteReview={this.handleDeleteReview.bind(this)}
+              handleUpdateReview={this.handleUpdateReview.bind(this)}
             />
           }/>
-          <Grid.Column width={15}>
-            <Switch>
-              <Grid.Column width={2}>
-                <Route path='/account' render={() =>
-                  <Account
-                    current_user={this.state.current_user}
-                    editUser={this.handleEditUser.bind(this)}
-                    handleDeleteUser={this.handleDeleteUser.bind(this)}
-                  />
-                }/>
-                <Route path='/account/edit' render={() =>
-                  <UserEdit
-                    current_user={this.state.current_user}
-                    editUser={this.handleEditUser.bind(this)}
-                  />
-                }/>
-              </Grid.Column>
-              <Route exact path='/logout'/>
-            </Switch>
-          </Grid.Column>
-        </Grid>
-      </div>
+
+          <Grid>
+            <Grid.Column width={16}>
+            <Route exact path='/cart' render={() =>
+              <CartShow
+                farmers={this.state.farmers}
+                current_user={this.state.current_user}
+                product_carts={this.state.product_carts}
+                farmer_products={this.state.farmer_products}
+                handleDeleteProduct={this.handleDeleteProduct.bind(this)}
+              />
+            }/>
+              <Switch>
+                <Grid.Column width={2}>
+                  <Route path='/account' render={() =>
+                    <Account
+                      current_user={this.state.current_user}
+                      editUser={this.handleEditUser.bind(this)}
+                      handleDeleteUser={this.handleDeleteUser.bind(this)}
+                    />
+                  }/>
+                  <Route path='/account/edit' render={() =>
+                    <UserEdit
+                      current_user={this.state.current_user}
+                      editUser={this.handleEditUser.bind(this)}
+                    />
+                  }/>
+                </Grid.Column>
+                <Route exact path='/logout'/>
+              </Switch>
+            </Grid.Column>
+          </Grid>
+        </div>
       )
     } else {
       return (

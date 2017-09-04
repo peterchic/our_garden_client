@@ -58,7 +58,7 @@ export default class AddToCart extends React.Component {
               color='orange'
               size='medium'
               type="submit"
-              value="Add to Basket">Add!
+              value="Add to Cart">Add!
             </Button>
           </Form.Group>
         </Form>

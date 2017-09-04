@@ -15,6 +15,7 @@ console.log('account', props);
             <Grid.Column width={3}>
             </Grid.Column>
             <Grid.Column width={10}>
+              <h3>Hey, {props.current_user.username}!</h3>
               {/* <div className="thumbnail"> */}
                 <img className="account-image" src={props.current_user.picture}/>
               {/* </div> */}

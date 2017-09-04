@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Grid, Segment, Input, Button, Header, Form } from 'semantic-ui-react'
-// import { Switch, Route, Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-export default class UserEdit extends Component{
+class UserEdit extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -32,6 +32,11 @@ export default class UserEdit extends Component{
     )
   }
 
+  handleCancel(e){
+    e.preventDefault()
+    this.props.history.push(`/account`)
+  }
+
   render(){
     console.log(this.props.current_user);
     if (!this.props.current_user){
@@ -41,9 +46,9 @@ export default class UserEdit extends Component{
     return (
       <Grid centered verticalAlign="middle">
         <Grid.Column textAlign="center" width={7}>
-          <Header id="header">
+          <Header>
             {/* <Image src={logo} /> */}
-            Edit Your Account!
+            <h2>Edit Your Account!</h2>
           </Header>
           <Form size="large" onSubmit={ e => this.handleSubmit(e)}>
             <Segment stacked>
@@ -63,11 +68,13 @@ export default class UserEdit extends Component{
                 <Input fluid icon='image' iconPosition='left' placeholder='Change image (url link only please)' type="textarea" value={this.state.picture} onChange={ e => this.handleChange('picture', e.target.value)} />
               </Form.Field>
               <Button fluid color="olive" size="large">Submit Changes</Button>
+              <Button fluid color="grey" size="large" id="account-button" onClick={this.handleCancel.bind(this)}>Cancel</Button>
             </Segment>
           </Form>
         </Grid.Column>
       </Grid>
     )
   }
-
 }
+
+export default withRouter(UserEdit)

@@ -1,21 +1,10 @@
-.App {
-  text-align: center;
+html {
+  margin: 80px 0 0 0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
+ol {
+  margin: 0;
+  padding: 0px;
 }
 
 .cart-count {
@@ -29,7 +18,20 @@
   line-height: 9px;
   background: #FF3333;
   color: white;
-  /*z-index:3*/
+}
+
+#cart-border {
+  border: 1px solid white;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 10px 30px #d9d9d9;
+}
+
+#cart-button {
+  position: relative;
+  float: right;
+  z-index: 2;
 }
 
 .row.garden-page{
@@ -72,6 +74,10 @@
   float: left;
 }
 
+.center {
+  text-align: center;
+}
+
 .ul{
 list-style-type: none;
 }
@@ -91,10 +97,6 @@ list-style-type: none;
   padding-top: 30px;
 }
 
-html {
-  margin: 80px 0 0 0;
-}
-
 #logged-out{
   margin: -80px 0 0 0;
 }
@@ -105,19 +107,18 @@ html {
 }
 
 #subline-bg {
-  background-color: rgba(247, 247, 248, 0.9);
+  background-color: rgb(140, 80, 0);
   text-align: center;
   margin: 40px auto;
-  max-width: 850px;
+  max-width: 100%;
   color: white;
-  border-radius: 8px;
   padding: 10px;
 }
 
 #intro {
   text-align: center;
-  max-width: 850px;
-  color: #999b9c;
+  max-width: auto;
+  color: white;
   font-size: 50px;
   font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
   font-weight: 700;
@@ -126,25 +127,18 @@ html {
 }
 
 .landing-image {
-    background: no-repeat center center fixed;
-    background-size: cover;
-    opacity: .4;
-    display: block;
-    margin-top: -80px;
-    position: fixed;
-    max-width: 100%;
-    z-index: -1;
-}
-
-.landing-div {
-  /*position: fixed;*/
-  /*z-index: -2;*/
+  opacity: .5;
+  margin-top: -80px;
+  background: no-repeat center fixed;
+  background-size: cover;
+  position: fixed;
+  z-index: -2;
 }
 
 #subline{
   text-align: center;
   max-width: 850px;
-  color: #999b9c;
+  color: white;
   font-size: 30px;
   font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
   font-weight: 700;
@@ -157,19 +151,15 @@ html {
   font-size: 30px;
 }
 
-#cart-border {
-  border: 1px solid white;
-  margin: auto;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 10px 30px #d9d9d9;
-}
-
 .account-image {
   object-fit: cover;
   border-radius: 50%;
   width: 150px;
   height: 150px;
+}
+
+#account-button {
+  margin-top: 14px;
 }
 
 .thumbnail {
@@ -192,4 +182,13 @@ html {
   position: absolute;
   top: 14px;
   right: 10px;
+}
+
+.review-edit {
+  text-align: center;
+}
+
+#review-two-buttons {
+  margin: 0 7px;
+  display: inline-flex;
 }

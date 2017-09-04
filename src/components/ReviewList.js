@@ -8,11 +8,6 @@ export default function ReviewList (props) {
 
   console.log('review list', props);
 
-  // const user_thumbnail = props.reviews.filter( user => {
-  //   return user.user_thumbnail === props.current_user.picture
-  // })
-
-
   const filtered = props.reviews.filter( review => review.farmer_id === props.farmer.id )
   const  reviews = filtered.map( review => {
     return (
@@ -28,7 +23,7 @@ export default function ReviewList (props) {
                 <h4>Review: {review.review}</h4>
               </div>
             </div>
-            <div id="review-icons">
+            {props.current_user.id === review.user_id ? <div id="review-icons">
               <Icon
                 link name='trash outline'
                 size="large"
@@ -40,7 +35,20 @@ export default function ReviewList (props) {
                   size="large"
                   color="grey"/>
               </Link>
-            </div>
+            </div> : null}
+            {/* <div id="review-icons">
+              <Icon
+                link name='trash outline'
+                size="large"
+                onClick={() => props.handleDeleteReview(review.id)}
+              />
+              <Link to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>
+                <Icon
+                  name='pencil'
+                  size="large"
+                  color="grey"/>
+              </Link>
+            </div> */}
           </div>
         </Grid.Column>
       </Grid>

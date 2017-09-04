@@ -20,9 +20,7 @@ export default function GardenPage(props){
         <Grid celled='internally'>
           <Grid.Column width={3}>
             <div>
-              <ul>
-                <h3>Your Local Gardeners:</h3>
-              </ul>
+              <h3>Your Local Gardeners:</h3>
               <ul>
                 { farmerList }
               </ul>

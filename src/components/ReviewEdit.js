@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
-// import { Switch, Route, Link, withRouter } from 'react-router-dom'
+import { Button, Grid, Form, Input } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
 
-export default class ReviewEdit extends Component{
+class ReviewEdit extends Component{
   constructor(){
     super()
     this.state = {
@@ -11,27 +11,36 @@ export default class ReviewEdit extends Component{
     }
   }
 
-    handleReviewInputChange(e){
-      const review = e.target.value
-      this.setState((state, props) => {
-        return {
-          review: review
-        }
-      })
-    }
-    handleRatingInputChange(e){
-      const rating = e.target.value
-      this.setState((state, props) => {
-        return {
-          rating: rating
-        }
-      })
-    }
+  handleReviewInputChange(e){
+    const review = e.target.value
+    this.setState((state, props) => {
+      return {
+        review: review
+      }
+    })
+  }
 
-    handleSubmit(e){
-      e.preventDefault()
-      this.props.handleUpdateReview(this.props.reviews.id, this.state.review, this.state.rating)
-    }
+  handleRatingInputChange(e){
+    const rating = e.target.value
+    this.setState((state, props) => {
+      return {
+        rating: rating
+      }
+    })
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+    this.props.handleUpdateReview(
+      this.props.reviews.id,
+      this.state.review,
+      this.state.rating)
+  }
+
+  handleCancel(e){
+    e.preventDefault()
+    this.props.history.push(`/farmers/${this.props.farmer.id}`)
+  }
 
   render(){
     if (!this.props.reviews) {
@@ -39,19 +48,31 @@ export default class ReviewEdit extends Component{
     }
     console.log('reviewEdited', this.props)
     return(
-      <div>
+      <Grid>
+
+      <Grid.Column width={13}>
+
+      <div className="review-edit">
         <h2>Edit your Review</h2>
-        <form>
-          <div>
-            <label>Review:</label>
-            <input type='text' value={this.state.review} placeholder={this.props.reviews.review} onChange={this.handleReviewInputChange.bind(this)} />
-            <label>Rating:</label>
-            <input type="number" min="1" max="5" value={this.state.rating} placeholder={this.props.reviews.rating} onChange={this.handleRatingInputChange.bind(this)} />
-            <Button color='green' size="tiny" type='submit' onClick={this.handleSubmit.bind(this)}>Save</Button>
+        <Form>
+          <Form.Group widths='equal'>
+            <Form.Field control={Input} label='Review' type='text' value={this.state.review} placeholder={this.props.reviews.review} onChange={this.handleReviewInputChange.bind(this)}/>
+            <Form.Field control={Input} type="number" max={5} label='Rating' value={this.state.rating} placeholder={this.props.reviews.rating} onChange={this.handleRatingInputChange.bind(this)}/>
+          </Form.Group>
+          <div id="review-two-buttons">
+            <Form.Field id="review-two-buttons" color="grey" control={Button} content='Cancel' onClick={this.handleCancel.bind(this)}
+            />
+            <Form.Field id="review-two-buttons" color="orange" control={Button} content='Save' onClick={this.handleSubmit.bind(this)}
+            />
           </div>
-        </form>
+        </Form>
+
   </div>
+</Grid.Column>
+</Grid>
     )
   }
 
 }
+
+export default withRouter(ReviewEdit)
