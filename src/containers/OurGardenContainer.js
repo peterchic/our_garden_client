@@ -12,6 +12,7 @@ import GardenPage from '../components/GardenPage'
 import UserEdit from '../components/UserEdit'
 
 const baseUrl = "https://git.heroku.com/our-garden-api.git"
+// const baseUrl = "http://localhost:3000"
 
 class OurGardenContainer extends React.Component {
   constructor(){
