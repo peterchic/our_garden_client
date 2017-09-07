@@ -36,19 +36,6 @@ export default function ReviewList (props) {
                   color="grey"/>
               </Link>
             </div> : null}
-            {/* <div id="review-icons">
-              <Icon
-                link name='trash outline'
-                size="large"
-                onClick={() => props.handleDeleteReview(review.id)}
-              />
-              <Link to={`/farmers/${props.farmer.id}/reviews/${review.id}/edit`}>
-                <Icon
-                  name='pencil'
-                  size="large"
-                  color="grey"/>
-              </Link>
-            </div> */}
           </div>
         </Grid.Column>
       </Grid>

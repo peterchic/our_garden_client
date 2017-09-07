@@ -8,19 +8,14 @@ export default function LogInSignUp (props){
       <div className='landing-div'>
         <img alt="fresh produce and bread background" className='landing-image' src={bg}/>
         <div id='log-in-signup'>
-
           <LogInForm handleLogin={props.handleLogin} handleSignUp={props.handleSignUp} />
           <div id="subline-bg">
             <div id='intro'>
               <span>An online marketplace<br/>
               that connects you to your neighbors.</span>
             </div>
-            {/* <div id="subline">
-              Search, buy or sell produce from your own garden to all the people around you!
-            </div> */}
           </div>
         </div>
       </div>
     )
-
 }

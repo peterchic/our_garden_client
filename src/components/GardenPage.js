@@ -6,7 +6,6 @@ import { Grid } from 'semantic-ui-react'
 
 import UserEdit from './UserEdit'
 
-
 export default function GardenPage(props){
   console.log('GP', props);
   const farmerList = props.farmers.map((farmer,i) =>

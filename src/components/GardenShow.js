@@ -31,7 +31,7 @@ export default function GardenShow (props) {
   let firstNameDown = name[0].toLowerCase()
   let lastNameDown = name[1].toLowerCase()
 
-  let email = `https://mail.google.com/mail/?view=cm&fs=1&to=${firstNameDown}.${lastNameDown}@example.com&su=Our_Garden_Question&body=Hello!`
+  let email = `https://mail.google.com/mail/?view=cm&fs=1&to=${firstNameDown}.${lastNameDown}@gmail.com&su=Our_Garden_Question&body=Hello!`
 
   return (
     <span>
@@ -43,7 +43,6 @@ export default function GardenShow (props) {
           <Grid.Column width={10}>
             <h1>{props.farmer.name}</h1>
             <h1>{props.farmer.bio}</h1>
-
             <Modal
               trigger={<Button color="orange">Contact {firstName}</Button>}
               header={`${firstName} would love to hear from you! Select from the options below:`}
@@ -52,9 +51,7 @@ export default function GardenShow (props) {
                 { key: 'no', content: 'Text', color: 'blue', triggerClose: true },
                 <Link to={email}><Button color='green'>E-mail</Button></Link>
               ]}
-
             />
-
           </Grid.Column>
         </Grid.Row>
       </Grid>
