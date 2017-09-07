@@ -24,6 +24,8 @@ class OurGardenContainer extends React.Component {
     }
   }
 
+  baseUrl = "https://git.heroku.com/our-garden-api.git"
+
   componentDidMount() {
     if(localStorage.getItem('token') && !this.state.current_user.id){
       decodeToken({token: localStorage.token})
@@ -72,7 +74,7 @@ class OurGardenContainer extends React.Component {
   //######################### LOG IN/OUT DELETE USER ###############################
 
   handleLogin(params){
-    fetch("http://localhost:3000/api/v1/login", {
+    fetch(`${baseUrl}/api/v1/login`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -94,7 +96,7 @@ class OurGardenContainer extends React.Component {
   }
 
   handleSignUp(name, username, password, bio, picture){
-    axios.post('http://localhost:3000/api/v1/users', {
+    axios.post(`${baseUrl}/api/v1/users`, {
       user: {
         name: name,
         username: username,
@@ -137,7 +139,7 @@ class OurGardenContainer extends React.Component {
 
   handleAddToCart(quantity, farmer_id, cart_id, product_id){
     // console.log('addCart to Rails', quantity, farmer_id, cart_id, product_id)
-    axios.post("http://localhost:3000/api/v1/product_carts", {
+    axios.post(`${baseUrl}/api/v1/product_carts`, {
       product_cart: {
         quantity: quantity,
         farmer_id: farmer_id,
