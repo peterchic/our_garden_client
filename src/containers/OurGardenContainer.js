@@ -11,6 +11,7 @@ import { Grid } from 'semantic-ui-react'
 import GardenPage from '../components/GardenPage'
 import UserEdit from '../components/UserEdit'
 
+const baseUrl = "https://git.heroku.com/our-garden-api.git"
 
 class OurGardenContainer extends React.Component {
   constructor(){
@@ -24,7 +25,6 @@ class OurGardenContainer extends React.Component {
     }
   }
 
-  const baseUrl = "https://git.heroku.com/our-garden-api.git"
 
   componentDidMount() {
     if(localStorage.getItem('token') && !this.state.current_user.id){
