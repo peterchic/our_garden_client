@@ -24,7 +24,7 @@ class OurGardenContainer extends React.Component {
     }
   }
 
-  baseUrl = "https://git.heroku.com/our-garden-api.git"
+  const baseUrl = "https://git.heroku.com/our-garden-api.git"
 
   componentDidMount() {
     if(localStorage.getItem('token') && !this.state.current_user.id){

@@ -1,6 +1,6 @@
 // import axios from 'axios'
 
-baseUrl = "https://git.heroku.com/our-garden-api.git"
+const baseUrl = "https://git.heroku.com/our-garden-api.git"
 
 export function getFarmers(){
   return fetch(`${baseUrl}/api/v1/farmers`)
