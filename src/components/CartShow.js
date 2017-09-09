@@ -2,8 +2,6 @@ import React from 'react'
 import { Item, Button, Modal, Grid } from 'semantic-ui-react'
 
 export default function CartShow (props){
-  console.log('cartshow', props)
-
   function calcTotal(cart){
     var keys = Object.keys(cart)
     var total = 0
@@ -37,15 +35,11 @@ export default function CartShow (props){
      )
    }
     return (
-
       <div>
         <Grid>
           <Grid.Row>
-
-
         <Grid.Column width={10} id="cart-border">
           <h1 className="center">Your Cart</h1>
-
         <ol>
           {user}
         </ol>
@@ -67,7 +61,6 @@ export default function CartShow (props){
             :  <h2 className='center'> Cart is empty. Grab some Produce and head back here to check out!</h2>}
           </h2>
         </div>
-
   </Grid.Column>
 </Grid.Row>
 </Grid>
@@ -75,12 +68,12 @@ export default function CartShow (props){
     )
   }
   else {
-   console.log('cart else');
    return (
      <div>
        <h2>
          Hey! Grab some fresh produce and head back here to checkout!
        </h2>
      </div>
-   )}
+   )
+  }
 }

@@ -11,8 +11,8 @@ import { Grid } from 'semantic-ui-react'
 import GardenPage from '../components/GardenPage'
 import UserEdit from '../components/UserEdit'
 
-const baseUrl = "https://git.heroku.com/our-garden-api.git"
-// const baseUrl = "http://localhost:3000"
+// const baseUrl = "https://git.heroku.com/our-garden-api.git"
+const baseUrl = "http://localhost:3000"
 
 class OurGardenContainer extends React.Component {
   constructor(){
@@ -25,7 +25,6 @@ class OurGardenContainer extends React.Component {
       product_carts: []
     }
   }
-
 
   componentDidMount() {
     if(localStorage.getItem('token') && !this.state.current_user.id){
@@ -109,7 +108,8 @@ class OurGardenContainer extends React.Component {
     localStorage.setItem("token", res.data.token)
     this.setState({
       current_user: res.data.user
-    }),this.props.history.push('/farmers')
+    })
+    this.props.history.push('/farmers')
   }).catch( e => alert("Missing information. Please fill in all fields below.") )
   }
 
@@ -139,7 +139,6 @@ class OurGardenContainer extends React.Component {
   //################################ CART ################################
 
   handleAddToCart(quantity, farmer_id, cart_id, product_id){
-    // console.log('addCart to Rails', quantity, farmer_id, cart_id, product_id)
     axios.post(`${baseUrl}/api/v1/product_carts`, {
       product_cart: {
         quantity: quantity,
@@ -229,7 +228,6 @@ class OurGardenContainer extends React.Component {
   //############################## RENDER ###############################
 
   render() {
-    console.log('container', this.state.current_user);
     if(localStorage.getItem('token') && this.state.current_user !== 0){
       return (
         <div>
@@ -251,7 +249,6 @@ class OurGardenContainer extends React.Component {
               handleUpdateReview={this.handleUpdateReview.bind(this)}
             />
           }/>
-
           <Grid>
             <Grid.Column width={16}>
             <Route exact path='/cart' render={() =>

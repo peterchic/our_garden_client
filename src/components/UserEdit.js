@@ -38,11 +38,9 @@ class UserEdit extends Component{
   }
 
   render(){
-    console.log(this.props.current_user);
     if (!this.props.current_user){
       return null
     }
-    console.log('name', this.state.name);
     return (
       <Grid centered verticalAlign="middle">
         <Grid.Column textAlign="center" width={7}>

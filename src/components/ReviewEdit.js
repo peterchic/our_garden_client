@@ -46,12 +46,9 @@ class ReviewEdit extends Component{
     if (!this.props.reviews) {
       return null
     }
-    console.log('reviewEdited', this.props)
     return(
       <Grid>
-
       <Grid.Column width={13}>
-
       <div className="review-edit">
         <h2>Edit your Review</h2>
         <Form>
@@ -66,13 +63,11 @@ class ReviewEdit extends Component{
             />
           </div>
         </Form>
-
   </div>
 </Grid.Column>
 </Grid>
     )
   }
-
 }
 
 export default withRouter(ReviewEdit)

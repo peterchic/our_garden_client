@@ -1,13 +1,10 @@
 import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
-
 import GardenShow from './GardenShow'
 import { Grid } from 'semantic-ui-react'
-
 import UserEdit from './UserEdit'
 
 export default function GardenPage(props){
-  console.log('GP', props);
   const farmerList = props.farmers.map((farmer,i) =>
     <div key={i}>
       <Link to={`/farmers/${farmer.id}`}><li className='ul'><h3>{farmer.name}</h3></li></Link>
@@ -46,7 +43,6 @@ export default function GardenPage(props){
                   }}
                 />
                 <Route path="/account/edit" render= {() => {
-                  console.log("Hello")
                   return (
                     <UserEdit
                       user={props.current_user}

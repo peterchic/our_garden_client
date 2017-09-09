@@ -26,7 +26,6 @@ export default function GardenShow (props) {
 
   let name = props.farmer.name.split(' ')
   let firstName = name[0]
-  let lastName = name[1]
 
   let firstNameDown = name[0].toLowerCase()
   let lastNameDown = name[1].toLowerCase()

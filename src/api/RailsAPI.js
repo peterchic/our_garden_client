@@ -1,7 +1,7 @@
 // import axios from 'axios'
 
-const baseUrl = "https://git.heroku.com/our-garden-api.git"
-// const baseUrl = "http://localhost:3000"
+// const baseUrl = "https://git.heroku.com/our-garden-api.git"
+const baseUrl = "http://localhost:3000"
 
 export function getFarmers(){
   return fetch(`${baseUrl}/api/v1/farmers`)
@@ -68,7 +68,7 @@ export function createReview(review, rating, user_id, farmer_id){
 }
 
 export function updateReview(id, review, rating) {
-  console.log('update review going to rails', id, review, rating)
+  // console.log('update review going to rails', id, review, rating)
   return fetch(`${baseUrl}/api/v1/reviews/${id}`, {
       headers: {
         'Accept': 'application/json',
@@ -96,14 +96,14 @@ export function deleteProduct(id){
 }
 
 export function deleteUser(id){
-  console.log('deleteing this user', id)
+  // console.log('deleteing this user', id)
   return fetch(`${baseUrl}/api/v1/users/${id}`, {
     method: 'DELETE',
   }).then( res => res.json() )
 }
 
 export function editUser(id, name, username, password, bio, picture){
-  console.log('edit this user', id, name, username, password, bio, picture)
+  // console.log('edit this user', id, name, username, password, bio, picture)
   return fetch(`${baseUrl}/api/v1/users/${id}`, {
     method: 'PATCH',
     headers: {
