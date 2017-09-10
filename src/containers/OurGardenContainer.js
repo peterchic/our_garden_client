@@ -180,14 +180,8 @@ class OurGardenContainer extends React.Component {
           next_cart[product] = current_cart[product]
         }
       }
-      return {
-        ...prevState,
-        current_user: {
-          ...prevState.current_user,
-          current_cart: next_cart
-        }
-      }
-    }))
+      return { ...prevState, current_user: {...prevState.current_user, current_cart: next_cart} }
+    }) )
   }
 
 //############################### REVIEWS ##################################
