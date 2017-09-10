@@ -1,7 +1,7 @@
 // import axios from 'axios'
 
-const baseUrl = "https://our-garden-api.herokuapp.com"
-// const baseUrl = "http://localhost:3000"
+// const baseUrl = "https://our-garden-api.herokuapp.com"
+const baseUrl = "http://localhost:3000"
 
 export function getFarmers(){
   return fetch(`${baseUrl}/api/v1/farmers`)

@@ -11,8 +11,8 @@ import { Grid } from 'semantic-ui-react'
 import GardenPage from '../components/GardenPage'
 import UserEdit from '../components/UserEdit'
 
-const baseUrl = "https://our-garden-api.herokuapp.com"
-// const baseUrl = "http://localhost:3000"
+// const baseUrl = "https://our-garden-api.herokuapp.com"
+const baseUrl = "http://localhost:3000"
 
 class OurGardenContainer extends React.Component {
   constructor(){
@@ -26,6 +26,10 @@ class OurGardenContainer extends React.Component {
     }
   }
 
+  // makeFetches = (res) => {
+  //   getFarmers(res).then( data => this.setState({farmers: data}))
+  // }
+
   componentDidMount() {
     if(localStorage.getItem('token') && !this.state.current_user.id){
       decodeToken({token: localStorage.token})
@@ -36,21 +40,25 @@ class OurGardenContainer extends React.Component {
       })
     }
     getFarmers()
-      .then( res => this.setState({
+      .then( res => {console.log('res from farmers', res)
+        this.setState({
       farmers: res
-    }))
+    })})
     getReviews()
-      .then(res => this.setState ({
+      .then(res => {console.log('res from reviews', res)
+        this.setState ({
       reviews: res
-    }))
+    })})
     getProductCarts()
-      .then(res => this.setState ({
+      .then(res => {console.log('res from prodCarts', res)
+        this.setState ({
       product_carts: res
-    }))
+    })})
     getFarmerProducts()
-      .then(res => this.setState ({
+      .then(res => {console.log('res from products', res)
+        this.setState ({
       farmer_products: res
-    }))
+    })})
   }
 
   componentWillReceiveProps(nextProps){
@@ -115,7 +123,15 @@ class OurGardenContainer extends React.Component {
 
   logout(){
     localStorage.clear('token')
+    if(!localStorage.getItem('token')){
+      this.setState({ current_user: this.state.current_user})
+    }
+    console.log('container state', this.state)
   }
+
+
+
+
 
   handleDeleteUser(id){
     deleteUser(id)

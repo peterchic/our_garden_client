@@ -4,6 +4,7 @@ import { Card, Image } from 'semantic-ui-react'
 
 
 export default function ProductShow (props) {
+  console.log('product show', props);
   const cart_id = props.current_user.cart_id ? props.current_user.cart_id : null
   return (
     <div className='pad-15-lbt'>

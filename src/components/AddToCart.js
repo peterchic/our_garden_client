@@ -10,6 +10,7 @@ export default class AddToCart extends React.Component {
       farmer_id: '',
       product_id: ''
     }
+    console.log('add to cart', this.props);
   }
 
   handleChange(f_id, p_id, e){
