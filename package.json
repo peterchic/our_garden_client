@@ -1,6 +1,7 @@
 {
   "name": "our_garden_client",
   "version": "0.1.0",
+  "private": true,
   "engines": {
     "node": "8.4.0",
     "npm": "5.4.1"
