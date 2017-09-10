@@ -3,6 +3,42 @@
 // const baseUrl = "https://our-garden-api.herokuapp.com"
 const baseUrl = "http://localhost:3000"
 
+export function decodeToken(params){
+  // console.log(params)
+  return fetch(`${baseUrl}/api/v1/decode_token`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+  })
+  .then( res => res.json() )
+}
+
+export function logIn(params){
+  console.log('leaving client login params', params);
+  return fetch(`${baseUrl}/api/v1/login`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
+
+export function signUp(params){
+  return fetch(`${baseUrl}/api/v1/users`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(params)
+  }).then( res => res.json() )
+}
+
 export function getFarmers(){
   return fetch(`${baseUrl}/api/v1/farmers`)
   .then(res => res.json())
@@ -31,19 +67,6 @@ export function getProductCarts(){
 export function getCart(){
   return fetch(`${baseUrl}/api/v1/carts`)
   .then(res => res.json())
-}
-
-export function decodeToken(params){
-  // console.log(params)
-  return fetch(`${baseUrl}/api/v1/decode_token`, {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify(params)
-  })
-  .then( res => res.json() )
 }
 
 export function createReview(review, rating, user_id, farmer_id){

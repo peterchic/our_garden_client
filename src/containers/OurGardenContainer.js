@@ -26,40 +26,53 @@ class OurGardenContainer extends React.Component {
     }
   }
 
-  // makeFetches = (res) => {
-  //   getFarmers(res).then( data => this.setState({farmers: data}))
-  // }
+  makeFetches = (res) => {
+    getFarmers(res)
+    .then( data => {console.log('res from get farmers', data)
+      this.setState({ farmers: data })})
+    getReviews(res)
+      .then(data => {console.log('data from reviews', data)
+        this.setState ({ reviews: data })})
+    getProductCarts(res)
+      .then(data => {console.log('data from prodCarts', data)
+        this.setState ({ product_carts: data })})
+    getFarmerProducts(res)
+      .then(data => {console.log('data from products', data)
+        this.setState ({ farmer_products: data })})
+  }
 
   componentDidMount() {
-    if(localStorage.getItem('token') && !this.state.current_user.id){
-      decodeToken({token: localStorage.token})
-        .then(res => {
-          this.setState ({
-          current_user: res
-        })
-      })
-    }
-    getFarmers()
-      .then( res => {console.log('res from farmers', res)
-        this.setState({
-      farmers: res
-    })})
-    getReviews()
-      .then(res => {console.log('res from reviews', res)
-        this.setState ({
-      reviews: res
-    })})
-    getProductCarts()
-      .then(res => {console.log('res from prodCarts', res)
-        this.setState ({
-      product_carts: res
-    })})
-    getFarmerProducts()
-      .then(res => {console.log('res from products', res)
-        this.setState ({
-      farmer_products: res
-    })})
+    decodeToken({token: localStorage.token})
+    .then( res => { this.makeFetches(res) })
   }
+    // if(localStorage.getItem('token') && !this.state.current_user.id){
+    //     .then(res => {
+    //       this.setState ({
+    //       current_user: res
+    //     })
+    //   })
+    // }
+    // getFarmers()
+    //   .then( res => {console.log('res from farmers', res)
+    //     this.setState({
+    //   farmers: res
+    // })})
+    // getReviews()
+    //   .then(res => {console.log('res from reviews', res)
+    //     this.setState ({
+    //   reviews: res
+    // })})
+    // getProductCarts()
+    //   .then(res => {console.log('res from prodCarts', res)
+    //     this.setState ({
+    //   product_carts: res
+    // })})
+    // getFarmerProducts()
+    //   .then(res => {console.log('res from products', res)
+    //     this.setState ({
+    //   farmer_products: res
+    // })})
+  // }
 
   componentWillReceiveProps(nextProps){
     // console.log('nextProps', nextProps)
@@ -81,54 +94,10 @@ class OurGardenContainer extends React.Component {
 
   //######################### LOG IN/OUT DELETE USER ###############################
 
-  handleLogin(params){
-    fetch(`${baseUrl}/api/v1/login`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(params)
-    })
-    .then( res => res.json() )
-    .then( res => {
-      if (res.error) {
-        return alert(`Sorry, ${res.error}! Try again.`)
-      }
-      localStorage.setItem("token", res.token)
-      this.setState({
-        current_user: res.user
-      })
-      this.props.history.push('/farmers')
-    }).catch( e => console.log('error from login', e.response) )
-  }
-
-  handleSignUp(name, username, password, bio, picture){
-    axios.post(`${baseUrl}/api/v1/users`, {
-      user: {
-        name: name,
-        username: username,
-        password: password,
-        bio: bio,
-        picture: picture
-      }
-    }).then(res => { console.log('Sign Up Response: ', res)
-    localStorage.setItem("token", res.data.token)
-    this.setState({
-      current_user: res.data.user
-    })
-    this.props.history.push('/farmers')
-  }).catch( e => alert("Missing information. Please fill in all fields below.") )
-  }
-
   logout(){
-    localStorage.clear('token')
-    if(!localStorage.getItem('token')){
-      this.setState({ current_user: this.state.current_user})
-    }
-    console.log('container state', this.state)
+    localStorage.clear()
+    this.props.history.push('/')
   }
-
 
 
 
@@ -238,9 +207,10 @@ class OurGardenContainer extends React.Component {
   //############################## RENDER ###############################
 
   render() {
-    if(localStorage.getItem('token') && this.state.current_user !== 0){
+    // if(localStorage.getItem('token') && this.state.current_user !== 0){
       return (
         <div>
+          {/* <NavBar /> */}
           <NavBar current_user={this.state.current_user} logout={this.logout.bind(this)} product_carts={this.state.product_carts} />
 
           <Route path='/farmers' render={() =>
@@ -292,17 +262,17 @@ class OurGardenContainer extends React.Component {
           </Grid>
         </div>
       )
-    } else {
-      return (
-        <div>
-          <NavBar/>
-          <LogInSignUp
-            handleLogin={this.handleLogin.bind(this)}
-            handleSignUp={this.handleSignUp.bind(this)}
-          />
-        </div>
-      )
-    }
+    // } else {
+    //   return (
+    //     <div>
+    //       <NavBar/>
+    //       <LogInSignUp
+    //         handleLogin={this.handleLogin.bind(this)}
+    //         handleSignUp={this.handleSignUp.bind(this)}
+    //       />
+    //     </div>
+    //   )
+
   }
 }
 

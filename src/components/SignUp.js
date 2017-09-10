@@ -25,13 +25,7 @@ class SignUp extends React.Component {
 
   handleSubmit(e){
     e.preventDefault()
-    this.props.handleSignUp(
-      this.state.name,
-      this.state.username,
-      this.state.password,
-      this.state.bio,
-      this.state.picture
-    )
+    this.props.handleSignUp(this.state)
   }
 
   render(){
@@ -42,7 +36,7 @@ class SignUp extends React.Component {
             <Image src={logo} />
             Create Your Account!
           </Header>
-          <Form size="large" onSubmit={ e => this.handleSubmit(e)}>
+          <Form size="large" onSubmit={this.handleSubmit.bind(this)}>
             <Segment stacked>
               <Form.Field>
                 <Input fluid icon='user' iconPosition='left' placeholder='Name' value={this.state.name} onChange={ e => this.handleChange('name', e.target.value)} />

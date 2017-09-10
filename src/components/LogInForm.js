@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, Switch, Route } from 'react-router-dom'
 import { Grid, Segment, Input, Button, Header, Image, Form, Message } from 'semantic-ui-react'
-import SignUp from './SignUp'
+// import SignUp from './SignUp'
 import logo from '../images/plant.svg'
 
 
@@ -22,7 +22,7 @@ export default class LoginForm extends React.Component {
 
   handleSubmit(e){
     e.preventDefault()
-    this.props.handleLogin(this.state)
+    this.props.handleLogIn(this.state)
   }
 
 
@@ -30,10 +30,10 @@ export default class LoginForm extends React.Component {
     // console.log('LoginForm props', this.props)
     return(
     <Switch>
-    <Route
+    {/* <Route
     path="/signup"
     render={ () => <SignUp handleSignUp={this.props.handleSignUp}/>}
-    />
+    /> */}
 
     <Grid centered verticalAlign="middle">
       <Grid.Column textAlign="center" width={7}>
@@ -41,7 +41,7 @@ export default class LoginForm extends React.Component {
           <Image src={logo}/>
           Log-in!
         </Header>
-        <Form size="large" onSubmit={ e => this.handleSubmit(e)}>
+        <Form size="large" onSubmit={this.handleSubmit.bind(this)}>
           <Segment stacked>
             <Form.Field>
               <Input fluid icon='user' iconPosition='left' placeholder='Username' value={this.state.username} onChange={ e => this.handleChange('username', e.target.value)} />
@@ -51,9 +51,9 @@ export default class LoginForm extends React.Component {
             </Form.Field>
             <Button fluid color="olive" size="large">LOGIN</Button>
           </Segment>
-          <Message>
+          {/* <Message>
             First time here? <Link to={'/signup'}> Sign Up </Link>
-          </Message>
+          </Message> */}
         </Form>
       </Grid.Column>
     </Grid>

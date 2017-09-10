@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Menu, Image } from 'semantic-ui-react'
 import logo from '../images/our_garden_logo-01.svg'
 
 
 
-export default class NavBar extends React.Component {
+class NavBar extends React.Component {
   constructor(){
     super()
     this.state = {
@@ -15,10 +15,9 @@ export default class NavBar extends React.Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
 
-
   render() {
     const { activeItem } = this.state
-    if(localStorage.getItem('token') && this.props.current_user){
+    // if(localStorage.getItem('token') && this.props.current_user){
       return (
         <div >
           <Menu className="ui top fixed menu" color='olive' inverted={true} >
@@ -45,17 +44,19 @@ export default class NavBar extends React.Component {
           </Menu>
         </div>
       )
-    }
-    else {
-      return (
-        <Menu color='olive' inverted={true} id='logged-out'>
-          <Link to="/">
-          <Menu.Item>
-            <Image src={logo} size='small' active={activeItem === 'Our Garden'} onClick={this.handleItemClick}/>
-          </Menu.Item>
-          </Link>
-        </Menu>
-      )
-    }
+    // }
+    // else {
+    //   return (
+    //     <Menu color='olive' inverted={true} id='logged-out'>
+    //       <Link to="/">
+    //       <Menu.Item>
+    //         <Image src={logo} size='small' active={activeItem === 'Our Garden'} onClick={this.handleItemClick}/>
+    //       </Menu.Item>
+    //       </Link>
+    //     </Menu>
+    //   )
+    // }
   }
 }
+
+export default withRouter(NavBar)
