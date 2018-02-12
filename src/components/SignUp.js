@@ -3,8 +3,6 @@ import {withRouter, Link } from "react-router-dom";
 import { Grid, Segment, Input, Button, Header, Image, Form, Message } from 'semantic-ui-react'
 import logo from '../images/plant.svg'
 
-
-
 class SignUp extends React.Component {
   constructor(){
     super()
@@ -70,6 +68,5 @@ class SignUp extends React.Component {
     )
   }
 }
-
 
 export default withRouter(SignUp)

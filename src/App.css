@@ -34,43 +34,42 @@ ol {
   z-index: 2;
 }
 
-.row.garden-page{
+.row.garden-page {
   border-color: solid green 2px;
 }
 
-.row.product-page{
+.row.product-page {
   float: left;
   border-color: solid green 2px;
 }
 
-.ui.card{
+.ui.card {
   float: left;
   display: inline;
 }
 
-.cartCon{
+.cartCon {
   border-color: solid green 2px;
 }
 
-.pad-15-lbt{
+.pad-15-lbt {
   padding-left: 15px;
   padding-bottom: 15px;
-  /*padding-right: 15px;*/
   padding-top: 15px;
 }
 
-.pad-15{
+.pad-15 {
   padding-left: 15px;
   padding-bottom: 15px;
   padding-right: 15px;
   padding-top: 15px;
 }
 
-.float-right{
+.float-right {
   float: right;
 }
 
-.float-left{
+.float-left {
   float: left;
 }
 
@@ -78,18 +77,16 @@ ol {
   text-align: center;
 }
 
-.ul{
-list-style-type: none;
+.ul {
+  list-style-type: none;
 }
 
 .div-horizontal {
-    width: 30%; /* safe distance for non-supporting browsers */
+  width: 30%; /* safe distance for non-supporting browsers */
 }
 
 .rcorners {
-    border-radius: 100%;
-    /*width: 200px;*/
-    /*height: 150px;*/
+  border-radius: 100%;
 }
 
 #farmer-image {
@@ -97,7 +94,7 @@ list-style-type: none;
   padding-top: 30px;
 }
 
-#logged-out{
+#logged-out {
   margin: -80px 0 0 0;
 }
 
@@ -135,7 +132,7 @@ list-style-type: none;
   z-index: -2;
 }
 
-#subline{
+#subline {
   text-align: center;
   max-width: 850px;
   color: white;

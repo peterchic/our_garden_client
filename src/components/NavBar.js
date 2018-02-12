@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import { Menu, Image } from 'semantic-ui-react'
 import logo from '../images/our_garden_logo-01.svg'
 
-
-
 export default class NavBar extends React.Component {
   constructor(){
     super()
@@ -14,11 +12,9 @@ export default class NavBar extends React.Component {
   }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-
-
   render() {
     const { activeItem } = this.state
-    if(localStorage.getItem('token') && this.props.current_user){
+    if(localStorage.getItem('token') && !this.props.current_user.current_cart){
       return (
         <div >
           <Menu className="ui top fixed menu" color='olive' inverted={true} >

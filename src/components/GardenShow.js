@@ -5,7 +5,6 @@ import ReviewList from './ReviewList'
 import { Route, Link } from 'react-router-dom'
 import ReviewEdit from './ReviewEdit'
 import { Grid, Divider, Button, Modal } from 'semantic-ui-react'
-//Garden Page renders me
 
 export default function GardenShow (props) {
   if (!props.farmer) {
@@ -26,10 +25,8 @@ export default function GardenShow (props) {
 
   let name = props.farmer.name.split(' ')
   let firstName = name[0]
-
   let firstNameDown = name[0].toLowerCase()
   let lastNameDown = name[1].toLowerCase()
-
   let email = `https://mail.google.com/mail/?view=cm&fs=1&to=${firstNameDown}.${lastNameDown}@gmail.com&su=Our_Garden_Question&body=Hello!`
 
   return (

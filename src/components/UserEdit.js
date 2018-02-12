@@ -45,7 +45,6 @@ class UserEdit extends Component{
       <Grid centered verticalAlign="middle">
         <Grid.Column textAlign="center" width={7}>
           <Header>
-            {/* <Image src={logo} /> */}
             <h2>Edit Your Account!</h2>
           </Header>
           <Form size="large" onSubmit={ e => this.handleSubmit(e)}>

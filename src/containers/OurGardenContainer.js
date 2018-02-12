@@ -1,7 +1,18 @@
 import axios from 'axios'
 import React from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
-import { getFarmers, getFarmerProducts, createReview, getReviews, deleteReview, getProductCarts, updateReview, decodeToken, deleteProduct, deleteUser, editUser } from '../api/RailsAPI'
+import {
+  createReview,
+  decodeToken,
+  deleteProduct,
+  deleteReview,
+  deleteUser,
+  editUser
+  getFarmerProducts,
+  getFarmers
+  getProductCarts,
+  getReviews,
+  updateReview, } from '../api/RailsAPI'
 
 import LogInSignUp from './LogInSignUp'
 import NavBar from '../components/NavBar'
@@ -11,8 +22,8 @@ import { Grid } from 'semantic-ui-react'
 import GardenPage from '../components/GardenPage'
 import UserEdit from '../components/UserEdit'
 
-const baseUrl = "https://our-garden-api.herokuapp.com"
-// const baseUrl = "http://localhost:3000"
+// const baseUrl = "https://our-garden-api.herokuapp.com"
+const baseUrl = "http://localhost:3000/api/v1/"
 
 class OurGardenContainer extends React.Component {
   constructor(){
@@ -54,27 +65,17 @@ class OurGardenContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log('nextProps', nextProps)
-    // console.log('this.state.current_user', this.state.current_user)
-    if(nextProps.product_carts !== this.state.product_carts){
-      this.setState({
-        current_user: this.state.current_user
-      })
-    } else {
-      return null
-    }
+    nextProps.product_carts !== this.state.product_carts
+    ? this.setState({
+      current_user: this.state.current_user
+    })
+    : null
   }
-
-  //componenetWillReceiveProps(){
-  // check to see if the current_user state has changed
-  // if so, make another fetch request for current_user
-  //in order to change state.
-
 
   //######################### LOG IN/OUT DELETE USER ###############################
 
   handleLogin(params){
-    fetch(`${baseUrl}/api/v1/login`, {
+    fetch(`${baseUrl}login`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -96,7 +97,7 @@ class OurGardenContainer extends React.Component {
   }
 
   handleSignUp(name, username, password, bio, picture){
-    axios.post(`${baseUrl}/api/v1/users`, {
+    axios.post(`${baseUrl}users`, {
       user: {
         name: name,
         username: username,
@@ -123,7 +124,7 @@ class OurGardenContainer extends React.Component {
       current_user: data
     }))
     localStorage.clear('token')
-    // .catch( err => console.log(err) )
+    .catch( err => console.log(err) )
   }
 
   handleEditUser(id, name, username, password, bio, picture){
@@ -139,7 +140,7 @@ class OurGardenContainer extends React.Component {
   //################################ CART ################################
 
   handleAddToCart(quantity, farmer_id, cart_id, product_id){
-    axios.post(`${baseUrl}/api/v1/product_carts`, {
+    axios.post(`${baseUrl}product_carts`, {
       product_cart: {
         quantity: quantity,
         farmer_id: farmer_id,

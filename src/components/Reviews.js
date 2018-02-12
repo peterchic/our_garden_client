@@ -1,7 +1,5 @@
 import React from 'react'
-//Garden Show Renders me
 import { Grid, Form, Input, Divider } from 'semantic-ui-react'
-
 
 export default class Reviews extends React.Component {
   constructor(props){
@@ -44,38 +42,36 @@ export default class Reviews extends React.Component {
   }
 
   render(){
-    // console.log('review', this.props)
     return (
       <div>
-          <Form onSubmit={this.handleSubmit.bind(this)}>
-            <Form.Group>
-              <Form.Input
-                id='form-input-contorl-rating'
-                control={Input}
-                // label='Rating'
-                placeholder='5'
-                value={this.state.rating}
-                name="rating"
-                type="number" min="1" max="5"
-                onChange={this.handleInputChange.bind(this)}/>
-              <Form.Input
-                id='form-input-contorl-review'
-                control={Input}
-                // label='Review'
-                placeholder='Review'
-                value={this.state.review}
-                name="review"
-                type="textarea"
-                onChange={this.handleInputChange.bind(this)}/>
-              <Form.Button color='orange' type="submit" value="Leave A Review">Leave a Review!</Form.Button>
-            </Form.Group>
-          </Form>
-          <Grid>
-              <Grid.Column width={13}>
-                <Divider></Divider>
-              </Grid.Column>
-          </Grid>
-
+        <Form onSubmit={this.handleSubmit.bind(this)}>
+          <Form.Group>
+            <Form.Input
+              id='form-input-contorl-rating'
+              control={Input}
+              // label='Rating'
+              placeholder='5'
+              value={this.state.rating}
+              name="rating"
+              type="number" min="1" max="5"
+              onChange={this.handleInputChange.bind(this)}/>
+            <Form.Input
+              id='form-input-contorl-review'
+              control={Input}
+              // label='Review'
+              placeholder='Review'
+              value={this.state.review}
+              name="review"
+              type="textarea"
+              onChange={this.handleInputChange.bind(this)}/>
+            <Form.Button color='orange' type="submit" value="Leave A Review">Leave a Review!</Form.Button>
+          </Form.Group>
+        </Form>
+        <Grid>
+          <Grid.Column width={13}>
+            <Divider></Divider>
+          </Grid.Column>
+        </Grid>
       </div>
     )
   }

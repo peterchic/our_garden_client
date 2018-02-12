@@ -1,41 +1,38 @@
-// import axios from 'axios'
-
-const baseUrl = "https://our-garden-api.herokuapp.com"
-// const baseUrl = "http://localhost:3000"
+// const baseUrl = "https://our-garden-api.herokuapp.com"
+const baseUrl = "http://localhost:3000"
 
 export function getFarmers(){
-  return fetch(`${baseUrl}/api/v1/farmers`)
+  return fetch(`${baseUrl}farmers`)
   .then(res => res.json())
 }
 
 export function getUsers(){
-  return fetch(`${baseUrl}/api/v1/users`)
+  return fetch(`${baseUrl}users`)
   .then(res => res.json())
 }
 
 export function getReviews(){
-  return fetch(`${baseUrl}/api/v1/reviews`)
+  return fetch(`${baseUrl}reviews`)
   .then(res => res.json())
 }
 
 export function getFarmerProducts(){
-  return fetch(`${baseUrl}/api/v1/farmer_products`)
+  return fetch(`${baseUrl}farmer_products`)
   .then(res => res.json())
 }
 
 export function getProductCarts(){
-  return fetch(`${baseUrl}/api/v1/product_carts`)
+  return fetch(`${baseUrl}product_carts`)
   .then(res => res.json())
 }
 
 export function getCart(){
-  return fetch(`${baseUrl}/api/v1/carts`)
+  return fetch(`${baseUrl}carts`)
   .then(res => res.json())
 }
 
 export function decodeToken(params){
-  // console.log(params)
-  return fetch(`${baseUrl}/api/v1/decode_token`, {
+  return fetch(`${baseUrl}decode_token`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -47,12 +44,10 @@ export function decodeToken(params){
 }
 
 export function createReview(review, rating, user_id, farmer_id){
-  // console.log('rails', review, rating, user_id, farmer_id);
-  return fetch(`${baseUrl}/api/v1/reviews`, {
+  return fetch(`${baseUrl}reviews`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-      // 'Authorization': sessionStorage.token
     },
     method: 'POST',
     body: JSON.stringify({
@@ -68,8 +63,7 @@ export function createReview(review, rating, user_id, farmer_id){
 }
 
 export function updateReview(id, review, rating) {
-  // console.log('update review going to rails', id, review, rating)
-  return fetch(`${baseUrl}/api/v1/reviews/${id}`, {
+  return fetch(`${baseUrl}reviews/${id}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -86,25 +80,23 @@ export function updateReview(id, review, rating) {
   }
 
 export function deleteReview(id){
-  return fetch(`${baseUrl}/api/v1/reviews/${id}`, { method: 'DELETE'})
+  return fetch(`${baseUrl}reviews/${id}`, { method: 'DELETE'})
     .then( res => res.json() )
 }
 
 export function deleteProduct(id){
-  return fetch(`${baseUrl}/api/v1/product_carts/${id}`, { method: 'DELETE'})
+  return fetch(`${baseUrl}product_carts/${id}`, { method: 'DELETE'})
     .then( res => res.json() )
 }
 
 export function deleteUser(id){
-  // console.log('deleteing this user', id)
-  return fetch(`${baseUrl}/api/v1/users/${id}`, {
+  return fetch(`${baseUrl}users/${id}`, {
     method: 'DELETE',
   }).then( res => res.json() )
 }
 
 export function editUser(id, name, username, password, bio, picture){
-  // console.log('edit this user', id, name, username, password, bio, picture)
-  return fetch(`${baseUrl}/api/v1/users/${id}`, {
+  return fetch(`${baseUrl}users/${id}`, {
     method: 'PATCH',
     headers: {
       'Accept': 'application/json',
